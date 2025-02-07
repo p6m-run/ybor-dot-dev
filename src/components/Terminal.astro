@@ -1,0 +1,128 @@
+---
+import Logo from "./Logo";
+---
+
+<main>
+  <div class="terminal rounded-t-2xl p-2 pb-0! m-2 lg:p-6 lg:m-6 mb-0!">
+    <div class="header mb-6">
+      <div class="actions">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+      </div>
+      <Logo />
+      <div class="actions"></div>
+    </div>
+
+    <div
+      class="text-white/25 text-xl md:text-3xl leading-loose mx-auto max-w-sm md:max-w-4xl xl:max-w-7xl rounded-t-2xl code-preview h-full p-6 md:p-12"
+    >
+      <div class="jetbrains-mono overflow-scroll">
+        <div class="line">
+          1 ) => <span class="text-indigo-500">Build and deploy</span>
+        </div>
+        <div class="line bg-green-500/5 rounded-2xl">
+          2 <span
+            class="rounded-full bg-green-400 text-black w-8 h-8 inline-flex items-center justify-center"
+            >+</span
+          > /** Enterprise grade applications
+        </div>
+        <div class="line">
+          3 <span class="text-sm md:text-xl pl-14">benefit_1 = </span><span class="text-white"
+            >deploy_any_cloud</span
+          >
+        </div>
+        <div class="line">
+          4 <span class="text-sm md:text-xl pl-14">benefit_2 = </span><span class="text-white"
+            >faster_than_ever</span
+          > }
+        </div>
+        <div class="bg-green-500/5 rounded-2xl vertical-dashed">
+          <div class="line">
+            5 <span
+              class="rounded-full bg-green-400 text-black w-8 h-8 inline-flex items-center justify-center relative z-10"
+              >+</span
+            > /** The Ybor Platform
+          </div>
+          <div class="line">
+            6 <span class="text-xl pl-14"
+              >value_prop_1 = End-to-end automation and orchestration for the
+              entire SDLC process</span
+            >
+          </div>
+          <div class="line">
+            7 <span class="text-xl pl-14"
+              >value_prop_2 = Manage new and existing workloads to optimize cost</span
+            >
+          </div>
+          <div class="line">
+            8 <span
+              class="rounded-full bg-green-400 text-black w-8 h-8 inline-flex items-center justify-center relative z-10"
+              >+</span
+            >
+            <span class="text-xl pl-2"
+              >value_prop_3 = Unlock the cloud, schedule a demo today</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    main {
+      font-family: "Space Mono", monospace;
+      font-weight: 400;
+      font-style: normal;
+      color: #454b56;
+    }
+
+    .terminal {
+      background: #16181c;
+      /* height: calc(100vh - 24px); */
+    }
+
+    .terminal .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .terminal .header .actions {
+      width: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .circle {
+      width: 0.75rem;
+      height: 0.75rem;
+      border-radius: 50%;
+      background: #2c2f35;
+    }
+
+    .code-preview {
+      background: #24272d;
+    }
+
+    .line {
+      padding-left: 1.5rem;
+    }
+
+    .vertical-dashed {
+      position: relative;
+    }
+
+    .vertical-dashed::after {
+      content: "";
+      position: absolute;
+      top: 10%;
+      left: 75px;
+      width: 2px;
+      height: 80%;
+	  z-index: 0;
+      border-left: 2px dashed var(--color-green-400);
+    }
+  </style>
+</main>

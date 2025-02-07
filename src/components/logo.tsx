@@ -1,6 +1,7 @@
 function Logo() {
   return (
     <svg
+      className="mt-3 lg:m-0"
       width={89}
       height={32}
       viewBox="0 0 89 32"
