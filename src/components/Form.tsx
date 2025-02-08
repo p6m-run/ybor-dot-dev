@@ -46,59 +46,14 @@ export default function ContactForm() {
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     console.log(data);
-    // send data to Notion
-    // const notion = new Client({
-    //   auth: 'Bearer ntn_e99831864317zxNQ37Z0ZrEcIAkPdYXcvcb46M5llk1gjJ', 
-    // })
     try {
-      await fetch("https://api.notion.com/v1/blocks/1942530b55ff80bfba01c1324c5fb10f/children",
+      await fetch("/api/contact",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Notion-Version": "2022-02-22",
-            Authorization: `Bearer ntn_e99831864317zxNQ37Z0ZrEcIAkPdYXcvcb46M5llk1gjJ`,
           },
-          body: JSON.stringify({
-            block_id: '1942530b55ff80bfba01c1324c5fb10f',
-            children: [
-              {
-                "object": "block",
-                "type": "heading_3",
-                "heading_3": {
-                  "rich_text": [{ "type": "text", "text": { "content": data.fullName } }]
-                }
-              },
-              {
-                "object": "block",
-                "type": "paragraph",
-                "paragraph": {
-                  "rich_text": [
-                    {
-                      "type": "text",
-                      "text": {
-                        "content": data.email + " - " + data.phoneNumber,
-                      }
-                    }
-                  ]
-                }
-              },
-              {
-                "object": "block",
-                "type": "paragraph",
-                "paragraph": {
-                  "rich_text": [
-                    {
-                      "type": "text",
-                      "text": {
-                        "content": data.message,
-                      }
-                    }
-                  ]
-                }
-              }
-            ],
-          }),
+          body: JSON.stringify(data),
         }
       );
       toast({
