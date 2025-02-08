@@ -1,5 +1,6 @@
 ---
 import Logo from "./Brand";
+import { BookCheck } from "lucide-react";
 ---
 
 <main>
@@ -15,9 +16,12 @@ import Logo from "./Brand";
     </div>
 
     <div
-      class="text-white/25 text-xl md:text-3xl mx-auto max-w-sm md:max-w-4xl xl:max-w-7xl rounded-t-2xl code-preview h-full p-6 md:p-12"
+      class="jetbrains-mono mx-auto max-w-sm md:max-w-4xl xl:max-w-7xl rounded-t-2xl code-preview h-full p-6 md:p-8"
     >
-      <div class="jetbrains-mono overflow-scroll">
+      <div class="flex items-center gap-4">
+        <span class="text-yellow-200"><BookCheck size={20} /></span> <span class="text-md">welcome > <span class="text-white">ybor.dev</span></span>
+      </div>
+      <div class="text-white/25 text-xl md:text-3xl">
         <div class="line">
           1 ) => <span class="text-indigo-500">Build and deploy</span>
         </div>

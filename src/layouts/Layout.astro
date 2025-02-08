@@ -1,9 +1,10 @@
 ---
+import { Toaster } from "@/components/ui/toaster";
 import "../styles/global.css";
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -24,6 +25,7 @@ import "../styles/global.css";
   </head>
   <body>
     <slot />
+    <Toaster client:load />
   </body>
 </html>
 
