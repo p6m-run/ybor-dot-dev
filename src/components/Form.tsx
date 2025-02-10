@@ -86,9 +86,10 @@ export default function ContactForm() {
   }
 
   return (
+    <div className=" mx-auto max-w-sm md:max-w-4xl xl:max-w-7xl pt-8">
     <Form {...form}>
       <form
-        className="text-white mx-auto max-w-sm md:max-w-4xl xl:max-w-7xl space-y-8 px-4 md:px-8 py-12"
+        className="text-white space-y-8"
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <h2>Get in touch with Ybor:</h2>
@@ -146,5 +147,6 @@ export default function ContactForm() {
         <Button type="submit">Deploy Message</Button>
       </form>
     </Form>
+    </div>
   );
 }
