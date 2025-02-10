@@ -2,14 +2,14 @@ export const prerender = false;
 import type { APIRoute } from "astro";
 import { Client } from "@notionhq/client";
 
-const notion = new Client({ auth: process.env.NOTION_TOKEN });
+const notion = new Client({ auth: import.meta.env.NOTION_TOKEN });
 
 export const POST: APIRoute = async ({ request }) => {
     try {
       const data = await request.json();
 
       await notion.blocks.children.append({
-        block_id: process.env.PAGE_ID ?? '',
+        block_id: import.meta.env.PAGE_ID ?? '',
         children: [
           {
             "object": "block",
