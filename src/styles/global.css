@@ -33,21 +33,21 @@
 }
 
 .dark {
-  --background: hsl(0 0% 3.9%);
+  --background: hsl(220, 11%, 16%);
   --foreground: hsl(0 0% 98%);
   --card: hsl(0 0% 3.9%);
   --card-foreground: hsl(0 0% 98%);
   --popover: hsl(0 0% 3.9%);
   --popover-foreground: hsl(0 0% 98%);
-  --primary: hsl(0 0% 98%);
-  --primary-foreground: hsl(0 0% 9%);
+  --primary: 	hsl(216, 84%, 42%);
+  --primary-foreground: hsl(0, 0%, 100%);
   --secondary: hsl(0 0% 14.9%);
   --secondary-foreground: hsl(0 0% 98%);
   --muted: hsl(0 0% 14.9%);
   --muted-foreground: hsl(0 0% 63.9%);
   --accent: hsl(0 0% 14.9%);
   --accent-foreground: hsl(0 0% 98%);
-  --destructive: hsl(0 62.8% 30.6%);
+  --destructive: hsl(0deg 100% 69.43%);
   --destructive-foreground: hsl(0 0% 98%);
   --border: hsl(0 0% 14.9%);
   --input: hsl(0 0% 14.9%);
@@ -57,6 +57,13 @@
   --chart-3: hsl(30 80% 55%);
   --chart-4: hsl(280 65% 60%);
   --chart-5: hsl(340 75% 55%);
+
+  --landing-background: hsl(220, 11%, 16%);  /* #24272d; */
+  --landing-foreground: hsl(219, 11%, 30%);  /* #454b56; */
+  --landing-terminal-background: hsl(220, 12%, 10%); /** #16181c */
+  --landing-circle-background: 	hsl(220, 9%, 19%); /** #2c2f35 */
+  --form-element-background: var(--landing-circle-background); /** #2C2F35 */
+
 }
 
 @theme inline {
@@ -89,8 +96,7 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 
-  --bg: hsl(0 0% 3.9%);
-  --terminal: hsl(0 0% 3.9%);
+  --color-form-element: var(--landing-circle-background);
 }
 
 @layer base {
