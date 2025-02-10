@@ -1,10 +1,11 @@
 ---
 import Logo from "./Brand";
 import { BookCheck } from "lucide-react";
+import Form from '../components/Form';
 ---
 
 <main>
-  <div class="terminal rounded-t-2xl p-2 pb-0! m-2 lg:p-6 lg:m-6 mb-0!">
+  <div class="terminal mx-auto max-w-sm md:max-w-4xl xl:max-w-7xl rounded-3xl p-2 lg:p-6 my-6">
     <div class="header mb-6">
       <div class="actions">
         <div class="circle"></div>
@@ -16,7 +17,7 @@ import { BookCheck } from "lucide-react";
     </div>
 
     <div
-      class="jetbrains-mono mx-auto max-w-sm md:max-w-4xl xl:max-w-7xl rounded-t-2xl code-preview h-full p-4 md:p-8"
+      class="jetbrains-mono rounded-2xl code-preview h-full p-4 md:p-8 border-frame border "
     >
       <div class="flex items-center gap-4">
         <span class="text-yellow-200"><BookCheck size={20} /></span>
@@ -79,6 +80,8 @@ import { BookCheck } from "lucide-react";
           </h3>
         </div>
       </div>
+
+      <Form client:load />
     </div>
   </div>
 

@@ -63,7 +63,7 @@
   --landing-terminal-background: hsl(220, 12%, 10%); /** #16181c */
   --landing-circle-background: 	hsl(220, 9%, 19%); /** #2c2f35 */
   --form-element-background: var(--landing-circle-background); /** #2C2F35 */
-
+  --frame: 	hsl(249, 6%, 23%);
 }
 
 @theme inline {
@@ -97,6 +97,7 @@
   --radius-xl: calc(var(--radius) + 4px);
 
   --color-form-element: var(--landing-circle-background);
+  --color-frame: var(--frame);
 }
 
 @layer base {
