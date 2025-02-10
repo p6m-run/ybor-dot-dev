@@ -37,9 +37,9 @@ const commonEmailProviders = [
 
 const FormSchema = z.object({
   fullName: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
+    message: "Full name must be at least 2 characters.",
   }),
-  email: z.string().email().refine(
+  email: z.string().email({ message: "Invalid email address" }).refine(
     (email) => {
       const domain = email.split("@")[1];
       return !commonEmailProviders.includes(domain);
