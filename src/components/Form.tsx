@@ -11,10 +11,8 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -31,7 +29,8 @@ const commonEmailProviders = [
   "protonmail.com",
   "zoho.com",
   "mail.com",
-  "gmx.com"
+  "gmx.com",
+  "msn.com"
 ];
 
 
@@ -92,7 +91,7 @@ export default function ContactForm() {
         className="text-white space-y-8"
         onSubmit={form.handleSubmit(onSubmit)}
       >
-        <h2>Get in touch with Ybor:</h2>
+        <h2>Schedule a Demo Today:</h2>
         <div className="grid md:grid-cols-3 gap-8">
           <FormField
             control={form.control}
@@ -144,7 +143,7 @@ export default function ContactForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Deploy Message</Button>
+        <Button type="submit">Schedule</Button>
       </form>
     </Form>
     </div>
