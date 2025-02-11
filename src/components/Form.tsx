@@ -143,7 +143,7 @@ export default function ContactForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Schedule</Button>
+        <Button type="submit" disabled={form.formState.isSubmitting}>Schedule</Button>
       </form>
     </Form>
     </div>
