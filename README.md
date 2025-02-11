@@ -49,4 +49,4 @@ Feel free to check [our documentation](https://docs.astro.build) or jump into ou
 
 ## Vercel
 
-Infrastructure running this app is on Vercel under chris@ybor.ai Github account.
+Infrastructure running this app is on [Vercel](https://vercel.com/upsight-llc/ybor-dot-dev) under chris@ybor.ai Github account.
