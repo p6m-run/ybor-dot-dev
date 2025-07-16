@@ -5,7 +5,7 @@ import { Image } from "astro:assets";
 ---
 
 <footer
-  class="py-4 px-8 text-sm jetbrains-mono"
+  class="py-4 px-8 text-sm"
 >
   <div class="flex flex-col gap-4 items-center md:flex-row md:justify-between w-full py-8">
     <Logo />
@@ -52,14 +52,8 @@ import { Image } from "astro:assets";
 
   <hr class="border-gray-200 w-full" />
 
-  <div class="mb-2 md:mb-0 md:flex md:flex-row md:justify-between items-center text-gray-500 py-8">
-    <div class="text-center md:text-left">
-      Copyright {new Date().getFullYear()} &copy;
-    <a class="hover:underline" href="https://ybor.ai"
-      >Ybor Technologies, LLC.</a>
-    </div>
-
-    <nav class="flex gap-4 flex-col md:flex-row items-center mt-4 md:mt-0">
+  <div class="mb-2 md:mb-0 md:flex md:flex-row-reverse md:justify-between items-center text-gray-500 py-8">
+    <nav class="flex gap-4 flex-col md:flex-row items-center mb-4 md:mb-0">
       <a href="#">
         Privacy Policy
       </a>
@@ -68,5 +62,11 @@ import { Image } from "astro:assets";
       </a>
       <a href="#">Cookies Settings</a>
     </nav>
+
+    <div class="text-center md:text-left">
+      Copyright {new Date().getFullYear()} &copy;
+    <a class="hover:underline" href="https://ybor.ai"
+      >Ybor Technologies, LLC.</a>
+    </div>
   </div>
 </footer>
