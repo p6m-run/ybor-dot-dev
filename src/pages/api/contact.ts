@@ -1,60 +1,50 @@
 export const prerender = false;
 import type { APIRoute } from "astro";
-import { Client } from "@notionhq/client";
+import { Resend } from "resend";
 
-const notion = new Client({ auth: import.meta.env.NOTION_TOKEN });
+const resend = new Resend(import.meta.env.RESEND_API_KEY);
 
 export const POST: APIRoute = async ({ request }) => {
-    try {
-      const data = await request.json();
+  try {
+    if (request.headers.get("Content-Type") === "application/json") {
+      const body = await request.json();
+      const { name, email, issue, message, privacy } = body;
 
-      await notion.blocks.children.append({
-        block_id: import.meta.env.PAGE_ID ?? '',
-        children: [
-          {
-            "object": "block",
-            "type": "heading_3",
-            "heading_3": {
-              "rich_text": [{ "type": "text", "text": { "content": data.fullName } }]
-            }
-          },
-          {
-            "object": "block",
-            "type": "paragraph",
-            "paragraph": {
-              "rich_text": [
-                {
-                  "type": "text",
-                  "text": {
-                    "content": data.email + " - " + data.phoneNumber,
-                  }
-                }
-              ]
-            }
-          },
-          {
-            "object": "block",
-            "type": "paragraph",
-            "paragraph": {
-              "rich_text": [
-                {
-                  "type": "text",
-                  "text": {
-                    "content": data.message,
-                  }
-                }
-              ]
-            }
-          }
-        ],
+      if (!name || !email || !issue || !message || privacy === undefined) {
+        return new Response("Missing required fields", { status: 400 });
+      }
+
+      const { data, error } = await resend.emails.send({
+        from: "YBOR.AI WEBSITE CONTACT FORM <no-reply@ybor.ai>",
+        to: ["salesinquiries@ybor.ai"],
+        subject: "New Contact Us Form Submission",
+        html: `
+                <h1>Contact Us Form Submission</h1>
+                <p>Name: ${name},</p>
+                <p>Email: ${email}</p>
+                <p>Issue: ${issue}</p>
+                <p>Message: ${message}</p>
+                <p>Privacy: ${privacy ? "Accepted" : "Declined"}</p>
+              `,
       });
-      
-      return new Response(JSON.stringify({
-        message: "SENT"
-      }), {
-        status: 200
-      })
-    } catch (error) {
-      return new Response(null, { status: 400 });
+
+      if (error) {
+        console.error("Error sending email:", error);
+        throw new Response(error.message, {
+          status: 400,
+        });
+      }
+
+      return new Response(
+        JSON.stringify({
+          message: "SENT",
+        }),
+        {
+          status: 200,
+        }
+      );
     }
+  } catch (error) {
+    return new Response(null, { status: 400 });
   }
+};
