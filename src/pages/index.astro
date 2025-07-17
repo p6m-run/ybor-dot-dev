@@ -104,16 +104,16 @@ import PostHogLayout from "@/layouts/PostHogLayout.astro";
         <Image
           src={TerminalImage}
           alt="Terminal"
-          class="w-full h-auto max-w-fit"
+          class="w-full h-auto max-w-fit md:sticky md:top-0"
         />
       </div>
 
       <div class="flex flex-col gap-y-4 mt-12">
-        <h3>Common Challenges</h3>
+        <h3 class="text-xs">Common Challenges</h3>
         <h2 class="text-4xl font-bold">
           Unblock Innovation for the Enterprise
         </h2>
-        <p class="jetbrains-mono md:w-1/2">
+        <p class="jetbrains-mono md:w-1/2 text-sm">
           Enterprises face increasing pressure to deliver software faster while
           maintaining quality, security, and reliability across diverse cloud
           environments.
@@ -125,8 +125,8 @@ import PostHogLayout from "@/layouts/PostHogLayout.astro";
           <h3 class="text-xl font-bold mb-6">
             Legacy Systems Hinder Agility and Growth
           </h3>
-          <p class="jetbrains-mono">
-            Modern workloads need modern foundations. Enterprises can’t afford
+          <p class="jetbrains-mono text-sm">
+            Modern workloads need modern foundations. Enterprises can't afford
             to let legacy systems dictate the pace of innovation.
           </p>
         </div>
@@ -135,7 +135,7 @@ import PostHogLayout from "@/layouts/PostHogLayout.astro";
           <h3 class="text-xl font-bold mb-6">
             Manual Workflows Are Costly and Unsustainable
           </h3>
-          <p class="jetbrains-mono">
+          <p class="jetbrains-mono text-sm">
             Repetitive tasks across teams add up to thousands of hours lost.
           </p>
         </div>
@@ -144,7 +144,7 @@ import PostHogLayout from "@/layouts/PostHogLayout.astro";
           <h3 class="text-xl font-bold mb-6">
             Rigid Platforms Hurt the Developer Experience
           </h3>
-          <p class="jetbrains-mono">
+          <p class="jetbrains-mono text-sm">
             Teams need flexibility to adapt to changing requirements and user
             needs.
           </p>
