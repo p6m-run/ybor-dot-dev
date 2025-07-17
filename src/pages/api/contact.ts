@@ -8,9 +8,9 @@ export const POST: APIRoute = async ({ request }) => {
   try {
     if (request.headers.get("Content-Type") === "application/json") {
       const body = await request.json();
-      const { name, email, issue, message, privacy } = body;
+      const { name, company, email, reason, message, privacy } = body;
 
-      if (!name || !email || !issue || !message || privacy === undefined) {
+      if (!name || !company || !email || !reason || !message || privacy === undefined) {
         return new Response("Missing required fields", { status: 400 });
       }
 
@@ -21,8 +21,9 @@ export const POST: APIRoute = async ({ request }) => {
         html: `
                 <h1>Contact Us Form Submission</h1>
                 <p>Name: ${name},</p>
+                <p>Company: ${company}</p>
                 <p>Email: ${email}</p>
-                <p>Issue: ${issue}</p>
+                <p>Reason: ${reason}</p>
                 <p>Message: ${message}</p>
                 <p>Privacy: ${privacy ? "Accepted" : "Declined"}</p>
               `,

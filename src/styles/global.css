@@ -32,6 +32,7 @@
   --radius: 0.6rem;
 
   --brand-green: hsl(124, 66%, 69%); /* #7CE483 */
+  --brand-green-hover: hsl(124, 66%, 59%);
   --brand-purple: hsl(260, 61%, 62%); /* #8C64DA */
 }
 
@@ -102,6 +103,7 @@
   --color-form-element: var(--color-white);
   --color-frame: var(--frame);
   --color-brand-green: var(--brand-green);
+  --color-brand-green-hover: var(--brand-green-hover);
   --color-brand-purple: var(--brand-purple);
 }
 
