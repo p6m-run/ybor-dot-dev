@@ -1,11 +1,10 @@
 # Global code owners
 * chris@ybor.ai
 * jose@ybor.ai
-* security@ybor.ai
 
 # Security-related files
-/.github/security-policy.yml security@ybor.ai
-/public/security.txt security@ybor.ai
+/.github/security-policy.yml chris@ybor.ai
+/public/security.txt chris@ybor.ai
 
 # Configuration files
 /astro.config.mjs jose@ybor.ai
