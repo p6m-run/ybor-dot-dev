@@ -1,0 +1,16 @@
+# Global code owners
+* @chris@ybor.ai
+* @jose@ybor.ai
+* @security@ybor.ai
+
+# Security-related files
+/.github/security-policy.yml @security@ybor.ai
+/public/security.txt @security@ybor.ai
+
+# Configuration files
+/astro.config.mjs @jose@ybor.ai
+/package.json @jose@ybor.ai
+/tsconfig.json @jose@ybor.ai
+
+# Documentation
+/README.md @jose@ybor.ai 
