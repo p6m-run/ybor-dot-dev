@@ -1,8 +1,5 @@
 # Ybor.ai - Enterprise Cloud Platform
 
-[![Deploy on Vercel](https://vercel.com/button)](https://vercel.com/upsight-llc/ybor-dot-dev)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
 > **Build and deploy enterprise-grade applications faster than ever**
 
 Ybor.ai is a modern cloud platform that provides end-to-end automation and orchestration for the entire Software Development Lifecycle (SDLC) process. Our platform helps organizations manage new and existing workloads to optimize costs while unlocking the full potential of cloud infrastructure.
@@ -88,6 +85,7 @@ Create a `.env` file in the root directory:
 # Add your environment variables here
 NOTION_API_KEY=your_notion_api_key
 NOTION_DATABASE_ID=your_notion_database_id
+RESEND_API_KEY=your_resend_api_key
 ```
 
 ## 🤝 Contributing
