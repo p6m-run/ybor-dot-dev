@@ -60,4 +60,4 @@ This repository includes several security measures:
 
 ---
 
-Thank you for helping keep our platform secure! 🔒 
+Thank you for helping keep our platform secure! 🔒
