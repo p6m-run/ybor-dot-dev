@@ -23,20 +23,22 @@ import RibbonImage from "../assets/ribbon.jpg";
       backgroundSize: "50, contain",
       backgroundPosition: "top right, top left",
       backgroundAttachment: "fixed, scroll",
+      backgroundOpacity: "0.25, 1",
     }}
   >
     <div
       class="mx-auto max-w-sm md:max-w-4xl xl:max-w-7xl relative z-10 px-4 md:px-0"
     >
       <header class="flex justify-between items-center py-4 md:py-8">
-        <Logo />
+        <a href="/">
+        <Logo /></a>
 
         <nav class="flex items-center gap-4">
           <!-- <a href="#">Careers</a>
           <a href="#">Documentation</a> -->
           <a
             href="#get-in-touch"
-            class="bg-brand-green text-black font-semibold jetbrains-mono text-sm uppercase px-4 py-2 rounded hover:bg-green-600 transition-colors duration-200"
+            class="bg-brand-green text-black font-semibold jetbrains-mono text-sm uppercase px-4 py-2 rounded hover:bg-brand-green-hover transition-colors duration-200"
           >
             Get In Touch
           </a>
@@ -68,13 +70,13 @@ import RibbonImage from "../assets/ribbon.jpg";
             <span>Scale with confidence.</span>
           </h1>
           <p class="jetbrains-mono mb-8">
-            At Ybor Technology, we are redefining how modern software is built
+            At Ybor Technology, we've built a platform that is redefining how modern software is built
             and shipped - merging speed with security, and setting the standard
             for scalable, cloud native development.
           </p>
           <a
             href="#get-in-touch"
-            class="bg-brand-green text-black font-semibold jetbrains-mono text-sm uppercase px-4 py-2 rounded hover:bg-green-600 transition-colors duration-200 mb-8 inline-block"
+            class="bg-brand-green text-black font-semibold jetbrains-mono text-sm uppercase px-4 py-2 rounded hover:bg-brand-green-hover transition-colors duration-200 mb-8 inline-block"
           >
             Get In Touch
           </a>
@@ -106,21 +108,21 @@ import RibbonImage from "../assets/ribbon.jpg";
       </div>
 
       <div class="flex flex-col gap-y-4 mt-12">
-        <h3>Current Conditions</h3>
+        <h3>Common Challenges</h3>
         <h2 class="text-4xl font-bold">
           Unblock Innovation for the Enterprise
         </h2>
         <p class="jetbrains-mono md:w-1/2">
           Enterprises face increasing pressure to deliver software faster while
           maintaining quality, security, and reliability across diverse cloud
-          environments. Current Conditions
+          environments.
         </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 mt-12 gap-8 pb-12">
         <div>
           <h3 class="text-xl font-bold mb-6">
-            Legacy Systems Block Agility and Growth
+            Legacy Systems Hinder Agility and Growth
           </h3>
           <p class="jetbrains-mono">
             Modern workloads need modern foundations. Enterprises can’t afford
@@ -139,7 +141,7 @@ import RibbonImage from "../assets/ribbon.jpg";
 
         <div>
           <h3 class="text-xl font-bold mb-6">
-            Rigid Platforms Hurt the User Experience
+            Rigid Platforms Hurt the Developer Experience
           </h3>
           <p class="jetbrains-mono">
             Teams need flexibility to adapt to changing requirements and user
@@ -464,7 +466,7 @@ import RibbonImage from "../assets/ribbon.jpg";
     <div class="mx-auto max-w-sm md:max-w-4xl xl:max-w-7xl relative z-10 px-4 md:px-0">
       <div class="md:grid grid-cols-2 gap-x-8">
         <div class="flex-1">
-          <h3 class="text-xs text-muted-foreground mb-6">Quantified Impact</h3>
+          <h3 class="text-xs text-muted-foreground mb-6">Business Impact</h3>
           <h2 class="text-4xl font-semibold mb-6">Accelerate Onboarding, Cut Setup Time, and Ship Faster.</h2>
           <p class="jetbrains-mono text-muted-foreground mb-8">
             Ybor’s automation-first platform streamlines the entire SDLC, from initial environment spin-up to production deployment. The result? Less manual work, faster ramp-up for developers, and shorter cycles from idea to impact.

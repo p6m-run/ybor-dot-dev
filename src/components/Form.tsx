@@ -44,6 +44,9 @@ const FormSchema = z.object({
   name: z.string().min(3, {
     message: "Full name must be at least 3 characters.",
   }),
+  company: z.string().min(3, {
+    message: "Company name must be at least 3 characters.",
+  }),
   email: z
     .string()
     .email({ message: "Invalid email address" })
@@ -54,8 +57,8 @@ const FormSchema = z.object({
       },
       { message: "Only work emails are allowed" }
     ),
-  issue: z.string().min(1, {
-    message: "Selecting an issue is required.",
+  reason: z.string().min(1, {
+    message: "Selecting an reason is required.",
   }),
   message: z.string().min(2, {
     message: "Message is required.",
@@ -68,8 +71,9 @@ export default function ContactForm() {
     resolver: zodResolver(FormSchema),
     defaultValues: {
       name: "",
+      company: "",
       email: "",
-      issue: undefined,
+      reason: undefined,
       message: "",
     },
   });
@@ -136,6 +140,19 @@ export default function ContactForm() {
               />
               <FormField
                 control={form.control}
+                name="company"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Company Name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter your company name" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
                 name="email"
                 render={({ field }) => (
                   <FormItem>
@@ -149,10 +166,10 @@ export default function ContactForm() {
               />
               <FormField
                 control={form.control}
-                name="issue"
+                name="reason"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Primary Issue to Solve</FormLabel>
+                    <FormLabel>Reason for Interest</FormLabel>
                     <FormControl>
                       <Select
                         onValueChange={field.onChange}
@@ -215,7 +232,7 @@ export default function ContactForm() {
                 )}
               />
               <Button
-                className="w-full bg-brand-green text-black font-semibold jetbrains-mono text-sm uppercase px-4 py-2 rounded hover:bg-green-600 transition-colors duration-200"
+                className="w-full bg-brand-green text-black font-semibold jetbrains-mono text-sm uppercase px-4 py-2 rounded hover:bg-brand-green-hover transition-colors duration-200"
                 type="submit"
                 disabled={form.formState.isSubmitting}
               >
