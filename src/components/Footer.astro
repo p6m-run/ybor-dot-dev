@@ -1,6 +1,7 @@
 ---
 import Logo from "./Brand";
-import MembershipsImage from "../assets/memberships.jpg";
+import LinuxImage from "../assets/linux-foundation.jpg"; 
+import CloudImage from "../assets/cloud-native.jpg";
 import { Image } from "astro:assets";
 ---
 
@@ -46,7 +47,8 @@ import { Image } from "astro:assets";
         </defs>
       </svg>
     </a>
-    <Image class="h-6 w-auto" src={MembershipsImage} alt="Memberships" />
+    <a href="https://www.linuxfoundation.org/about/members" target="_blank"><Image class="h-6 w-auto" src={LinuxImage} alt="Linux Foundation" /></a>
+      <a href="#"><Image class="h-6 w-auto" src={CloudImage} alt="Cloud Native Computing Foundation" /></a>
     </div>
   </div>
 

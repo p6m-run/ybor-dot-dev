@@ -101,7 +101,7 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="gradient-bg py-24 mt-24 px-4 md:px-0">
+    <div id="get-in-touch" className="gradient-bg py-24 mt-24 px-4 md:px-0">
       <div className="mx-auto max-w-sm md:max-w-4xl xl:max-w-7xl pt-8">
         <div className="grid md:grid-cols-2 gap-x-4">
           <div>
