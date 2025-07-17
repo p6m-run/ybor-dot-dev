@@ -4,7 +4,7 @@ import "../styles/global.css";
 ---
 
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -18,12 +18,9 @@ import "../styles/global.css";
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital@0;1&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
   </head>
-  <body>
+  <body class="manrope">
     <slot />
     <Toaster client:load />
   </body>
@@ -32,6 +29,12 @@ import "../styles/global.css";
 <style is:global>
   .jetbrains-mono {
     font-family: "JetBrains Mono", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+  }
+
+  .manrope {
+    font-family: "Manrope", sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
