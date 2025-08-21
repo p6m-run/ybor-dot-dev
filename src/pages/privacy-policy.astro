@@ -9,10 +9,11 @@ import Logo from "@/components/Brand";
 import { Image } from "astro:assets";
 
 import TerminalImage from "../assets/legal-hero.svg";
-import PlatformImage from "../assets/platform.jpg";
-import RibbonImage from "../assets/ribbon.jpg";
 
 import PostHogLayout from "../layouts/PostHogLayout.astro";
+
+import PolicyHtml from "../assets/policy.html?raw";
+
 ---
 
 <PostHogLayout>
@@ -97,22 +98,12 @@ import PostHogLayout from "../layouts/PostHogLayout.astro";
       >
         <div class="md:flex items-center justify-between gap-4">
           <div class="flex-1">
-            <div class="flex flex-col gap-y-4 mt-12">
-              <h3>Last Updated: 07/16/25</h3>
-              <h2 class="text-4xl font-bold">Privacy Policy</h2>
-              <p>
-                Ybor, Inc. (“Ybor”, “we”, “us”, or “our”) is committed to
-                protecting your privacy. This Privacy Policy explains how we
-                collect, use, disclose, and safeguard your information when you
-                visit our website [https://ybor.dev] and use our services.
-              </p>
-              <p>
-                By accessing or using the Ybor website, you agree to the
-                collection and use of information in accordance with this policy.
-                This policy applies to all information collected through the Ybor
-                website, including but not limited to IP addresses, device
-                identifiers, and other data.
-              </p>
+            <div class="flex flex-col gap-y-4 mt-12">           
+              
+              <!-- DOC -->
+              <div set:html={PolicyHtml}></div>
+              <!-- END DOC -->
+
             </div>
           </div>
         </div>
