@@ -112,19 +112,3 @@
     @apply border-border outline-ring/50;
   }
 }
-
-.gradient-bg {
-  background: linear-gradient(180deg, #16181c 0%, #24272d 51.92%, #38373e 100%);
-}
-
-.hero {
-  color: var(--color-white)
-}
-
-.hero p {
-  font-weight: 100;
-}
-
-html {
-  scroll-behavior: smooth;
-}
