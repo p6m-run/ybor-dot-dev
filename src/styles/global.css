@@ -112,3 +112,20 @@
     @apply border-border outline-ring/50;
   }
 }
+
+.has-circle-end,
+.has-arrow-right {
+  position: relative;
+}
+
+.has-circle-end::before {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #38373E;
+  content: '';
+  top: -2.5px;
+  left: -3.5px;
+  z-index: 20;
+  position: absolute;
+}
