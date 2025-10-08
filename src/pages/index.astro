@@ -14,6 +14,7 @@ import P6MResourcesImage from "../assets/p6m-resources.svg";
 import SuccessFlexiblePlatformImage from "../assets/success-flexible-platform.svg";
 import Section from "@/components/Section.astro";
 import CertificationsImage from "../assets/certifications.svg";
+import HomeHeroImage from "../assets/home-hero.svg";
 
 // Import Contentful functions
 import { getHomepageData } from "../lib/contentful";
@@ -97,11 +98,20 @@ const challengesSection = homepageData?.challengesSection.fields;
     </header>
 
     <!-- Hero Section  -->
+    <div style={{
+      "background-image": `url(${HomeHeroImage.src})`,
+      "background-size": "contain",
+      "background-position": "center right",
+      "background-repeat": "no-repeat",
+    }}>
     <section class="container mx-auto px-6 py-8">
       <div class="has-circle-end">
         <div class="border-l border-t border-gray-900 max-full">
           <ArrowRightIcon className="w-3 h-3 absolute -top-[5.5px] -right-1" />
           <ArrowDownIcon className="w-3 h-3 absolute -bottom-1 -left-[5.5px]" />
+
+          <!-- home-hero.svg -->
+          <!-- <Image src={HomeHeroImage} alt="Home Hero" class="absolute top-0 right-0" /> -->
 
           <h1
             class="pl-10 text-5xl md:text-6xl font-medium leading-relaxed text-balance"
@@ -117,9 +127,6 @@ const challengesSection = homepageData?.challengesSection.fields;
             />
             <div>
               {heroSection?.subtitle || "// --"}
-            </div>
-            <div>
-              {heroSection?.description || "// --"}
             </div>
           </div>
           <div class="flex gap-4 pl-10">
@@ -138,6 +145,7 @@ const challengesSection = homepageData?.challengesSection.fields;
         </div>
       </div>
     </section>
+    </div>
 
     <!-- Mission Section  -->
     <section class="container mx-auto px-6 py-8">
@@ -178,11 +186,14 @@ const challengesSection = homepageData?.challengesSection.fields;
           <Image src={UnlockPaceImage} alt="Unlock Pace" class="w-full" />
           <div>
             <h3 class="font-normal text-lg mb-2">
-              Legacy systems Stifle Progress
+              {
+                challengesSection?.challenges[0].fields?.title || "--"
+              }
             </h3>
             <p class="text-xs text-gray-600 font-mono">
-              Modern workloads demand modern foundations-legacy systems can't
-              set the pace.
+              {
+                challengesSection?.challenges[0].fields?.description || "--"
+              }
             </p>
           </div>
         </div>
@@ -193,10 +204,14 @@ const challengesSection = homepageData?.challengesSection.fields;
           <Image src={P6MResourcesImage} alt="P6M Resources" class="w-full" />
           <div>
             <h3 class="font-normal text-lg mb-2">
-              Manual Workflows Drain Resources
+              {
+                challengesSection?.challenges[1].fields?.title || "--"
+              }
             </h3>
             <p class="text-xs text-gray-600 font-mono">
-              Repetitive tasks across teams add up to thousands of hours lost.
+              {
+                challengesSection?.challenges[1].fields?.description || "--"
+              }
             </p>
           </div>
         </div>
@@ -211,11 +226,14 @@ const challengesSection = homepageData?.challengesSection.fields;
           />
           <div>
             <h3 class="font-normal text-lg mb-2">
-              Inflexibility Wrecks the Experience
+              {
+                challengesSection?.challenges[2].fields?.title || "--"
+              }
             </h3>
             <p class="text-xs text-gray-600 font-mono">
-              Great experiences come from platforms that flex to your teams-not
-              the other way around.
+              {
+                challengesSection?.challenges[2].fields?.description || "--"
+              }
             </p>
           </div>
         </div>

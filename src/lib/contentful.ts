@@ -101,19 +101,19 @@ export async function getHomepageData(): Promise<any> {
     const homepageEntry = items[0];
     
     // Process all the sections with their nested content
-    const processedHomepage = {
-      id: homepageEntry.sys.id,
-      title: homepageEntry.fields.title || '',
-      heroSection: await processSection(homepageEntry.fields.heroSection),
-      missionSection: await processSection(homepageEntry.fields.missionSection),
-      // challengesSection: await processSection(homepageEntry.fields.challengesSection),
-      platformSection: await processSection(homepageEntry.fields.platformSection),
-      businessImpactSection: await processSection(homepageEntry.fields.businessImpactSection),
-      productSuiteSection: await processSection(homepageEntry.fields.productSuiteSection),
-      testimonialsSection: await processSection(homepageEntry.fields.testimonialsSection),
-      certificationsSection: await processSection(homepageEntry.fields.certificationsSection),
-      contactSection: await processSection(homepageEntry.fields.contactSection),
-    };
+      const processedHomepage = {
+        id: homepageEntry.sys.id,
+        title: homepageEntry.fields.title || '',
+        heroSection: await processSection(homepageEntry.fields.heroSection),
+        missionSection: await processSection(homepageEntry.fields.missionSection),
+        challengesSection: await processSection(homepageEntry.fields.challengesSection),
+        platformSection: await processSection(homepageEntry.fields.platformSection),
+        businessImpactSection: await processSection(homepageEntry.fields.businessImpactSection),
+        productSuiteSection: await processSection(homepageEntry.fields.productSuiteSection),
+        testimonialsSection: await processSection(homepageEntry.fields.testimonialsSection),
+        certificationsSection: await processSection(homepageEntry.fields.certificationsSection),
+        contactSection: await processSection(homepageEntry.fields.contactSection),
+      };
     
     return processedHomepage;
   } catch (error) {
@@ -121,27 +121,6 @@ export async function getHomepageData(): Promise<any> {
     return null; // Return null instead of throwing to allow fallback content
   }
 }
-
-// // Navigation and Footer functions
-// export async function getNavigationData(): Promise<any> {
-//   try {
-//     const { items } = await getEntries('navigation', { limit: 1 });
-//     return items.length > 0 ? items[0] : null;
-//   } catch (error) {
-//     console.error('Error fetching navigation data:', error);
-//     return null; // Return null instead of throwing
-//   }
-// }
-
-// export async function getFooterData(): Promise<any> {
-//   try {
-//     const { items } = await getEntries('footer', { limit: 1 });
-//     return items.length > 0 ? items[0] : null;
-//   } catch (error) {
-//     console.error('Error fetching footer data:', error);
-//     return null; // Return null instead of throwing
-//   }
-// }
 
 // Helper function to process sections with their nested content
 async function processSection(sectionRef: any): Promise<any> {
@@ -155,28 +134,3 @@ async function processSection(sectionRef: any): Promise<any> {
     return null;
   }
 }
-
-// // Rich text rendering utility
-// export function renderRichText(document: any): string {
-//   // This is a basic implementation - you might want to use @contentful/rich-text-html-renderer
-//   // for more complex rich text rendering
-//   if (!document || !document.content) return '';
-  
-//   return document.content
-//     .map((node: any) => {
-//       if (node.nodeType === 'paragraph') {
-//         return `<p>${node.content?.map((text: any) => text.value || '').join('') || ''}</p>`;
-//       }
-//       if (node.nodeType === 'heading-1') {
-//         return `<h1>${node.content?.map((text: any) => text.value || '').join('') || ''}</h1>`;
-//       }
-//       if (node.nodeType === 'heading-2') {
-//         return `<h2>${node.content?.map((text: any) => text.value || '').join('') || ''}</h2>`;
-//       }
-//       if (node.nodeType === 'heading-3') {
-//         return `<h3>${node.content?.map((text: any) => text.value || '').join('') || ''}</h3>`;
-//       }
-//       return '';
-//     })
-//     .join('');
-// }
