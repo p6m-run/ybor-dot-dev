@@ -769,8 +769,8 @@ const contactSection = homepageData?.contactSection.fields;
     <!-- Contact Us Section -->
     <Section title="/* Contact Us">
 
-      <div class="flex justify-between items-center gap-8">
-        <h2 class="text-3xl md:text-4xl font-medium max-w-sm">
+      <div class="flex items-center gap-8">
+        <h2 class="text-3xl md:text-4xl font-medium">
           {contactSection?.headline || "--"}
         </h2>
         <div
@@ -779,7 +779,7 @@ const contactSection = homepageData?.contactSection.fields;
           <ArrowRightIcon className="current-color w-4 h-4 mx-2" />
         </div>
 
-        <div class="max-w-lg font-mono">
+        <div class="font-mono">
           {contactSection?.description || "--"}
         </div>
       </div>
