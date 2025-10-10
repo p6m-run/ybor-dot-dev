@@ -113,6 +113,7 @@ export interface Homepage {
 }
 
 export interface HeroSection {
+  title: ContentfulTextField;
   headline: ContentfulTextField;
   subtitle: ContentfulTextField;
   description: ContentfulTextField;

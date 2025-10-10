@@ -11,7 +11,7 @@
   --card-foreground: hsl(0 0% 3.9%);
   --popover: hsl(0 0% 100%);
   --popover-foreground: hsl(0 0% 3.9%);
-  --primary: hsl(0 0% 9%);
+  --primary: hsl(220 11% 16%);
   --primary-foreground: hsl(0 0% 98%);
   --secondary: hsl(0 0% 96.1%);
   --secondary-foreground: hsl(0 0% 9%);
@@ -34,6 +34,9 @@
   --brand-green: hsl(124, 66%, 69%); /* #7CE483 */
   --brand-green-hover: hsl(124, 66%, 59%);
   --brand-purple: hsl(260, 61%, 62%); /* #8C64DA */
+  --brand-blue: hsl(221, 83%, 53%); /* #2563EB */
+  --brand-orange: hsl(20, 100%, 64%); /* #FF8345 */
+  --brand-yellow: hsl(48, 96%, 53%); /* #FACC15 */
 }
 
 .dark {
@@ -105,6 +108,9 @@
   --color-brand-green: var(--brand-green);
   --color-brand-green-hover: var(--brand-green-hover);
   --color-brand-purple: var(--brand-purple);
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-orange: var(--brand-orange);
+  --color-brand-yellow: var(--brand-yellow);
 }
 
 @layer base {
@@ -128,4 +134,8 @@
   left: -3.5px;
   z-index: 20;
   position: absolute;
+}
+
+.bg-dark-gradient {
+  background: linear-gradient(180deg, #16181C 0%, #24272D 51.92%, #38373E 100%);
 }

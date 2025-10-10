@@ -1,0 +1,57 @@
+---
+import { ArrowRightIcon } from "lucide-react"
+import Logo from "./Brand"
+---
+<!-- Header -->
+    <header>
+      <div
+        class="container mx-auto px-6 py-4 flex items-center justify-between"
+      >
+        <div class="flex items-center gap-8">
+          <div class="text-xl font-bold font-mono">
+            <a href="/"> <Logo /></a>
+          </div>
+          <nav class="hidden md:flex items-center gap-6">
+            <button
+              class="flex items-center gap-1 text-sm text-gray-700 hover:text-gray-900"
+            >
+              Products
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <a href="#" class="text-sm text-gray-700 hover:text-gray-900"
+              >Platform Configurator</a
+            >
+            <a href="#" class="text-sm text-gray-700 hover:text-gray-900"
+              >Careers</a
+            >
+            <a href="#" class="text-sm text-gray-700 hover:text-gray-900"
+              >Contact</a
+            >
+          </nav>
+        </div>
+        <div class="flex items-center gap-3">
+          <button
+            class="inline-flex items-center justify-center rounded-full text-sm font-medium border border-gray-300 bg-transparent hover:bg-gray-50 h-10 px-6 py-2"
+          >
+            Get Started
+            <ArrowRightIcon className="w-4 h-4 ml-4" />
+          </button>
+          <button
+            class="inline-flex items-center justify-center rounded-full text-sm font-medium hover:bg-gray-100 h-10 px-4 py-2"
+          >
+            Log In
+          </button>
+        </div>
+      </div>
+    </header>
