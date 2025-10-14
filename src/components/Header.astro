@@ -1,21 +1,21 @@
 ---
 import { ArrowRightIcon } from "lucide-react"
 import Logo from "./Brand"
-import YInfraLogo from "../assets/y-infra-logo.svg";
-import YAppLogo from "../assets/y-app-logo.svg";
-import YAiLogo from "../assets/y-ai-logo.svg";
-import YEdeLogo from "../assets/y-ede-logo.svg";
+import YInfraLogo from "@/assets/y-infra-logo.svg";
+import YAppLogo from "@/assets/y-app-logo.svg";
+import YAiLogo from "@/assets/y-ai-logo.svg";
+import YEdeLogo from "@/assets/y-ede-logo.svg";
 import { Image } from "astro:assets";
-interface HeaderProps {
-  products: any[];
-}
+import { getHomepageData } from "@/lib/contentful";
 
-const { products } = Astro.props;
+const homepageData = await getHomepageData();
+const productSuiteSection = homepageData?.productSuiteSection.fields;
+const products = productSuiteSection?.products;
 ---
 <!-- Header -->
     <header>
       <div
-        class="container mx-auto px-6 py-4 flex items-center justify-between"
+        class="container mx-auto p-6 flex items-center justify-between"
       >
         <div class="flex items-center gap-8">
           <div class="text-xl font-bold font-mono">
@@ -48,7 +48,7 @@ const { products } = Astro.props;
                   <div class="grid gap-8">
                     <!-- Left Section - Products -->
                     <div>
-                      <h3 class="text-2xl font-bold text-gray-900 mb-2">Products</h3>
+                      <h3 class="text-2xl font-medium text-gray-900 mb-2">Products</h3>
                       <p class="text-gray-600 mb-6 text-sm">
                         Accelerate your business with our comprehensive platform solutions.
                       </p>
@@ -86,7 +86,7 @@ const { products } = Astro.props;
                         </a>
                         
                         <!-- Y_EDE Card -->
-                        <a href="#y-ede" class="group/card p-4 rounded-lg border border-gray-200 hover:border-brand-yellow transition-all duration-200">
+                        <a href="/products/ede" class="group/card p-4 rounded-lg border border-gray-200 hover:border-brand-yellow transition-all duration-200">
                           <div class="flex items-center justify-start mb-3">
                             <Image src={YEdeLogo} alt={products[3].fields?.name || "--"} class="h-8 w-auto" />
                           </div>

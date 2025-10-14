@@ -1,33 +1,33 @@
 ---
-import Footer from "../components/Footer.astro";
-import Terminal from "../components/Terminal.astro";
-import Form from "../components/Form";
-import Layout from "../layouts/Layout.astro";
+import Footer from "@/components/Footer.astro";
+import Terminal from "@/components/Terminal.astro";
+import Form from "@/components/Form";
+import Layout from "@/layouts/Layout.astro";
 import Analytics from "@vercel/analytics/astro";
 
 import Logo from "@/components/Brand";
 import { Image } from "astro:assets";
 import PostHogLayout from "@/layouts/PostHogLayout.astro";
 import { ArrowDownIcon, ArrowRightIcon, MoveRightIcon } from "lucide-react";
-import UnlockPaceImage from "../assets/unlock-pace.svg";
-import P6MResourcesImage from "../assets/p6m-resources.svg";
-import SuccessFlexiblePlatformImage from "../assets/success-flexible-platform.svg";
+import UnlockPaceImage from "@/assets/unlock-pace.svg";
+import P6MResourcesImage from "@/assets/p6m-resources.svg";
+import SuccessFlexiblePlatformImage from "@/assets/success-flexible-platform.svg";
 import Section from "@/components/Section.astro";
-import CertificationsImage from "../assets/certifications.svg";
-import HomeHeroImage from "../assets/home-hero.svg";
+import CertificationsImage from "@/assets/certifications.svg";
+import HomeHeroImage from "@/assets/home-hero.svg";
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import AnimatedProgressBar from "@/components/AnimatedProgressBar";
-import YInfraLogo from "../assets/y-infra-logo.svg";
-import YInfraProductsImage from "../assets/home-y-infra-product.svg";
-import YAppProductsImage from "../assets/home-y-app-product.svg";
-import YAppLogo from "../assets/y-app-logo.svg";
-import YAiLogo from "../assets/y-ai-logo.svg";
-import YAiProductsImage from "../assets/home-y-ai-product.svg";
-import YEdeLogo from "../assets/y-ede-logo.svg";
-import YEdeProductsImage from "../assets/home-y-ede-product.svg";
+import YInfraLogo from "@/assets/y-infra-logo.svg";
+import YInfraProductsImage from "@/assets/home-y-infra-product.svg";
+import YAppProductsImage from "@/assets/home-y-app-product.svg";
+import YAppLogo from "@/assets/y-app-logo.svg";
+import YAiLogo from "@/assets/y-ai-logo.svg";
+import YAiProductsImage from "@/assets/home-y-ai-product.svg";
+import YEdeLogo from "@/assets/y-ede-logo.svg";
+import YEdeProductsImage from "@/assets/home-y-ede-product.svg";
 
 // Import Contentful functions
-import { getHomepageData } from "../lib/contentful";
+import { getHomepageData } from "@/lib/contentful";
 import Header from "@/components/Header.astro";
 
 // Fetch homepage data from Contentful
@@ -54,7 +54,7 @@ const contactSection = homepageData?.contactSection.fields;
 
 <PostHogLayout>
   <Layout>
-    <Header products={productSuiteSection?.products} />
+    <Header/>
 
     <!-- Hero Section  -->
     <div
@@ -767,7 +767,9 @@ const contactSection = homepageData?.contactSection.fields;
     </section>
 
     <!-- Contact Us Section -->
-    <Section title="/* Contact Us">
+    <Section title={
+      contactSection?.title || "/* --"
+    }>
 
       <div class="flex items-center gap-8">
         <h2 class="text-3xl md:text-4xl font-medium">

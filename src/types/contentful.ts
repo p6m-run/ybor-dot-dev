@@ -209,6 +209,13 @@ export interface ContactSection {
   description: ContentfulTextField;
 }
 
+export interface EdeProductPage {
+  title: ContentfulTextField;
+  edeHeroSection: ContentfulEntryField<HeroSection>;
+  capabilities: ContentfulEntryField<CapabilitiesSection>;
+  contactSection: ContentfulEntryField<ContactSection>;
+}
+
 // Additional content types from your Contentful space
 export interface Footer {
   title?: ContentfulTextField;
@@ -240,30 +247,6 @@ export interface MenuItem {
   url: ContentfulTextField;
   target?: ContentfulTextField;
   children?: ContentfulEntryArrayField<MenuItem>;
-}
-
-// Blog Content Types (keeping for future use)
-export interface BlogPost {
-  title: ContentfulTextField;
-  slug: ContentfulTextField;
-  excerpt: ContentfulTextField;
-  content: ContentfulRichTextField;
-  featuredImage: ContentfulAssetField;
-  author: ContentfulEntryField<{
-    name: ContentfulTextField;
-    bio: ContentfulTextField;
-    avatar: ContentfulAssetField;
-  }>;
-  tags: ContentfulEntryArrayField<{
-    name: ContentfulTextField;
-    slug: ContentfulTextField;
-  }>;
-  publishDate: {
-    'en-US': string;
-    [locale: string]: string;
-  };
-  seoTitle?: ContentfulTextField;
-  seoDescription?: ContentfulTextField;
 }
 
 export interface Page {
@@ -323,3 +306,16 @@ export type CleanContentfulEntry<T> = {
   createdAt: string;
   updatedAt: string;
 };
+
+export interface CapabilitiesSection {
+  title: ContentfulTextField;
+  headline: ContentfulTextField;
+  subtitle: ContentfulTextField;
+  description: ContentfulTextField;
+  capability: ContentfulEntryArrayField<Capability[]>;
+}
+
+export interface Capability {
+  title: ContentfulTextField;
+  description: ContentfulTextField;
+}

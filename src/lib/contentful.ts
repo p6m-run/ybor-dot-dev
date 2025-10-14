@@ -1,4 +1,4 @@
-import type { Homepage } from '@/types/contentful';
+import type { EdeProductPage, Homepage } from '@/types/contentful';
 import { createClient } from 'contentful';
 
 
@@ -118,6 +118,41 @@ export async function getHomepageData(): Promise<any> {
     return processedHomepage;
   } catch (error) {
     console.error('Error fetching homepage data:', error);
+    return null; // Return null instead of throwing to allow fallback content
+  }
+}
+
+// EDE-specific functions
+export async function getEdePageData(): Promise<any> {
+  try {
+    // First, try to get any homepage entry (in case the ID is different)
+    const { items } = await contentfulClient.getEntries<{
+      contentTypeId: "edeProductPage",
+      fields: EdeProductPage
+    }>({
+      content_type: 'edeProductPage',
+      limit: 1,
+    });
+    
+    if (items.length === 0) {
+      console.warn('No edeProductPage entries found in Contentful');
+      return null;
+    }
+    
+    const edeProductPageEntry = items[0];
+    
+    // Process all the sections with their nested content
+      const processedEdeProductPage = {
+        id: edeProductPageEntry.sys.id,
+        title: edeProductPageEntry.fields.title || '',
+        edeHeroSection: await processSection(edeProductPageEntry.fields.edeHeroSection),
+        capabilitiesSection: await processSection(edeProductPageEntry.fields.capabilities),
+        contactSection: await processSection(edeProductPageEntry.fields.contactSection),
+      };
+    
+    return processedEdeProductPage;
+  } catch (error) {
+    console.error('Error fetching edeProductPage data:', error);
     return null; // Return null instead of throwing to allow fallback content
   }
 }
