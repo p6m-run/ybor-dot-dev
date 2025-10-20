@@ -1,5 +1,4 @@
 ---
-import { ArrowRightIcon } from "lucide-react"
 import Logo from "./Brand"
 import YInfraLogo from "@/assets/y-infra-logo.svg";
 import YAppLogo from "@/assets/y-app-logo.svg";
@@ -7,6 +6,7 @@ import YAiLogo from "@/assets/y-ai-logo.svg";
 import YEdeLogo from "@/assets/y-ede-logo.svg";
 import { Image } from "astro:assets";
 import { getHomepageData } from "@/lib/contentful";
+import { ArrowRightIcon } from "@lucide/astro";
 
 const homepageData = await getHomepageData();
 const productSuiteSection = homepageData?.productSuiteSection.fields;
@@ -23,7 +23,8 @@ const products = productSuiteSection?.products;
           </div>
           <nav class="hidden md:flex items-center gap-6">
             <!-- Products Mega Menu -->
-            <div class="relative group">
+            {
+              products && (<div class="relative group">
               <button
                 class="flex items-center gap-1 text-sm text-gray-700 hover:text-brand-purple transition-colors"
               >
@@ -99,7 +100,8 @@ const products = productSuiteSection?.products;
                   </div>
                 </div>
               </div>
-            </div>
+            </div>)
+            }
             
             <a href="#" class="text-sm text-gray-700 hover:text-brand-purple transition-colors"
               >Platform Configurator</a
@@ -117,7 +119,7 @@ const products = productSuiteSection?.products;
             class="inline-flex items-center justify-center rounded-full text-sm font-medium border border-gray-300 bg-transparent hover:bg-gray-50  hover:text-brand-purple transition-colors h-10 px-6 py-2"
           >
             Get Started
-            <ArrowRightIcon className="w-4 h-4 ml-4" />
+            <ArrowRightIcon class="w-4 h-4 ml-4" />
           </button>
           <button
             class="inline-flex items-center justify-center rounded-full text-sm font-medium hover:bg-gray-100 hover:text-brand-purple transition-colors h-10 px-4 py-2"

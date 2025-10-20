@@ -1,0 +1,59 @@
+---
+import type { ProcessedSection } from '@/types/contentful-v2';
+import { ArrowRightIcon } from 'lucide-react';
+import Section from '@/components/Section.astro';
+import AnimatedProgressBar from '@/components/AnimatedProgressBar';
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+
+interface Props {
+  section: ProcessedSection;
+}
+
+const { section } = Astro.props;
+---
+
+<Section title={section.title || ''}>
+  <div class="flex justify-between items-center gap-8 mb-8">
+    {section.headline && (
+      <h2 class="text-3xl md:text-4xl font-medium mb-6 max-w-sm">
+        {section.headline}
+      </h2>
+    )}
+    
+    <div class="rounded-full bg-brand-purple flex items-center justify-center w-8 h-8">
+      <ArrowRightIcon className="current-color w-4 h-4 mx-2" />
+    </div>
+
+    {section.description && (
+      <div class="max-w-lg font-mono">
+        {typeof section.description === 'string' 
+          ? section.description 
+          : documentToHtmlString(section.description)}
+      </div>
+    )}
+  </div>
+
+  <div class="grid md:grid-cols-3 gap-8">
+    {section.items?.map((item) => (
+      <div class="text-center">
+        {item.value && (
+          <div class="text-5xl font-bold mb-4 text-brand-purple">
+            {item.value}
+          </div>
+        )}
+        {item.title && (
+          <h3 class="text-xl font-medium mb-2">{item.title}</h3>
+        )}
+        {item.description && (
+          <p class="text-sm text-gray-600 font-mono">
+            {typeof item.description === 'string' 
+              ? item.description 
+              : documentToHtmlString(item.description)}
+          </p>
+        )}
+        <AnimatedProgressBar client:visible />
+      </div>
+    ))}
+  </div>
+</Section>
+

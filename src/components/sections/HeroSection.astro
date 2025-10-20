@@ -1,0 +1,67 @@
+---
+import type { ProcessedSection } from '@/types/contentful-v2';
+import { ArrowDownIcon, ArrowRightIcon } from 'lucide-react';
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+import HomeHeroImage from '@/assets/home-hero.svg';
+
+interface Props {
+  section: ProcessedSection;
+}
+
+const { section } = Astro.props;
+---
+
+<div
+  style={{
+    'background-image': section.media ? `url(${section.media.url})` : `url(${HomeHeroImage.src})`,
+    'background-size': 'contain',
+    'background-position': 'right 26px',
+    'background-repeat': 'no-repeat',
+    height: '470px',
+  }}
+>
+  <section class="container mx-auto px-6 py-8">
+    <div class="has-circle-end">
+      <div class="border-l border-t border-gray-900 max-full">
+        <ArrowRightIcon className="w-3 h-3 absolute -top-[5.5px] -right-1" />
+        <ArrowDownIcon className="w-3 h-3 absolute -bottom-1 -left-[5.5px]" />
+
+        <h1 class="pl-10 text-5xl md:text-6xl font-medium leading-relaxed text-balance">
+          {section.headline && <span>{section.headline}</span>}
+          {section.title && (
+            <span set:html={typeof section.title === 'string' ? section.title : documentToHtmlString(section.title)} />
+          )}
+        </h1>
+
+        {section.subtitle && (
+          <div class="font-mono text-sm text-gray-600 space-y-1 pl-10 py-6 border-gray-900 border-t max-w-4xl relative">
+            <ArrowRightIcon className="w-3 h-3 absolute -top-[6.5px] -right-1" />
+            <div>{section.subtitle}</div>
+          </div>
+        )}
+
+        <div class="flex gap-4 pl-10">
+          {section.primaryButton && (
+            <a
+              href={section.primaryButton.url}
+              class="inline-flex items-center justify-center rounded-full text-sm font-medium bg-gray-900 text-white hover:bg-gray-800 h-10 px-6 py-2"
+            >
+              {section.primaryButton.text}
+              <ArrowRightIcon className="w-4 h-4 ml-4 text-brand-purple" />
+            </a>
+          )}
+          
+          {section.secondaryButton && (
+            <a
+              href={section.secondaryButton.url}
+              class="inline-flex items-center justify-center rounded-full text-sm font-medium border border-gray-300 bg-white hover:bg-gray-50 h-10 px-6 py-2"
+            >
+              {section.secondaryButton.text}
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+

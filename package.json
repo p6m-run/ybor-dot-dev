@@ -6,7 +6,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "contentful:import-types": "node import-contentful.js",
+    "contentful:import-content": "node import-fixed.js"
   },
   "dependencies": {
     "@astrojs/react": "^4.3.0",
@@ -39,6 +41,7 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "contentful-management": "^11.60.4",
     "sharp": "^0.34.3"
   }
 }

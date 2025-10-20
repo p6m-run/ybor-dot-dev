@@ -1,0 +1,59 @@
+---
+import type { ProcessedSection } from '@/types/contentful-v2';
+import Section from '@/components/Section.astro';
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+
+interface Props {
+  section: ProcessedSection;
+}
+
+const { section } = Astro.props;
+---
+
+<Section title={section.title || ''}>
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {section.items?.map((testimonial) => (
+      <div class="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
+        {testimonial.metadata?.rating && (
+          <div class="flex mb-4">
+            {Array.from({ length: testimonial.metadata.rating }).map(() => (
+              <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+            ))}
+          </div>
+        )}
+        
+        {testimonial.description && (
+          <blockquote class="text-gray-700 mb-6 italic">
+            {typeof testimonial.description === 'string' 
+              ? `"${testimonial.description}"` 
+              : documentToHtmlString(testimonial.description)}
+          </blockquote>
+        )}
+        
+        <div class="flex items-center">
+          {testimonial.metadata?.authorImage && (
+            <img 
+              src={testimonial.metadata.authorImage} 
+              alt={testimonial.metadata.authorName || 'Author'} 
+              class="w-12 h-12 rounded-full mr-4"
+            />
+          )}
+          <div>
+            {testimonial.metadata?.authorName && (
+              <div class="font-medium">{testimonial.metadata.authorName}</div>
+            )}
+            {testimonial.metadata?.authorTitle && (
+              <div class="text-sm text-gray-600">{testimonial.metadata.authorTitle}</div>
+            )}
+            {testimonial.metadata?.authorCompany && (
+              <div class="text-sm text-gray-600">{testimonial.metadata.authorCompany}</div>
+            )}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</Section>
+

@@ -1,0 +1,58 @@
+---
+/**
+ * Dynamic page route using the NEW flexible Contentful architecture
+ * 
+ * This handles all pages dynamically based on their slug.
+ * Examples: /products/ede, /about, /pricing, etc.
+ */
+
+import type { GetStaticPaths } from 'astro';
+import Layout from '@/layouts/Layout.astro';
+import PostHogLayout from '@/layouts/PostHogLayout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import SectionRenderer from '@/components/SectionRenderer.astro';
+import { getAllPages, getPageBySlug } from '@/lib/contentful-v2';
+import type { ProcessedPage } from '@/types/contentful-v2';
+
+// Generate static paths for all pages (except homepage)
+export const getStaticPaths: GetStaticPaths = async () => {
+  const pages = await getAllPages();
+  
+  return pages
+    .filter(page => page.slug !== '/') // Exclude homepage (handled by index.astro)
+    .map((page) => ({
+      params: { 
+        slug: page.slug.startsWith('/') ? page.slug.slice(1) : page.slug 
+      },
+      props: { page },
+    }));
+};
+
+interface Props {
+  page: ProcessedPage;
+}
+
+const { page } = Astro.props;
+
+// Log for debugging
+console.log(`📄 Rendering page: ${page.title} (${page.slug})`);
+console.log(`📦 Sections: ${page.sections.length}`);
+---
+
+<PostHogLayout>
+  <Layout 
+    title={page.title}
+    description={page.metaDescription}
+  >
+    <Header />
+
+    <!-- Render all sections dynamically -->
+    {page.sections.map((section) => (
+      <SectionRenderer section={section} />
+    ))}
+
+    <Footer />
+  </Layout>
+</PostHogLayout>
+
