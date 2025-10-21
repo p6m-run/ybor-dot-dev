@@ -37,6 +37,7 @@
   --brand-blue: hsl(221, 83%, 53%); /* #2563EB */
   --brand-orange: hsl(20, 100%, 64%); /* #FF8345 */
   --brand-yellow: hsl(48, 96%, 53%); /* #FACC15 */
+  --brand-stroke: hsl(249 6% 23%); /* #38373E */
 }
 
 .dark {
@@ -111,6 +112,7 @@
   --color-brand-blue: var(--brand-blue);
   --color-brand-orange: var(--brand-orange);
   --color-brand-yellow: var(--brand-yellow);
+  --color-brand-stroke: var(--brand-stroke);
 }
 
 @layer base {

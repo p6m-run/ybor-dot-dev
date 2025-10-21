@@ -18,7 +18,9 @@ export type SectionType =
   | 'features'
   | 'cta'
   | 'how-it-works'
-  | 'use-cases';
+  | 'use-cases'
+  | 'security-compliance'
+  | 'comparison';
 
 // Component type options
 export type ComponentType = 
@@ -60,6 +62,7 @@ export interface SectionFields {
   backgroundColor?: string;
   items?: Entry<ComponentFields | ProductFields | TestimonialFields>[];
   media?: Asset;
+  metadata?: Record<string, any>;
 }
 
 export interface ComponentFields {
@@ -164,6 +167,7 @@ export interface ProcessedSection {
   backgroundColor?: string;
   items?: ProcessedComponent[];
   media?: ProcessedMedia;
+  metadata?: Record<string, any>;
 }
 
 export interface ProcessedComponent {

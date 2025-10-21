@@ -36,7 +36,7 @@ const { section, color } = Astro.props;
       <ArrowRightIcon class="current-color w-4 h-4 mx-2" />
     </div>
 
-    <div class="font-mono" set:html={decodeHtmlEntities(documentToHtmlString(section?.description))}>
+    <div class="font-mono text-sm" set:html={decodeHtmlEntities(documentToHtmlString(section?.description))}>
       
     </div>
   </div>

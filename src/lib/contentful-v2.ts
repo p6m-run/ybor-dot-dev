@@ -212,6 +212,7 @@ function processSection(entry: Entry<SectionFields>): ProcessedSection {
           height: fields.media.fields.file.details.image?.height,
         }
       : undefined,
+    metadata: fields.metadata,
   };
 }
 
