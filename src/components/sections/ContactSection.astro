@@ -3,43 +3,46 @@ import type { ProcessedSection } from '@/types/contentful-v2';
 import Section from '@/components/Section.astro';
 import Form from '@/components/Form';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+import { cn, decodeHtmlEntities } from '@/lib/utils';
 import { Image } from 'astro:assets';
 import GetInTouchImage from '@/assets/get-in-touch.svg';
+import { ArrowRightIcon } from '@lucide/astro';
 
 interface Props {
   section: ProcessedSection;
+  color: string;
 }
 
-const { section } = Astro.props;
+const { section, color } = Astro.props;
 ---
 
-<Section title={section.title || ''}>
-  <div class="grid md:grid-cols-2 gap-12 items-center">
-    <div>
-      {section.headline && (
-        <h2 class="text-3xl md:text-4xl font-medium mb-6">
-          {section.headline}
-        </h2>
-      )}
-      
-      {section.description && (
-        <div class="text-gray-600 mb-8 font-mono">
-          {typeof section.description === 'string' 
-            ? section.description 
-            : documentToHtmlString(section.description)}
-        </div>
-      )}
-      
-      <Form client:load />
+<Section title={
+  section?.title || "/* --"
+}>
+
+  <div class="flex items-center gap-8">
+    <h2 class="text-3xl md:text-4xl font-medium">
+      {section?.headline || "--"}
+    </h2>
+    <div
+      class={
+        cn("rounded-full flex items-center text-primary justify-center w-8 h-8", {
+          "bg-brand-purple": color === "brand-purple",
+          "bg-brand-blue": color === "brand-blue",
+          "bg-brand-orange": color === "brand-orange",
+          "bg-brand-yellow": color === "brand-yellow",
+        })
+      }>
+      <ArrowRightIcon class="current-color w-4 h-4 mx-2" />
     </div>
-    
-    <div class="hidden md:block">
-      {section.media ? (
-        <img src={section.media.url} alt={section.media.alt} class="w-full" />
-      ) : (
-        <Image src={GetInTouchImage} alt="Get in Touch" class="w-full" />
-      )}
+
+    <div class="font-mono" set:html={decodeHtmlEntities(documentToHtmlString(section?.description))}>
+      
     </div>
   </div>
-</Section>
+
+
+  <Form client:only="react" />
+  </Section
+>
 

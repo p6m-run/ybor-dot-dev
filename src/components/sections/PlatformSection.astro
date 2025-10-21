@@ -4,6 +4,7 @@ import { ArrowRightIcon } from 'lucide-react';
 import Section from '@/components/Section.astro';
 import Terminal from '@/components/Terminal.astro';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+import { decodeHtmlEntities } from '@/lib/utils';
 
 interface Props {
   section: ProcessedSection;
@@ -25,11 +26,12 @@ const { section } = Astro.props;
     </div>
 
     {section.description && (
-      <div class="max-w-lg font-mono">
-        {typeof section.description === 'string' 
+      <div 
+        class="max-w-lg font-mono"
+        set:html={typeof section.description === 'string' 
           ? section.description 
-          : documentToHtmlString(section.description)}
-      </div>
+          : decodeHtmlEntities(documentToHtmlString(section.description))}
+      />
     )}
   </div>
 
@@ -40,11 +42,12 @@ const { section } = Astro.props;
           <h3 class="text-xl font-medium mb-4">{item.title}</h3>
         )}
         {item.description && (
-          <div class="text-sm text-gray-600 mb-4 font-mono">
-            {typeof item.description === 'string' 
+          <div 
+            class="text-sm text-gray-600 mb-4 font-mono"
+            set:html={typeof item.description === 'string' 
               ? item.description 
-              : documentToHtmlString(item.description)}
-          </div>
+              : decodeHtmlEntities(documentToHtmlString(item.description))}
+          />
         )}
         {item.metadata?.details && (
           <ul class="text-sm text-gray-600 mb-4 list-disc list-inside font-mono">

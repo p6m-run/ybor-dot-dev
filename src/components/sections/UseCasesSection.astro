@@ -1,11 +1,10 @@
 ---
 import type { ProcessedSection } from "@/types/contentful-v2";
-import { Image } from "astro:assets";
 import { ArrowRightIcon } from "@lucide/astro";
 import Section from "@/components/Section.astro";
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
-import YedeCapabilitiesImage from "@/assets/y-ede-capabilities.svg";
 import { decodeHtmlEntities } from "@/lib/utils";
+import UseCasesTabs from "@/components/UseCasesTabs";
 
 interface Props {
   section: ProcessedSection;
@@ -35,7 +34,7 @@ const { section } = Astro.props;
         <div
           class="max-w-lg font-mono text-sm text-foreground"
           set:html={decodeHtmlEntities(
-            documentToHtmlString(section.description)
+            decodeHtmlEntities(documentToHtmlString(section.description))
           )}
         />
       )
@@ -43,32 +42,8 @@ const { section } = Astro.props;
   </div>
 
   <div class="my-8">
-    <!-- y-ede-capabilities.svg -->
-    <Image
-      src={YedeCapabilitiesImage}
-      alt="Y_EDE Capabilities"
-      class="w-full"
-    />
-  </div>
-
-  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-    {
-      section.items?.map((capability) => (
-        <div class="">
-          {capability.title && (
-            <h3 class="text-lg font-medium mb-2">{capability.title}</h3>
-          )}
-
-          {capability.description && (
-            <div
-              class="text-sm text-gray-600 font-mono"
-              set:html={decodeHtmlEntities(
-                documentToHtmlString(capability.description)
-              )}
-            />
-          )}
-        </div>
-      ))
-    }
+    {section.items && section.items.length > 0 && (
+      <UseCasesTabs useCases={section.items} client:load />
+    )}
   </div>
 </Section>

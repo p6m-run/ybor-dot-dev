@@ -8,9 +8,29 @@ import { Image } from "astro:assets";
 import { getHomepageData } from "@/lib/contentful";
 import { ArrowRightIcon } from "@lucide/astro";
 
-const homepageData = await getHomepageData();
-const productSuiteSection = homepageData?.productSuiteSection.fields;
-const products = productSuiteSection?.products;
+const products = [
+  {
+    name: "Y_Infra",
+    description: "Y_Infra is a platform for building and deploying infrastructure.",
+    url: "/products/y-infra"
+  },
+  {
+    name: "Y_App",
+    description: "Y_App is a platform for building and deploying applications.",
+    url: "/products/y-app"
+  },
+  {
+    name: "Y_AI",
+    description: "Y_AI is a platform for building and deploying AI applications.",
+    url: "/products/y-ai"
+  },
+  {
+    name: "Y_EDE",
+    description: "Y_EDE is a platform for building and deploying EDE applications.",
+    url: "/products/ede"
+  }
+]
+
 ---
 <!-- Header -->
     <header>
@@ -59,40 +79,40 @@ const products = productSuiteSection?.products;
                         <!-- Y_Infra Card -->
                         <a href="#y-infra" class="group/card p-4 rounded-lg border border-gray-200 hover:border-brand-blue transition-all duration-200">
                           <div class="flex items-center justify-start mb-3">
-                            <Image src={YInfraLogo} alt={products[0].fields?.name || "--"} class="h-8 w-auto" />
+                            <Image src={YInfraLogo} alt={products[0].name || "--"} class="h-8 w-auto" />
                           </div>
                           <p class="text-xs text-gray-600">
-                            {products[0].fields?.description || "--"}
+                            {products[0].description || "--"}
                           </p>
                         </a>
                         
                         <!-- Y_App Card -->
                         <a href="#y-app" class="group/card p-4 rounded-lg border border-gray-200 hover:border-brand-green transition-all duration-200">
                           <div class="flex items-center justify-start mb-3">
-                            <Image src={YAppLogo} alt={products[1].fields?.name || "--"} class="h-8 w-auto" />
+                            <Image src={YAppLogo} alt={products[1].name || "--"} class="h-8 w-auto" />
                           </div>
                           <p class="text-xs text-gray-600">
-                            {products[1].fields?.description || "--"}
+                            {products[1].description || "--"}
                           </p>
                         </a>
                         
                         <!-- Y_AI Card -->
                         <a href="#y-ai" class="group/card p-4 rounded-lg border border-gray-200 hover:border-brand-orange transition-all duration-200">
                           <div class="flex items-center justify-start mb-3">
-                            <Image src={YAiLogo} alt={products[2].fields?.name || "--"} class="h-8 w-auto" />
+                            <Image src={YAiLogo} alt={products[2].name || "--"} class="h-8 w-auto" />
                           </div>
                           <p class="text-xs text-gray-600">
-                            {products[2].fields?.description || "--"}
+                            {products[2].description || "--"}
                           </p>
                         </a>
                         
                         <!-- Y_EDE Card -->
                         <a href="/products/ede" class="group/card p-4 rounded-lg border border-gray-200 hover:border-brand-yellow transition-all duration-200">
                           <div class="flex items-center justify-start mb-3">
-                            <Image src={YEdeLogo} alt={products[3].fields?.name || "--"} class="h-8 w-auto" />
+                            <Image src={YEdeLogo} alt={products[3].name || "--"} class="h-8 w-auto" />
                           </div>
                           <p class="text-xs text-gray-600">
-                            {products[3].fields?.description || "--"}
+                            {products[3].description || "--"}
                           </p>
                         </a>
                       </div>

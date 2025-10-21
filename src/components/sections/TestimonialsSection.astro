@@ -2,6 +2,7 @@
 import type { ProcessedSection } from '@/types/contentful-v2';
 import Section from '@/components/Section.astro';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+import { decodeHtmlEntities } from '@/lib/utils';
 
 interface Props {
   section: ProcessedSection;
@@ -25,11 +26,12 @@ const { section } = Astro.props;
         )}
         
         {testimonial.description && (
-          <blockquote class="text-gray-700 mb-6 italic">
-            {typeof testimonial.description === 'string' 
+          <blockquote 
+            class="text-gray-700 mb-6 italic"
+            set:html={typeof testimonial.description === 'string' 
               ? `"${testimonial.description}"` 
-              : documentToHtmlString(testimonial.description)}
-          </blockquote>
+              : decodeHtmlEntities(documentToHtmlString(testimonial.description))}
+          />
         )}
         
         <div class="flex items-center">

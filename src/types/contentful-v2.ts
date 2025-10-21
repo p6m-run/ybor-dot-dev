@@ -16,7 +16,9 @@ export type SectionType =
   | 'contact'
   | 'capabilities'
   | 'features'
-  | 'cta';
+  | 'cta'
+  | 'how-it-works'
+  | 'use-cases';
 
 // Component type options
 export type ComponentType = 
@@ -25,7 +27,9 @@ export type ComponentType =
   | 'metric'
   | 'capability'
   | 'card'
-  | 'code-example';
+  | 'code-example'
+  | 'use-case'
+  | 'step';
 
 // Link type options
 export type LinkType = 'footer' | 'social' | 'navigation';

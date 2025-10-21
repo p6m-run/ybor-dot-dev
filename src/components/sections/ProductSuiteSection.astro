@@ -3,6 +3,7 @@ import type { ProcessedSection } from '@/types/contentful-v2';
 import { ArrowRightIcon, MoveRightIcon } from 'lucide-react';
 import Section from '@/components/Section.astro';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+import { decodeHtmlEntities } from '@/lib/utils';
 import { Image } from 'astro:assets';
 
 // Default product logos (fallback if not provided)
@@ -44,11 +45,12 @@ const defaultLogos = [YEdeLogo, YInfraLogo, YAppLogo, YAiLogo];
         )}
         
         {product.description && (
-          <div class="text-sm text-gray-600 mb-4 font-mono">
-            {typeof product.description === 'string' 
+          <div 
+            class="text-sm text-gray-600 mb-4 font-mono"
+            set:html={typeof product.description === 'string' 
               ? product.description 
-              : documentToHtmlString(product.description)}
-          </div>
+              : decodeHtmlEntities(documentToHtmlString(product.description))}
+          />
         )}
         
         {product.metadata?.features && product.metadata.features.length > 0 && (

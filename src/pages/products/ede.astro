@@ -1,177 +1,52 @@
 ---
-import Footer from "@/components/Footer.astro";
-import Terminal from "@/components/Terminal.astro";
-import Form from "@/components/Form";
-import Layout from "@/layouts/Layout.astro";
+/**
+ * Dynamic page route using the NEW flexible Contentful architecture
+ * 
+ * This handles all pages dynamically based on their slug.
+ * Examples: /products/ede, /about, /pricing, etc.
+ */
 
-import { Image } from "astro:assets";
-import PostHogLayout from "@/layouts/PostHogLayout.astro";
-import { ArrowDownIcon, ArrowRightIcon } from "lucide-react";
-import Section from "@/components/Section.astro";
-import HomeHeroImage from"@/assets/hero-y-ede.svg";
-import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
-import YEdeLogo from "@/assets/y-ede-logo.svg";
-import YEdeCapabilitiesImage from"@/assets/y-ede-capabilities.svg";
+ import type { GetStaticPaths } from 'astro';
+import Layout from '@/layouts/Layout.astro';
+import PostHogLayout from '@/layouts/PostHogLayout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import SectionRenderer from '@/components/SectionRenderer.astro';
+import { getAllPages, getPageBySlug } from '@/lib/contentful-v2';
+import type { ProcessedPage } from '@/types/contentful-v2';
 
-// Import Contentful functions
-import { getEdePageData } from"@/lib/contentful";
-import Header from "@/components/Header.astro";
-
-// Fetch homepage data from Contentful
-const edeProductPageData = await getEdePageData();
+// Fetch homepage data using new API
+const slug = '/products/ede';
+const page = await getPageBySlug(slug);
 
 // Log status for debugging
-if (edeProductPageData) {
-    console.log("✅ EDE Product Page data loaded successfully");
+if (page) {
+  console.log('✅ Contentful v2 data loaded successfully');
+  console.log(`📄 Page: ${page.title}`);
+  console.log(`📦 Sections: ${page.sections.length}`);
 } else {
-  console.log("⚠️ No EDE Product Page data found, using static fallbacks");
+  console.log('⚠️ No Contentful v2 data found');
+  console.log('💡 Make sure you have created a Page with slug "/" in Contentful');
 }
 
-// Process sections if data is available
-const heroSection = edeProductPageData?.edeHeroSection.fields;
-const capabilitiesSection = edeProductPageData?.capabilitiesSection.fields;
-const contactSection = edeProductPageData?.contactSection.fields;
-
+// If no data, show helpful message
+if (!page) {
+  return Astro.redirect('/404');
+}
 ---
 
 <PostHogLayout>
-  <Layout>
-    <Header/>
+  <Layout 
+    title={page.title}
+    description={page.metaDescription}
+  >
+    <Header />
 
-    <!-- Hero Section  -->
-    <div
-      style={{
-        "background-image": `url(${HomeHeroImage.src})`,
-        "background-size": "contain",
-        "background-position": "right 20px",
-        "background-repeat": "no-repeat",
-        height: "470px",
-      }}
-    >
-      <section class="container mx-auto px-6 py-8">
-        <div class="has-circle-end">
-          <div class="border-l border-t border-gray-900 max-full">
-            <ArrowRightIcon
-              className="w-3 h-3 absolute -top-[5.5px] -right-1"
-            />
-            <ArrowDownIcon
-              className="w-3 h-3 absolute -bottom-1 -left-[5.5px]"
-            />
+    {page.sections.map((section) => (
+      <SectionRenderer section={section} slug={slug} color="brand-yellow" />
+    ))}
 
-            <h1
-              class="pl-10 text-5xl md:text-6xl font-medium leading-relaxed text-balance"
-              set:html={documentToHtmlString(heroSection?.title) || "--"}
-            />
-
-            <div
-              class="font-mono text-sm text-gray-600 space-y-1 pl-10 py-6 border-gray-900 border-t max-w-4xl relative"
-            >
-              <ArrowRightIcon
-                className="w-3 h-3 absolute -top-[6.5px] -right-1"
-              />
-              <div class="flex items-center gap-8">
-                <Image src={YEdeLogo} alt="Y_EDE Logo" class="h-11 w-auto" />
-                {heroSection?.description || "// --"}
-              </div>
-            </div>
-            <div class="flex gap-4 pl-10">
-              <button
-                class="inline-flex items-center justify-center rounded-full text-sm font-medium bg-gray-900 text-white hover:bg-gray-800 h-10 px-6 py-2"
-              >
-                {heroSection?.primaryButtonText}
-                <ArrowRightIcon className="w-4 h-4 ml-4 text-brand-yellow" />
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <!-- Capabilities Section  -->
-    <Section title={capabilitiesSection?.title || "--"}>
-      <div class="flex justify-between items-center gap-8 mb-8">
-        <h2 class="text-3xl md:text-4xl font-medium mb-6 max-w-sm">
-          {capabilitiesSection?.headline || "--"}
-        </h2>
-        <div
-          class="rounded-full bg-brand-yellow flex items-center justify-center w-8 h-8"
-        >
-          <ArrowRightIcon className="current-color w-4 h-4 mx-2" />
-        </div>
-
-        <div class="max-w-lg font-mono">
-          {capabilitiesSection?.description || "--"}
-        </div>
-      </div>
-
-      <!-- y-ede-capabilities.svg -->
-      <Image src={YEdeCapabilitiesImage} alt="Y_EDE Capabilities" class="w-full" />
-
-      <div class="grid md:grid-cols-3 gap-8">
-        <!-- Column 1  -->
-        <div>
-          <div>
-            <h3 class="font-normal text-lg mb-2">
-              {capabilitiesSection?.capability[0].fields?.title || "--"}
-            </h3>
-            <p class="text-xs text-gray-600 font-mono">
-              {capabilitiesSection?.capability[0].fields?.description || "--"}
-            </p>
-          </div>
-        </div>
-
-        <!-- Column 2  -->
-        <div>
-          <div>
-            <h3 class="font-normal text-lg mb-2">
-              {capabilitiesSection?.capability[1].fields?.title || "--"}
-            </h3>
-            <p class="text-xs text-gray-600 font-mono">
-              {capabilitiesSection?.capability[1].fields?.description || "--"}
-            </p>
-          </div>
-        </div>
-
-        <!-- Column 3  -->
-        <div>
-          <div>
-            <h3 class="font-normal text-lg mb-2">
-              {capabilitiesSection?.capability[2].fields?.title || "--"}
-            </h3>
-            <p class="text-xs text-gray-600 font-mono">
-              {capabilitiesSection?.capability[2].fields?.description || "--"}
-            </p>
-          </div>
-        </div>
-      </div>
-    </Section>
-
-    <!-- Contact Us Section -->
-    <Section title={
-        contactSection?.title || "/* --"
-      }>
-
-      <div class="flex items-center gap-8">
-        <h2 class="text-3xl md:text-4xl font-medium">
-          {contactSection?.headline || "--"}
-        </h2>
-        <div
-          class="rounded-full bg-brand-yellow flex items-center text-primary justify-center w-8 h-8"
-        >
-          <ArrowRightIcon className="current-color w-4 h-4 mx-2" />
-        </div>
-
-        <div class="font-mono">
-          {contactSection?.description || "--"}
-        </div>
-      </div>
-
-
-      <Form client:only="react" />
-      </Section
-    >
-
-    <!-- Footer -->
     <Footer />
   </Layout>
 </PostHogLayout>
+

@@ -8,7 +8,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "contentful:import-types": "node import-contentful.js",
-    "contentful:import-content": "node import-fixed.js"
+    "contentful:import-content": "node import-fixed.js",
+    "contentful:import-ede": "node import-ede-content.js"
   },
   "dependencies": {
     "@astrojs/react": "^4.3.0",

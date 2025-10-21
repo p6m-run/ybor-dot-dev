@@ -19,12 +19,16 @@ import TestimonialsSection from './sections/TestimonialsSection.astro';
 import CertificationsSection from './sections/CertificationsSection.astro';
 import ContactSection from './sections/ContactSection.astro';
 import CapabilitiesSection from './sections/CapabilitiesSection.astro';
+import HowItWorksSection from './sections/HowItWorksSection.astro';
+import UseCasesSection from './sections/UseCasesSection.astro';
 
 interface Props {
   section: ProcessedSection;
+  slug: string;
+  color?: string;
 }
 
-const { section } = Astro.props;
+const { section, slug, color } = Astro.props;
 
 // Map section types to their corresponding components
 const sectionComponents = {
@@ -40,6 +44,8 @@ const sectionComponents = {
   capabilities: CapabilitiesSection,
   features: PlatformSection, // Reuse platform section for features
   cta: ContactSection, // Reuse contact section for CTA
+  howItWorks: HowItWorksSection,
+  useCases: UseCasesSection,
 } as const;
 
 // Get the component for this section type
@@ -52,7 +58,7 @@ if (!Component) {
 ---
 
 {Component ? (
-  <Component section={section} />
+  <Component section={section} slug={slug} color={color} />
 ) : (
   <div class="container mx-auto px-6 py-8">
     <div class="border border-red-200 bg-red-50 rounded-lg p-6">
