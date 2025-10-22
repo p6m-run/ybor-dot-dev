@@ -6,12 +6,16 @@ import Section from "@/components/Section.astro";
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import YedeCapabilitiesImage from "@/assets/y-ede-capabilities.svg";
 import { decodeHtmlEntities } from "@/lib/utils";
+import { cn } from "@/lib/utils";
+import YInfraCapabilitiesImage from "@/assets/y-infra-capabilities.svg";
 
 interface Props {
   section: ProcessedSection;
+  color: string;
+  slug: string;
 }
 
-const { section } = Astro.props;
+const { section, color, slug } = Astro.props;
 ---
 
 <Section title={section.title || ""}>
@@ -25,7 +29,15 @@ const { section } = Astro.props;
     }
 
     <div
-      class="rounded-full bg-brand-yellow flex items-center justify-center w-8 h-8"
+      class={
+        cn("rounded-full flex items-center justify-center w-8 h-8", {
+          "bg-brand-yellow": color === "brand-yellow",
+          "bg-brand-blue": color === "brand-blue",
+          "bg-brand-orange": color === "brand-orange",
+          "bg-brand-purple": color === "brand-purple",
+          "bg-brand-green": color === "brand-green",
+        })
+      }
     >
       <ArrowRightIcon class="current-color w-4 h-4 mx-2" />
     </div>
@@ -44,11 +56,20 @@ const { section } = Astro.props;
 
   <div class="my-8">
     <!-- y-ede-capabilities.svg -->
-    <Image
-      src={YedeCapabilitiesImage}
-      alt="Y_EDE Capabilities"
-      class="w-full"
-    />
+    {slug === "/products/ede" && (
+      <Image
+        src={YedeCapabilitiesImage}
+        alt="Y_EDE Capabilities"
+        class="w-full"
+      />
+    )}
+    {slug === "/products/infra" && (
+      <Image
+        src={YInfraCapabilitiesImage}
+        alt="Y_Infra Capabilities"
+        class="w-full"
+      />
+    )}
   </div>
 
   <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">

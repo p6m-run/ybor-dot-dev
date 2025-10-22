@@ -5,13 +5,16 @@ import Section from "@/components/Section.astro";
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import { decodeHtmlEntities } from "@/lib/utils";
 import { EdeHowItWorks } from "../EdeHowItWorks";
+import { InfraHowItWorks } from "../InfraHowItWorks";
+import { cn } from "@/lib/utils";
 
 interface Props {
   section: ProcessedSection;
+  color: string;
   slug: string;
 }
 
-const { section, slug } = Astro.props;
+const { section, color, slug } = Astro.props;
 ---
 
 <Section title={section.title || ""}>
@@ -25,7 +28,15 @@ const { section, slug } = Astro.props;
     }
 
     <div
-      class="rounded-full bg-brand-yellow flex items-center justify-center w-8 h-8"
+    class={
+      cn("rounded-full flex items-center justify-center w-8 h-8", {
+        "bg-brand-yellow": color === "brand-yellow",
+        "bg-brand-blue": color === "brand-blue",
+        "bg-brand-orange": color === "brand-orange",
+        "bg-brand-purple": color === "brand-purple",
+        "bg-brand-green": color === "brand-green",
+      })
+    }
     >
       <ArrowRightIcon class="current-color w-4 h-4 mx-2" />
     </div>
@@ -44,5 +55,6 @@ const { section, slug } = Astro.props;
 
   <div class="my-8">
     {slug === "/products/ede" && <EdeHowItWorks section={section} client:only="react" />}
+    {slug === "/products/infra" && <InfraHowItWorks section={section} client:only="react" />}
   </div>
 </Section>

@@ -3,12 +3,14 @@ import { ArrowRight } from 'lucide-react';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import type { ProcessedComponent } from '@/types/contentful-v2';
 import { decodeHtmlEntities } from '@/lib/utils';
+import { cn } from '@/lib/utils';
 
 interface UseCasesTabsProps {
   useCases: ProcessedComponent[];
+  color: string;
 }
 
-export default function UseCasesTabs({ useCases }: UseCasesTabsProps) {
+export default function UseCasesTabs({ useCases, color }: UseCasesTabsProps) {
   const [activeTab, setActiveTab] = useState(0);
 
   if (!useCases || useCases.length === 0) {
@@ -37,7 +39,13 @@ export default function UseCasesTabs({ useCases }: UseCasesTabsProps) {
           >
             <span>{useCase.title}</span>
             {activeTab === index && (
-              <ArrowRight className="w-4 h-4 text-brand-yellow" />
+              <ArrowRight className={cn("w-4 h-4", {
+                "text-brand-yellow": color === "brand-yellow",
+                "text-brand-blue": color === "brand-blue",
+                "text-brand-orange": color === "brand-orange",
+                "text-brand-purple": color === "brand-purple",
+                "text-brand-green": color === "brand-green",
+              })} />
             )}
           </button>
         ))}
@@ -54,7 +62,13 @@ export default function UseCasesTabs({ useCases }: UseCasesTabsProps) {
             className="inline-flex items-center justify-center rounded-full text-sm font-medium bg-gray-900 text-white hover:bg-gray-800 h-10 px-6 py-2"
           >
             Get In Touch
-            <ArrowRight className="w-4 h-4 ml-2 text-brand-yellow" />
+            <ArrowRight className={cn("w-4 h-4", {
+                "text-brand-yellow": color === "brand-yellow",
+                "text-brand-blue": color === "brand-blue",
+                "text-brand-orange": color === "brand-orange",
+                "text-brand-purple": color === "brand-purple",
+                "text-brand-green": color === "brand-green",
+              })} />
           </a>
         </div>
       </div>

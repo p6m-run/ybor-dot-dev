@@ -3,8 +3,10 @@ import type { ProcessedSection } from '@/types/contentful-v2';
 import { ArrowDownIcon, ArrowRightIcon } from '@lucide/astro';
 import HomeHeroImage from '@/assets/home-hero.svg';
 import YEdeHeroImage from '@/assets/hero-y-ede.svg';
+import YInfraHeroImage from '@/assets/hero-y-infra.svg';
 import { cn } from '@/lib/utils';
 import YEdeLogo from '@/assets/y-ede-logo.svg';
+import YInfraLogo from '@/assets/y-infra-logo.svg';
 import { Image } from 'astro:assets';
 
 interface Props {
@@ -17,10 +19,12 @@ const { section, slug, color = 'brand-purple' } = Astro.props;
 
 const productPagesHeroMap = {
   '/products/ede': YEdeHeroImage.src,
+  '/products/infra': YInfraHeroImage.src,
 }
 
 const productLogosMap = {
   "/products/ede": YEdeLogo,
+  "/products/infra": YInfraLogo,
 }
 
 const bgImage = slug === '/' ? HomeHeroImage.src : productPagesHeroMap[slug as keyof typeof productPagesHeroMap] || HomeHeroImage.src;
@@ -34,7 +38,6 @@ const productLogo = productLogosMap[slug as keyof typeof productLogosMap] || YEd
     'background-size': 'contain',
     'background-position': 'right 26px',
     'background-repeat': 'no-repeat',
-    height: '470px',
   }}
 >
   <section class="container mx-auto px-6 py-8">
@@ -48,7 +51,7 @@ const productLogo = productLogosMap[slug as keyof typeof productLogosMap] || YEd
         </h1>
 
         {section.subtitle && (
-          <div class="font-mono text-sm space-y-1 pl-10 py-6 border-gray-900 border-t relative max-w-lg flex items-center gap-4">
+          <div class="font-mono text-sm space-y-1 pl-10 py-6 border-gray-900 border-t relative max-w-xl flex items-center gap-4">
             <ArrowRightIcon class="w-3 h-3 absolute -top-[6.5px] -right-1" />
             {
           slug !== "/" && (
