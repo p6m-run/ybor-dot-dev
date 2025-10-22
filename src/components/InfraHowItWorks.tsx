@@ -27,7 +27,7 @@ export function InfraHowItWorks({ section }: Props) {
 
   const handleItemClick = (internalName: string) => {
     const item = section.items?.find(
-      (item) => item.title && item.title.includes(internalName)
+      (item) => item.internalName && item.internalName === internalName
     );
     if (item) {
       setSelectedItem(item);
@@ -38,6 +38,7 @@ export function InfraHowItWorks({ section }: Props) {
   return (
     <>
       <svg
+        className="w-full"
         width={1051}
         height={487}
         viewBox="0 0 1051 487"
@@ -133,7 +134,7 @@ export function InfraHowItWorks({ section }: Props) {
         {/* Workflow - Observe */}
         <g filter="url(#filter0_dd_4633_51065)" 
          className="cursor-pointer group"
-         onClick={() => handleItemClick("Monitor")}
+         onClick={() => handleItemClick("Workflow - Observe")}
         >
           <circle cx={205} cy={418} r={28.5} fill="#F9F9F9" className="transition-colors duration-200 group-hover:fill-brand-blue"/>
           <circle
@@ -147,7 +148,7 @@ export function InfraHowItWorks({ section }: Props) {
         {/* Workflow - Declare */}
         <g filter="url(#filter1_dd_4633_51065)" 
          className="cursor-pointer group"
-         onClick={() => handleItemClick("Define")}
+         onClick={() => handleItemClick("Workflow - Declare")}
         >
           <circle cx={798} cy={69} r={28.5} fill="#F9F9F9" className="transition-colors duration-200 group-hover:fill-brand-blue"/>
           <circle
@@ -160,7 +161,7 @@ export function InfraHowItWorks({ section }: Props) {
         </g>
         {/* Workflow - Operate */}
         <g filter="url(#filter2_dd_4633_51065)" className="cursor-pointer group"
-          onClick={() => handleItemClick("Opera")}>
+          onClick={() => handleItemClick("Workflow - Operate")}>
           <circle cx={798} cy={418} r={28.5} fill="#F9F9F9"
           className="transition-colors duration-200 group-hover:fill-brand-blue"
            />
@@ -176,7 +177,7 @@ export function InfraHowItWorks({ section }: Props) {
         <g
           filter="url(#filter3_dd_4633_51065)"
           className="cursor-pointer group"
-          onClick={() => handleItemClick("Connect")}
+          onClick={() => handleItemClick("Workflow - Connect")}
         >
           <circle
             cx={205}

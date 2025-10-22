@@ -1,7 +1,7 @@
 // New flexible Contentful content types
 // These types support the new composable architecture
 
-import type { Entry, Asset } from 'contentful';
+import type { Entry, Asset, EntrySkeletonType } from 'contentful';
 
 // Section type options
 export type SectionType = 
@@ -45,7 +45,7 @@ export interface PageFields {
   slug: string;
   metaDescription?: string;
   metaImage?: Asset;
-  sections: Entry<SectionFields>[];
+  sections: Entry<SectionSkeleton>[];
 }
 
 export interface SectionFields {
@@ -60,7 +60,7 @@ export interface SectionFields {
   secondaryButtonText?: string;
   secondaryButtonUrl?: string;
   backgroundColor?: string;
-  items?: Entry<ComponentFields | ProductFields | TestimonialFields>[];
+  items?: Entry<ComponentSkeleton | ProductSkeleton | TestimonialSkeleton>[];
   media?: Asset;
   metadata?: Record<string, any>;
 }
@@ -83,10 +83,10 @@ export interface ProductFields {
   tagline?: string;
   description?: any; // Rich text
   color?: string;
-  features?: Entry<ComponentFields>[];
+  features?: Entry<ComponentSkeleton>[];
   demoContent?: any; // Rich text
   slug?: string;
-  page?: Entry<PageFields>;
+  page?: Entry<PageSkeleton>;
 }
 
 export interface TestimonialFields {
@@ -107,7 +107,7 @@ export interface LinkFields {
 
 export interface NavigationFields {
   brandName: string;
-  menuItems?: Entry<MenuItemFields>[];
+  menuItems?: Entry<MenuItemSkeleton>[];
   primaryButtonText?: string;
   secondaryButtonText?: string;
 }
@@ -116,15 +116,15 @@ export interface MenuItemFields {
   label: string;
   url: string;
   hasDropdown?: boolean;
-  dropdownItems?: Entry<MenuItemFields>[];
+  dropdownItems?: Entry<MenuItemSkeleton>[];
 }
 
 export interface FooterFields {
   copyrightText?: string;
   companyName?: string;
   companyUrl?: string;
-  footerLinks?: Entry<LinkFields>[];
-  socialLinks?: Entry<LinkFields>[];
+  footerLinks?: Entry<LinkSkeleton>[];
+  socialLinks?: Entry<LinkSkeleton>[];
   certificationImages?: Asset[];
 }
 
@@ -132,10 +132,59 @@ export interface SiteSettingsFields {
   siteName: string;
   logo?: Asset;
   favicon?: Asset;
-  navigation?: Entry<NavigationFields>;
-  footer?: Entry<FooterFields>;
+  navigation?: Entry<NavigationSkeleton>;
+  footer?: Entry<FooterSkeleton>;
   defaultMetaDescription?: string;
   socialImage?: Asset;
+}
+
+// ============================================================================
+// Entry Skeleton Types (for Contentful SDK)
+// ============================================================================
+
+export interface PageSkeleton extends EntrySkeletonType {
+  contentTypeId: 'page';
+  fields: PageFields;
+}
+
+export interface SectionSkeleton extends EntrySkeletonType {
+  contentTypeId: 'section';
+  fields: SectionFields;
+}
+
+export interface ComponentSkeleton extends EntrySkeletonType {
+  contentTypeId: 'component';
+  fields: ComponentFields;
+}
+
+export interface ProductSkeleton extends EntrySkeletonType {
+  contentTypeId: 'product';
+  fields: ProductFields;
+}
+
+export interface TestimonialSkeleton extends EntrySkeletonType {
+  contentTypeId: 'testimonial';
+  fields: TestimonialFields;
+}
+
+export interface LinkSkeleton extends EntrySkeletonType {
+  contentTypeId: 'link';
+  fields: LinkFields;
+}
+
+export interface NavigationSkeleton extends EntrySkeletonType {
+  contentTypeId: 'navigation';
+  fields: NavigationFields;
+}
+
+export interface MenuItemSkeleton extends EntrySkeletonType {
+  contentTypeId: 'menuItem';
+  fields: MenuItemFields;
+}
+
+export interface FooterSkeleton extends EntrySkeletonType {
+  contentTypeId: 'footer';
+  fields: FooterFields;
 }
 
 // ============================================================================
@@ -172,6 +221,7 @@ export interface ProcessedSection {
 
 export interface ProcessedComponent {
   id: string;
+  internalName?: string;
   type: ComponentType | 'product' | 'testimonial';
   title?: string;
   subtitle?: string;
@@ -226,15 +276,15 @@ export interface ProcessedFooter {
 // Type Guards
 // ============================================================================
 
-export function isComponentEntry(entry: Entry<any>): entry is Entry<ComponentFields> {
+export function isComponentEntry(entry: Entry<any>): entry is Entry<ComponentSkeleton> {
   return entry.sys.contentType.sys.id === 'component';
 }
 
-export function isProductEntry(entry: Entry<any>): entry is Entry<ProductFields> {
+export function isProductEntry(entry: Entry<any>): entry is Entry<ProductSkeleton> {
   return entry.sys.contentType.sys.id === 'product';
 }
 
-export function isTestimonialEntry(entry: Entry<any>): entry is Entry<TestimonialFields> {
+export function isTestimonialEntry(entry: Entry<any>): entry is Entry<TestimonialSkeleton> {
   return entry.sys.contentType.sys.id === 'testimonial';
 }
 

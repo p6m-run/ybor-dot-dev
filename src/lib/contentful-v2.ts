@@ -13,6 +13,15 @@ import type {
   NavigationFields,
   MenuItemFields,
   FooterFields,
+  PageSkeleton,
+  SectionSkeleton,
+  ComponentSkeleton,
+  ProductSkeleton,
+  TestimonialSkeleton,
+  LinkSkeleton,
+  NavigationSkeleton,
+  MenuItemSkeleton,
+  FooterSkeleton,
   ProcessedPage,
   ProcessedSection,
   ProcessedComponent,
@@ -33,12 +42,12 @@ import type {
  */
 export async function getPageBySlug(slug: string): Promise<ProcessedPage | null> {
   try {
-    const { items } = await contentfulClient.getEntries<PageFields>({
+    const { items } = await contentfulClient.getEntries({
       content_type: 'page',
       'fields.slug': slug,
-      include: 10, // Deep nesting for sections and components
+      include: 10,
       limit: 1,
-    });
+    } as any) as { items: Entry<PageSkeleton>[] };
 
     if (items.length === 0) {
       console.warn(`No page found with slug: ${slug}`);
@@ -58,10 +67,10 @@ export async function getPageBySlug(slug: string): Promise<ProcessedPage | null>
  */
 export async function getAllPages(): Promise<ProcessedPage[]> {
   try {
-    const { items } = await contentfulClient.getEntries<PageFields>({
+    const { items } = await contentfulClient.getEntries({
       content_type: 'page',
       include: 10,
-    });
+    }) as { items: Entry<PageSkeleton>[] };
 
     return Promise.all(items.map(processPage));
   } catch (error) {
@@ -76,12 +85,12 @@ export async function getAllPages(): Promise<ProcessedPage[]> {
  */
 export async function getAllPageSlugs(): Promise<string[]> {
   try {
-    const { items } = await contentfulClient.getEntries<PageFields>({
+    const { items } = await contentfulClient.getEntries({
       content_type: 'page',
-      select: 'fields.slug',
-    });
+      select: ['fields.slug'] as any,
+    }) as { items: Entry<PageSkeleton>[] };
 
-    return items.map(item => item.fields.slug);
+    return items.map(item => (item.fields as PageFields).slug);
   } catch (error) {
     console.error('Error fetching page slugs:', error);
     return [];
@@ -115,11 +124,11 @@ export async function getEdePageData(): Promise<ProcessedPage | null> {
  */
 export async function getNavigationData(): Promise<ProcessedNavigation | null> {
   try {
-    const { items } = await contentfulClient.getEntries<NavigationFields>({
+    const { items } = await contentfulClient.getEntries({
       content_type: 'navigation',
       include: 3,
       limit: 1,
-    });
+    }) as { items: Entry<NavigationSkeleton>[] };
 
     if (items.length === 0) {
       console.warn('No navigation found');
@@ -138,11 +147,11 @@ export async function getNavigationData(): Promise<ProcessedNavigation | null> {
  */
 export async function getFooterData(): Promise<ProcessedFooter | null> {
   try {
-    const { items } = await contentfulClient.getEntries<FooterFields>({
+    const { items } = await contentfulClient.getEntries({
       content_type: 'footer',
       include: 3,
       limit: 1,
-    });
+    }) as { items: Entry<FooterSkeleton>[] };
 
     if (items.length === 0) {
       console.warn('No footer found');
@@ -163,15 +172,15 @@ export async function getFooterData(): Promise<ProcessedFooter | null> {
 /**
  * Process a page entry into a clean format
  */
-function processPage(entry: Entry<PageFields>): ProcessedPage {
-  const { fields } = entry;
+function processPage(entry: Entry<PageSkeleton>): ProcessedPage {
+  const fields = entry.fields as PageFields;
 
   return {
     id: entry.sys.id,
     title: fields.title,
     slug: fields.slug,
     metaDescription: fields.metaDescription,
-    metaImage: fields.metaImage ? getAssetUrl(fields.metaImage) : undefined,
+    metaImage: fields.metaImage ? getAssetUrl(fields.metaImage as any) : undefined,
     sections: fields.sections?.map(processSection) || [],
   };
 }
@@ -179,8 +188,8 @@ function processPage(entry: Entry<PageFields>): ProcessedPage {
 /**
  * Process a section entry
  */
-function processSection(entry: Entry<SectionFields>): ProcessedSection {
-  const { fields } = entry;
+function processSection(entry: Entry<SectionSkeleton>): ProcessedSection {
+  const fields = entry.fields as SectionFields;
 
   return {
     id: entry.sys.id,
@@ -206,10 +215,10 @@ function processSection(entry: Entry<SectionFields>): ProcessedSection {
     items: fields.items?.map(processItem) || [],
     media: fields.media
       ? {
-          url: getAssetUrl(fields.media),
-          alt: fields.media.fields.title || fields.title || '',
-          width: fields.media.fields.file.details.image?.width,
-          height: fields.media.fields.file.details.image?.height,
+          url: getAssetUrl(fields.media as any),
+          alt: (fields.media.fields as any)?.title || fields.title || '',
+          width: (fields.media.fields as any)?.file?.details?.image?.width,
+          height: (fields.media.fields as any)?.file?.details?.image?.height,
         }
       : undefined,
     metadata: fields.metadata,
@@ -220,16 +229,16 @@ function processSection(entry: Entry<SectionFields>): ProcessedSection {
  * Process an item (could be Component, Product, or Testimonial)
  */
 function processItem(
-  entry: Entry<ComponentFields | ProductFields | TestimonialFields>
+  entry: Entry<ComponentSkeleton | ProductSkeleton | TestimonialSkeleton>
 ): ProcessedComponent {
   const contentType = entry.sys.contentType.sys.id;
 
   if (contentType === 'component') {
-    return processComponent(entry as Entry<ComponentFields>);
+    return processComponent(entry as Entry<ComponentSkeleton>);
   } else if (contentType === 'product') {
-    return processProduct(entry as Entry<ProductFields>);
+    return processProduct(entry as Entry<ProductSkeleton>);
   } else if (contentType === 'testimonial') {
-    return processTestimonial(entry as Entry<TestimonialFields>);
+    return processTestimonial(entry as Entry<TestimonialSkeleton>);
   }
 
   // Fallback
@@ -243,23 +252,24 @@ function processItem(
 /**
  * Process a component entry
  */
-function processComponent(entry: Entry<ComponentFields>): ProcessedComponent {
-  const { fields } = entry;
+function processComponent(entry: Entry<ComponentSkeleton>): ProcessedComponent {
+  const fields = entry.fields as ComponentFields;
 
   return {
     id: entry.sys.id,
+    internalName: fields.internalName,
     type: fields.type,
     title: fields.title,
     subtitle: fields.subtitle,
     description: fields.description,
     value: fields.value,
-    icon: fields.icon ? getAssetUrl(fields.icon) : undefined,
+    icon: fields.icon ? getAssetUrl(fields.icon as any) : undefined,
     image: fields.image
       ? {
-          url: getAssetUrl(fields.image),
-          alt: fields.image.fields.title || fields.title || '',
-          width: fields.image.fields.file.details.image?.width,
-          height: fields.image.fields.file.details.image?.height,
+          url: getAssetUrl(fields.image as any),
+          alt: (fields.image.fields as any)?.title || fields.title || '',
+          width: (fields.image.fields as any)?.file?.details?.image?.width,
+          height: (fields.image.fields as any)?.file?.details?.image?.height,
         }
       : undefined,
     url: fields.url,
@@ -270,8 +280,8 @@ function processComponent(entry: Entry<ComponentFields>): ProcessedComponent {
 /**
  * Process a product entry as a component
  */
-function processProduct(entry: Entry<ProductFields>): ProcessedComponent {
-  const { fields } = entry;
+function processProduct(entry: Entry<ProductSkeleton>): ProcessedComponent {
+  const fields = entry.fields as ProductFields;
 
   return {
     id: entry.sys.id,
@@ -291,8 +301,8 @@ function processProduct(entry: Entry<ProductFields>): ProcessedComponent {
 /**
  * Process a testimonial entry as a component
  */
-function processTestimonial(entry: Entry<TestimonialFields>): ProcessedComponent {
-  const { fields } = entry;
+function processTestimonial(entry: Entry<TestimonialSkeleton>): ProcessedComponent {
+  const fields = entry.fields as TestimonialFields;
 
   return {
     id: entry.sys.id,
@@ -302,7 +312,7 @@ function processTestimonial(entry: Entry<TestimonialFields>): ProcessedComponent
       authorName: fields.authorName,
       authorTitle: fields.authorTitle,
       authorCompany: fields.authorCompany,
-      authorImage: fields.authorImage ? getAssetUrl(fields.authorImage) : undefined,
+      authorImage: fields.authorImage ? getAssetUrl(fields.authorImage as any) : undefined,
       rating: fields.rating,
     },
   };
@@ -311,8 +321,8 @@ function processTestimonial(entry: Entry<TestimonialFields>): ProcessedComponent
 /**
  * Process navigation entry
  */
-function processNavigation(entry: Entry<NavigationFields>): ProcessedNavigation {
-  const { fields } = entry;
+function processNavigation(entry: Entry<NavigationSkeleton>): ProcessedNavigation {
+  const fields = entry.fields as NavigationFields;
 
   return {
     brandName: fields.brandName,
@@ -325,8 +335,8 @@ function processNavigation(entry: Entry<NavigationFields>): ProcessedNavigation 
 /**
  * Process menu item entry
  */
-function processMenuItem(entry: Entry<MenuItemFields>): ProcessedMenuItem {
-  const { fields } = entry;
+function processMenuItem(entry: Entry<MenuItemSkeleton>): ProcessedMenuItem {
+  const fields = entry.fields as MenuItemFields;
 
   return {
     label: fields.label,
@@ -339,8 +349,8 @@ function processMenuItem(entry: Entry<MenuItemFields>): ProcessedMenuItem {
 /**
  * Process footer entry
  */
-function processFooter(entry: Entry<FooterFields>): ProcessedFooter {
-  const { fields } = entry;
+function processFooter(entry: Entry<FooterSkeleton>): ProcessedFooter {
+  const fields = entry.fields as FooterFields;
 
   return {
     copyrightText: fields.copyrightText,
@@ -348,20 +358,20 @@ function processFooter(entry: Entry<FooterFields>): ProcessedFooter {
     companyUrl: fields.companyUrl,
     footerLinks: fields.footerLinks?.map(processLink) || [],
     socialLinks: fields.socialLinks?.map(processLink) || [],
-    certificationImages: fields.certificationImages?.map(getAssetUrl) || [],
+    certificationImages: fields.certificationImages?.map((asset) => getAssetUrl(asset as any)) || [],
   };
 }
 
 /**
  * Process link entry
  */
-function processLink(entry: Entry<LinkFields>): ProcessedLink {
-  const { fields } = entry;
+function processLink(entry: Entry<LinkSkeleton>): ProcessedLink {
+  const fields = entry.fields as LinkFields;
 
   return {
     label: fields.label,
     url: fields.url,
-    icon: fields.icon ? getAssetUrl(fields.icon) : undefined,
+    icon: fields.icon ? getAssetUrl(fields.icon as any) : undefined,
     type: fields.type,
   };
 }
@@ -375,7 +385,7 @@ function processLink(entry: Entry<LinkFields>): ProcessedLink {
  */
 export async function pageExists(slug: string): Promise<boolean> {
   try {
-    const { total } = await contentfulClient.getEntries<PageFields>({
+    const { total } = await contentfulClient.getEntries({
       content_type: 'page',
       'fields.slug': slug,
       limit: 1,
@@ -393,10 +403,10 @@ export async function pageExists(slug: string): Promise<boolean> {
  */
 export async function getAllProducts(): Promise<ProcessedComponent[]> {
   try {
-    const { items } = await contentfulClient.getEntries<ProductFields>({
+    const { items } = await contentfulClient.getEntries({
       content_type: 'product',
       include: 3,
-    });
+    }) as { items: Entry<ProductSkeleton>[] };
 
     return items.map(processProduct);
   } catch (error) {
@@ -410,12 +420,12 @@ export async function getAllProducts(): Promise<ProcessedComponent[]> {
  */
 export async function getProductBySlug(slug: string): Promise<ProcessedComponent | null> {
   try {
-    const { items } = await contentfulClient.getEntries<ProductFields>({
+    const { items } = await contentfulClient.getEntries({
       content_type: 'product',
       'fields.slug': slug,
       include: 3,
       limit: 1,
-    });
+    } as any) as { items: Entry<ProductSkeleton>[] };
 
     if (items.length === 0) {
       return null;

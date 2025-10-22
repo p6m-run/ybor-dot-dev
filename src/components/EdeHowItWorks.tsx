@@ -27,7 +27,7 @@ export function EdeHowItWorks({ section }: Props) {
 
   const handleItemClick = (internalName: string) => {
     const item = section.items?.find(
-      (item) => item.title && internalName.includes(item.title)
+      (item) => item.internalName &&  item.internalName === internalName
     );
     if (item) {
       setSelectedItem(item);
@@ -661,7 +661,7 @@ export function EdeHowItWorks({ section }: Props) {
           </DialogHeader>
           <DialogDescription className="font-mono">
             <div className="flex gap-4 items-start text-muted-foreground">
-              <ArrowRightIcon className="w-12 h-auto text-foreground" />
+              <ArrowRightIcon className="w-8 h-auto text-foreground" />
               {selectedItem?.description ? (
                 <div
                   dangerouslySetInnerHTML={{
