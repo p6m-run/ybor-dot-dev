@@ -38,19 +38,37 @@ const ai = section.items?.find((item) => item.internalName?.includes("AI"));
         </div>
         <div class="text-sm text-muted-foreground mb-4 font-mono flex items-start gap-2">
           <ArrowRightIcon class="w-4 h-4" />
-          {infra.subtitle || '--'}
+          {infra.subtitle || "--"}
         </div>
         <div class="flex items-start gap-14 mt-8">
-         {
-          infra.image?.url && infra.image.width && infra.image.height && (
-            <Image src={infra.image.url} alt={infra.image.alt || infra.title || ''} width={infra.image.width} height={infra.image.height} class="w-auto h-96" />
-          )
-         }
-         {
-          infra.description && (
-            <div class="text-sm text-gray-600 mb-4 font-mono y-feature-details" set:html={decodeHtmlEntities(documentToHtmlString(infra.description))} />
-          )
-         }
+          {infra.image?.url && infra.image.width && infra.image.height && (
+            <Image
+              src={infra.image.url}
+              alt={infra.image.alt || infra.title || ""}
+              width={infra.image.width}
+              height={infra.image.height}
+              class="w-auto h-96"
+            />
+          )}
+          <div>
+            {infra.description && (
+              <div
+                class="text-sm text-gray-600 mb-4 font-mono y-feature-details"
+                set:html={decodeHtmlEntities(
+                  documentToHtmlString(infra.description)
+                )}
+              />
+            )}
+            {infra.url && (
+              <a
+                href={infra.url}
+                class="mt-6 inline-flex items-center justify-center rounded-full text-sm font-medium bg-gray-900 text-white hover:bg-gray-800 h-10 px-6 py-2"
+              >
+                Learn More
+                <ArrowRightIcon class="w-4 h-4 ml-4 text-brand-blue" />
+              </a>
+            )}
+          </div>
         </div>
       </div>
     )
@@ -68,19 +86,38 @@ const ai = section.items?.find((item) => item.internalName?.includes("AI"));
         </div>
         <div class="text-sm text-muted-foreground mb-4 font-mono flex items-start gap-2">
           <ArrowRightIcon class="w-4 h-4" />
-          {app.subtitle || '--'}
+          {app.subtitle || "--"}
         </div>
         <div class="flex items-start gap-14 mt-8">
-         {
-          app.description && (
-            <div class="text-sm text-gray-600 mb-4 font-mono y-feature-details" set:html={decodeHtmlEntities(documentToHtmlString(app.description))} />
-          )
-         }
-         {
-          app.image?.url && app.image.width && app.image.height && (
-            <Image src={app.image.url} alt={app.image.alt || app.title || ''} width={app.image.width} height={app.image.height} class="w-auto h-96" />
-          )
-         }
+          <div>
+            {app.description && (
+              <div
+                class="text-sm text-gray-600 mb-4 font-mono y-feature-details"
+                set:html={decodeHtmlEntities(
+                  documentToHtmlString(app.description)
+                )}
+              />
+            )}
+            {app.url && (
+              <a
+                href={app.url}
+                class="mt-6 inline-flex items-center justify-center rounded-full text-sm font-medium bg-gray-900 text-white hover:bg-gray-800 h-10 px-6 py-2"
+              >
+                Learn More
+                <ArrowRightIcon class="w-4 h-4 ml-4 text-brand-green" />
+              </a>
+            )}
+          </div>
+
+          {app.image?.url && app.image.width && app.image.height && (
+            <Image
+              src={app.image.url}
+              alt={app.image.alt || app.title || ""}
+              width={app.image.width}
+              height={app.image.height}
+              class="w-auto h-96"
+            />
+          )}
         </div>
       </div>
     )
@@ -98,19 +135,37 @@ const ai = section.items?.find((item) => item.internalName?.includes("AI"));
         </div>
         <div class="text-sm text-muted-foreground mb-4 font-mono flex items-start gap-2">
           <ArrowRightIcon class="w-4 h-4" />
-          {ai.subtitle || '--'}
+          {ai.subtitle || "--"}
         </div>
         <div class="flex items-start gap-14 mt-8">
-         {
-          ai.image?.url && ai.image.width && ai.image.height && (
-            <Image src={ai.image.url} alt={ai.image.alt || ai.title || ''} width={ai.image.width} height={ai.image.height} class="w-auto h-96" />
-          )
-         }
-         {
-          ai.description && (
-            <div class="text-sm text-gray-600 mb-4 font-mono y-feature-details" set:html={decodeHtmlEntities(documentToHtmlString(ai.description))} />
-          )
-         }
+          {ai.image?.url && ai.image.width && ai.image.height && (
+            <Image
+              src={ai.image.url}
+              alt={ai.image.alt || ai.title || ""}
+              width={ai.image.width}
+              height={ai.image.height}
+              class="w-auto h-96"
+            />
+          )}
+          <div>
+            {ai.description && (
+              <div
+                class="text-sm text-gray-600 mb-4 font-mono y-feature-details"
+                set:html={decodeHtmlEntities(
+                  documentToHtmlString(ai.description)
+                )}
+              />
+            )}
+            {ai.url && (
+              <a
+                href={ai.url}
+                class="mt-6 inline-flex items-center justify-center rounded-full text-sm font-medium bg-gray-900 text-white hover:bg-gray-800 h-10 px-6 py-2"
+              >
+                Learn More
+                <ArrowRightIcon class="w-4 h-4 ml-4 text-brand-orange" />
+              </a>
+            )}
+          </div>
         </div>
       </div>
     )
@@ -128,19 +183,37 @@ const ai = section.items?.find((item) => item.internalName?.includes("AI"));
         </div>
         <div class="text-sm text-muted-foreground mb-4 font-mono flex items-start gap-2">
           <ArrowRightIcon class="w-4 h-4" />
-          {ede.subtitle || '--'}
+          {ede.subtitle || "--"}
         </div>
         <div class="flex items-start gap-14 mt-8">
-         {
-          ede.description && (
-            <div class="text-sm text-gray-600 mb-4 font-mono y-feature-details" set:html={decodeHtmlEntities(documentToHtmlString(ede.description))} />
-          )
-         }
-         {
-          ede.image?.url && ede.image.width && ede.image.height && (
-            <Image src={ede.image.url} alt={ede.image.alt || ede.title || ''} width={ede.image.width} height={ede.image.height} class="w-auto h-96" />
-          )
-         }
+          <div>
+            {ede.description && (
+              <div
+                class="text-sm text-gray-600 mb-4 font-mono y-feature-details"
+                set:html={decodeHtmlEntities(
+                  documentToHtmlString(ede.description)
+                )}
+              />
+            )}
+            {ede.url && (
+              <a
+                href={ede.url}
+                class="mt-6 inline-flex items-center justify-center rounded-full text-sm font-medium bg-gray-900 text-white hover:bg-gray-800 h-10 px-6 py-2"
+              >
+                Learn More
+                <ArrowRightIcon class="w-4 h-4 ml-4 text-brand-yellow" />
+              </a>
+            )}
+          </div>
+          {ede.image?.url && ede.image.width && ede.image.height && (
+            <Image
+              src={ede.image.url}
+              alt={ede.image.alt || ede.title || ""}
+              width={ede.image.width}
+              height={ede.image.height}
+              class="w-auto h-96"
+            />
+          )}
         </div>
       </div>
     )
