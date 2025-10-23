@@ -1,13 +1,13 @@
 ---
-import type { ProcessedSection } from '@/types/contentful-v2';
-import { ArrowDownIcon, ArrowRightIcon } from '@lucide/astro';
-import HomeHeroImage from '@/assets/home-hero.svg';
-import YEdeHeroImage from '@/assets/hero-y-ede.svg';
-import YInfraHeroImage from '@/assets/hero-y-infra.svg';
-import { cn } from '@/lib/utils';
-import YEdeLogo from '@/assets/y-ede-logo.svg';
-import YInfraLogo from '@/assets/y-infra-logo.svg';
-import { Image } from 'astro:assets';
+import type { ProcessedSection } from "@/types/contentful-v2";
+import { ArrowDownIcon, ArrowRightIcon } from "@lucide/astro";
+import HomeHeroImage from "@/assets/home-hero.svg";
+import YEdeHeroImage from "@/assets/hero-y-ede.svg";
+import YInfraHeroImage from "@/assets/hero-y-infra.svg";
+import { cn } from "@/lib/utils";
+import YEdeLogo from "@/assets/y-ede-logo.svg";
+import YInfraLogo from "@/assets/y-infra-logo.svg";
+import { Image } from "astro:assets";
 
 interface Props {
   section: ProcessedSection;
@@ -15,29 +15,36 @@ interface Props {
   color?: string;
 }
 
-const { section, slug, color = 'brand-purple' } = Astro.props;
+const { section, slug, color = "brand-purple" } = Astro.props;
 
 const productPagesHeroMap = {
-  '/products/ede': YEdeHeroImage.src,
-  '/products/infra': YInfraHeroImage.src,
-}
+  "/products/ede": YEdeHeroImage.src,
+  "/products/infra": YInfraHeroImage.src,
+};
 
 const productLogosMap = {
   "/products/ede": YEdeLogo,
   "/products/infra": YInfraLogo,
-}
+};
 
-const bgImage = slug === '/' ? HomeHeroImage.src : productPagesHeroMap[slug as keyof typeof productPagesHeroMap] || HomeHeroImage.src;
+const bgImage =
+  slug === "/"
+    ? HomeHeroImage.src
+    : productPagesHeroMap[slug as keyof typeof productPagesHeroMap] ||
+      HomeHeroImage.src;
 
-const productLogo = productLogosMap[slug as keyof typeof productLogosMap] || YEdeLogo;
+const productLogo =
+  productLogosMap[slug as keyof typeof productLogosMap] || YEdeLogo;
 ---
 
 <div
   style={{
-    'background-image': section.media ? `url(${section.media.url})` : `url(${bgImage})`,
-    'background-size': 'contain',
-    'background-position': 'right 26px',
-    'background-repeat': 'no-repeat',
+    "background-image": section.media
+      ? `url(${section.media.url})`
+      : `url(${bgImage})`,
+    "background-size": "contain",
+    "background-position": "right 26px",
+    "background-repeat": "no-repeat",
   }}
 >
   <section class="container mx-auto px-6 py-8">
@@ -46,52 +53,64 @@ const productLogo = productLogosMap[slug as keyof typeof productLogosMap] || YEd
         <ArrowRightIcon class="w-3 h-3 absolute -top-[5.5px] -right-1" />
         <ArrowDownIcon class="w-3 h-3 absolute -bottom-1 -left-[5.5px]" />
 
-        <h1 class="pl-10 text-5xl md:text-6xl font-medium leading-relaxed text-balance max-w-3xl">
+        <h1
+          class="pl-10 text-5xl md:text-6xl font-medium leading-relaxed text-balance max-w-3xl"
+        >
           {section.headline}
         </h1>
 
-        {section.subtitle && (
-          <div class="font-mono text-sm space-y-1 pl-10 py-6 border-gray-900 border-t relative max-w-3xl flex items-center gap-4">
-            <ArrowRightIcon class="w-3 h-3 absolute -top-[6.5px] -right-1" />
-            {
-          slug !== "/" && (
-            <Image src={productLogo} alt={section.title || ""} class="w-auto h-11" />
+        {
+          section.subtitle && (
+            <div class="font-mono text-sm space-y-1 pl-10 py-6 border-gray-900 border-t relative max-w-3xl flex items-center gap-4">
+              <ArrowRightIcon class="w-3 h-3 absolute -top-[6.5px] -right-1" />
+              {slug && slug !== "/" && (
+                <Image
+                  src={productLogo}
+                  alt={section.title || ""}
+                  class="w-auto h-11"
+                />
+              )}
+
+              <div class="flex items-start gap-2 text-foreground">
+                <ArrowRightIcon class="w-10 h-auto mt-1 mr-2" />{" "}
+                {section.subtitle}
+              </div>
+            </div>
           )
         }
-            
-            <div class="flex items-start gap-2 text-muted-foreground"><ArrowRightIcon class="w-10 h-auto mt-1 mr-2" /> {section.subtitle}</div>
-          </div>
-        )}
 
         <div class="flex gap-4 pl-10">
-          {section.primaryButton && (
-            <a
-              href={section.primaryButton.url}
-              class="inline-flex items-center justify-center rounded-full text-sm font-medium bg-gray-900 text-white hover:bg-gray-800 h-10 px-6 py-2"
-            >
-              {section.primaryButton.text}
-              <ArrowRightIcon class={
-                cn({
-                  "w-4 h-4 ml-4 text-brand-purple": color === "brand-purple",
-                  "w-4 h-4 ml-4 text-brand-blue": color === "brand-blue",
-                  "w-4 h-4 ml-4 text-brand-orange": color === "brand-orange",
-                  "w-4 h-4 ml-4 text-brand-yellow": color === "brand-yellow",
-                })
-              } />
-            </a>
-          )}
-          
-          {section.secondaryButton && (
-            <a
-              href={section.secondaryButton.url}
-              class="inline-flex items-center justify-center rounded-full text-sm font-medium border border-gray-300 bg-white hover:bg-gray-50 h-10 px-6 py-2"
-            >
-              {section.secondaryButton.text}
-            </a>
-          )}
+          {
+            section.primaryButton && (
+              <a
+                href={section.primaryButton.url}
+                class="inline-flex items-center justify-center rounded-full text-sm font-medium bg-gray-900 text-white hover:bg-gray-800 h-10 px-6 py-2"
+              >
+                {section.primaryButton.text}
+                <ArrowRightIcon
+                  class={cn({
+                    "w-4 h-4 ml-4 text-brand-purple": color === "brand-purple",
+                    "w-4 h-4 ml-4 text-brand-blue": color === "brand-blue",
+                    "w-4 h-4 ml-4 text-brand-orange": color === "brand-orange",
+                    "w-4 h-4 ml-4 text-brand-yellow": color === "brand-yellow",
+                  })}
+                />
+              </a>
+            )
+          }
+
+          {
+            section.secondaryButton && (
+              <a
+                href={section.secondaryButton.url}
+                class="inline-flex items-center justify-center rounded-full text-sm font-medium border border-gray-300 bg-white hover:bg-gray-50 h-10 px-6 py-2"
+              >
+                {section.secondaryButton.text}
+              </a>
+            )
+          }
         </div>
       </div>
     </div>
   </section>
 </div>
-

@@ -59,7 +59,7 @@ export default function AnimatedProgressBar({
   const percentageText = `${Math.round(percentage)}%`;
 
   return (
-    <div className={`flex items-center gap-2 font-mono ${className}`}>
+    <div className={`flex items-center gap-2 font-mono animate-fade animate-once animate-duration-[250ms] animate-delay-100 ${className}`}>
       <span className="text-sm">{progressBar}</span>
       {showPercentage && (
         <span className="text-sm">{percentageText}</span>

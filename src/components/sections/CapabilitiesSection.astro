@@ -5,6 +5,7 @@ import { ArrowRightIcon } from "@lucide/astro";
 import Section from "@/components/Section.astro";
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import YedeCapabilitiesImage from "@/assets/y-ede-capabilities.svg";
+import YHomeCapabilitiesImage from "@/assets/ybor-home-capabilities.svg";
 import { decodeHtmlEntities } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 import YInfraCapabilitiesImage from "@/assets/y-infra-capabilities.svg";
@@ -55,7 +56,15 @@ const { section, color, slug } = Astro.props;
   </div>
 
   <div class="my-8">
-    <!-- y-ede-capabilities.svg -->
+    {
+      slug && slug === "/" && (
+        <Image
+          src={YHomeCapabilitiesImage}
+          alt="Ybor Capabilities"
+          class="w-full"
+        />
+      )
+    }
     {slug === "/products/ede" && (
       <Image
         src={YedeCapabilitiesImage}

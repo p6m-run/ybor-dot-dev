@@ -33,7 +33,7 @@ const { section, color } = Astro.props;
           "bg-brand-yellow": color === "brand-yellow",
         })
       }>
-      <ArrowRightIcon class="current-color w-4 h-4 mx-2" />
+      <ArrowRightIcon class="text-foreground w-4 h-4 mx-2" />
     </div>
 
     <div class="font-mono text-sm" set:html={decodeHtmlEntities(documentToHtmlString(section?.description))}>

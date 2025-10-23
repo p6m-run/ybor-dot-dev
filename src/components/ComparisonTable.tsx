@@ -1,10 +1,10 @@
-import { CheckCircle2, XCircle, AlertTriangle } from 'lucide-react';
-import YedeLogo from '@/assets/y-ede-logo.svg';
-
+import { CheckCircle2, XCircle, AlertTriangle } from "lucide-react";
+import YedeLogo from "@/assets/y-ede-logo.svg";
+import YInfraLogo from "@/assets/y-infra-logo.svg";
 
 interface ComparisonTableProps {
   metadata: {
-    'Feature Comparison': {
+    "Feature Comparison": {
       [categoryName: string]: {
         [featureName: string]: {
           [competitorName: string]: boolean | null;
@@ -13,6 +13,8 @@ interface ComparisonTableProps {
     };
   };
   highlightColumn?: number; // Index of column to highlight (typically EDE)
+  slug: string;
+  color: string;
 }
 
 const StatusIcon = ({ status }: { status: boolean | null }) => {
@@ -29,26 +31,51 @@ const StatusIcon = ({ status }: { status: boolean | null }) => {
 export default function ComparisonTable({
   metadata,
   highlightColumn = 0,
+  slug,
+  color,
 }: ComparisonTableProps) {
-  if (!metadata || !metadata['Feature Comparison']) {
+  if (!metadata || !metadata["Feature Comparison"]) {
     return <div className="text-gray-500">No comparison data available</div>;
   }
 
-  const featureComparison = metadata['Feature Comparison'];
-  
+  const renderLogo = (competitor: string) => {
+    switch (competitor as string) {
+      case "EDE":
+        return (
+          <div className="flex items-center justify-center gap-2">
+            <img src={YedeLogo.src} alt="EDE" className="w-auto h-6" />
+          </div>
+        );
+      case "INFRA":
+        return (
+          <div className="flex items-center justify-center gap-2">
+            <img src={YInfraLogo.src} alt="Infra" className="w-auto h-6" />
+          </div>
+        );
+      default:
+        return competitor;
+    }
+  };
+
+  const featureComparison = metadata["Feature Comparison"];
+
   // Extract competitors from the first feature of the first category
   const firstCategory = Object.values(featureComparison)[0];
   const firstFeature = Object.values(firstCategory)[0];
   const competitors = Object.keys(firstFeature);
-  
+
   // Parse categories and features
-  const categories = Object.entries(featureComparison).map(([categoryName, features]) => ({
-    name: categoryName,
-    features: Object.entries(features).map(([featureName, competitorData]) => ({
-      name: featureName,
-      support: competitors.map(competitor => competitorData[competitor]),
-    })),
-  }));
+  const categories = Object.entries(featureComparison).map(
+    ([categoryName, features]) => ({
+      name: categoryName,
+      features: Object.entries(features).map(
+        ([featureName, competitorData]) => ({
+          name: featureName,
+          support: competitors.map((competitor) => competitorData[competitor]),
+        })
+      ),
+    })
+  );
 
   return (
     <div className="overflow-x-auto">
@@ -62,18 +89,10 @@ export default function ComparisonTable({
               <th
                 key={competitor}
                 className={`text-center py-4 px-6 font-semibold ${
-                  index === highlightColumn
-                    ? 'bg-green-100'
-                    : ''
+                  index === highlightColumn ? "bg-green-100" : ""
                 }`}
               >
-                {competitor === 'EDE' ? (
-                  <div className="flex items-center justify-center gap-2">
-                    <img src={YedeLogo.src} alt="EDE" className="w-auto h-6" />
-                  </div>
-                ) : (
-                  competitor
-                )}
+                {renderLogo(competitor)}
               </th>
             ))}
           </tr>
@@ -104,8 +123,8 @@ export default function ComparisonTable({
                       key={`status-${categoryIndex}-${featureIndex}-${competitorIndex}`}
                       className={`py-4 px-6 text-center ${
                         competitorIndex === highlightColumn
-                          ? 'bg-green-100'
-                          : ''
+                          ? "bg-green-100"
+                          : ""
                       }`}
                     >
                       <div className="flex justify-center">
@@ -122,4 +141,3 @@ export default function ComparisonTable({
     </div>
   );
 }
-

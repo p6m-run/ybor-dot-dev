@@ -3,6 +3,7 @@ import type { ProcessedSection } from '@/types/contentful-v2';
 import { ArrowDownIcon } from 'lucide-react';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import { decodeHtmlEntities } from '@/lib/utils';
+import { ArrowRightIcon } from '@lucide/astro';
 
 interface Props {
   section: ProcessedSection;
@@ -29,15 +30,34 @@ const description = typeof section.description === 'string'
       </div>
     )}
     <div class="bg-dark-gradient text-white p-12 rounded-lg rounded-l-none">
-      {section.headline && (
-        <h2 class="text-3xl md:text-4xl font-medium mb-6">
-          {section.headline}
-        </h2>
-      )}
-      {description && (
-        <div class="font-mono text-sm text-gray-300 space-y-1" set:html={description} />
-      )}
+      <div class="flex justify-between items-center gap-8">
+        {
+          section.headline && (
+            <h2 class="text-3xl md:text-4xl font-medium">
+              {section.headline}
+            </h2>
+          )
+        }
+    
+        <div
+        class="rounded-full flex items-center justify-center w-8 h-8 bg-brand-purple"
+        >
+          <ArrowRightIcon class="current-color w-4 h-4 mx-2" />
+        </div>
+    
+        {
+          section.description && (
+            <div
+              class="max-w-lg font-mono text-sm text-white"
+              set:html={decodeHtmlEntities(
+                documentToHtmlString(section.description)
+              )}
+            />
+          )
+        }
+      </div>
     </div>
+    
   </div>
 </section>
 

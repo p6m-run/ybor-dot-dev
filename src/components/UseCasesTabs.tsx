@@ -62,7 +62,7 @@ export default function UseCasesTabs({ useCases, color }: UseCasesTabsProps) {
             className="inline-flex items-center justify-center rounded-full text-sm font-medium bg-gray-900 text-white hover:bg-gray-800 h-10 px-6 py-2"
           >
             Get In Touch
-            <ArrowRight className={cn("w-4 h-4", {
+            <ArrowRight className={cn("w-4 h-4 ml-2", {
                 "text-brand-yellow": color === "brand-yellow",
                 "text-brand-blue": color === "brand-blue",
                 "text-brand-orange": color === "brand-orange",
@@ -74,10 +74,10 @@ export default function UseCasesTabs({ useCases, color }: UseCasesTabsProps) {
       </div>
 
       {/* Right content area */}
-      <div className="border border-gray-900 bg-background rounded-lg p-8">
+      <div className="border border-gray-900 bg-background rounded-lg p-12">
 
         {activeUseCase.subtitle && (
-          <p className="text-xl text-gray-700 mb-4 font-medium">
+          <p className="text-2xl text-gray-700 mb-4 font-medium">
             {activeUseCase.subtitle}
           </p>
         )}
@@ -96,11 +96,11 @@ export default function UseCasesTabs({ useCases, color }: UseCasesTabsProps) {
         )}
 
         {activeUseCase.image && (
-          <div className="mt-6">
+          <div className="flex justify-center mt-12">
             <img
               src={activeUseCase.image.url}
               alt={activeUseCase.image.alt || activeUseCase.title || ''}
-              className="w-full h-auto rounded-lg"
+              className="w-auto h-56 animate-fade animate-once animate-duration-[250ms] animate-delay-100"
             />
           </div>
         )}

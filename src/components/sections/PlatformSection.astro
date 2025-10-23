@@ -1,68 +1,165 @@
 ---
-import type { ProcessedSection } from '@/types/contentful-v2';
-import { ArrowRightIcon } from 'lucide-react';
-import Section from '@/components/Section.astro';
-import Terminal from '@/components/Terminal.astro';
-import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
-import { decodeHtmlEntities } from '@/lib/utils';
+import type { ProcessedSection } from "@/types/contentful-v2";
+import { ArrowRightIcon } from "@lucide/astro";
+import Section from "@/components/Section.astro";
 
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
+import { decodeHtmlEntities } from "@/lib/utils";
+import YInfraLogo from "@/assets/y-infra-logo.svg";
+import YAppLogo from "@/assets/y-app-logo.svg";
+import YAiLogo from "@/assets/y-ai-logo.svg";
+import YEdeLogo from "@/assets/y-ede-logo.svg";
+import { Image } from "astro:assets";
 interface Props {
   section: ProcessedSection;
 }
 
 const { section } = Astro.props;
+
+const infra = section.items?.find((item) =>
+  item.internalName?.includes("INFRA")
+);
+console.log(infra);
+const ede = section.items?.find((item) => item.internalName?.includes("EDE"));
+const app = section.items?.find((item) => item.internalName?.includes("APP"));
+const ai = section.items?.find((item) => item.internalName?.includes("AI"));
 ---
 
-<Section title={section.title || ''}>
-  <div class="flex justify-between items-center gap-8 mb-8">
-    {section.headline && (
-      <h2 class="text-3xl md:text-4xl font-medium mb-6 max-w-sm">
-        {section.headline}
-      </h2>
-    )}
-    
-    <div class="rounded-full bg-brand-purple flex items-center justify-center w-8 h-8">
-      <ArrowRightIcon className="current-color w-4 h-4 mx-2" />
-    </div>
-
-    {section.description && (
-      <div 
-        class="max-w-lg font-mono"
-        set:html={typeof section.description === 'string' 
-          ? section.description 
-          : decodeHtmlEntities(documentToHtmlString(section.description))}
-      />
-    )}
-  </div>
-
-  <div class="grid md:grid-cols-2 gap-8">
-    {section.items?.map((item) => (
-      <div class="border border-gray-200 rounded-lg p-6">
-        {item.title && (
-          <h3 class="text-xl font-medium mb-4">{item.title}</h3>
-        )}
-        {item.description && (
-          <div 
-            class="text-sm text-gray-600 mb-4 font-mono"
-            set:html={typeof item.description === 'string' 
-              ? item.description 
-              : decodeHtmlEntities(documentToHtmlString(item.description))}
-          />
-        )}
-        {item.metadata?.details && (
-          <ul class="text-sm text-gray-600 mb-4 list-disc list-inside font-mono">
-            {item.metadata.details.map((detail: string) => (
-              <li>{detail}</li>
-            ))}
-          </ul>
-        )}
-        {item.metadata?.codeExample && (
-          <Terminal>
-            <pre class="text-xs"><code>{item.metadata.codeExample}</code></pre>
-          </Terminal>
-        )}
+<Section title={section.title || ""}>
+  {
+    infra && (
+      <div>
+        <div class="flex items-center gap-4 mb-8">
+          <Image src={YInfraLogo} alt={"Y_Infra Logo"} class="w-auto h-12" />
+          <h3 class="text-xl font-medium flex items-center justify-center rounded-full bg-brand-blue/25 border border-brand-blue px-4 py-2">
+            <ArrowRightIcon class="w-4 h-4 mr-2" />
+            {infra.title}
+          </h3>
+        </div>
+        <div class="text-sm text-muted-foreground mb-4 font-mono flex items-start gap-2">
+          <ArrowRightIcon class="w-4 h-4" />
+          {infra.subtitle || '--'}
+        </div>
+        <div class="flex items-start gap-14 mt-8">
+         {
+          infra.image?.url && infra.image.width && infra.image.height && (
+            <Image src={infra.image.url} alt={infra.image.alt || infra.title || ''} width={infra.image.width} height={infra.image.height} class="w-auto h-96" />
+          )
+         }
+         {
+          infra.description && (
+            <div class="text-sm text-gray-600 mb-4 font-mono y-feature-details" set:html={decodeHtmlEntities(documentToHtmlString(infra.description))} />
+          )
+         }
+        </div>
       </div>
-    ))}
-  </div>
+    )
+  }
+  <hr class="my-8" />
+  {
+    app && (
+      <div>
+        <div class="flex items-center gap-4 mb-8">
+          <Image src={YAppLogo} alt={"Y_App Logo"} class="w-auto h-12" />
+          <h3 class="text-xl font-medium flex items-center justify-center rounded-full bg-brand-green/25 border border-brand-green px-4 py-2">
+            <ArrowRightIcon class="w-4 h-4 mr-2" />
+            {app.title}
+          </h3>
+        </div>
+        <div class="text-sm text-muted-foreground mb-4 font-mono flex items-start gap-2">
+          <ArrowRightIcon class="w-4 h-4" />
+          {app.subtitle || '--'}
+        </div>
+        <div class="flex items-start gap-14 mt-8">
+         {
+          app.description && (
+            <div class="text-sm text-gray-600 mb-4 font-mono y-feature-details" set:html={decodeHtmlEntities(documentToHtmlString(app.description))} />
+          )
+         }
+         {
+          app.image?.url && app.image.width && app.image.height && (
+            <Image src={app.image.url} alt={app.image.alt || app.title || ''} width={app.image.width} height={app.image.height} class="w-auto h-96" />
+          )
+         }
+        </div>
+      </div>
+    )
+  }
+  <hr class="my-8" />
+  {
+    ai && (
+      <div>
+        <div class="flex items-center gap-4 mb-8">
+          <Image src={YAiLogo} alt={"Y_AI Logo"} class="w-auto h-12" />
+          <h3 class="text-xl font-medium flex items-center justify-center rounded-full bg-brand-orange/25 border border-brand-orange px-4 py-2">
+            <ArrowRightIcon class="w-4 h-4 mr-2" />
+            {ai.title}
+          </h3>
+        </div>
+        <div class="text-sm text-muted-foreground mb-4 font-mono flex items-start gap-2">
+          <ArrowRightIcon class="w-4 h-4" />
+          {ai.subtitle || '--'}
+        </div>
+        <div class="flex items-start gap-14 mt-8">
+         {
+          ai.image?.url && ai.image.width && ai.image.height && (
+            <Image src={ai.image.url} alt={ai.image.alt || ai.title || ''} width={ai.image.width} height={ai.image.height} class="w-auto h-96" />
+          )
+         }
+         {
+          ai.description && (
+            <div class="text-sm text-gray-600 mb-4 font-mono y-feature-details" set:html={decodeHtmlEntities(documentToHtmlString(ai.description))} />
+          )
+         }
+        </div>
+      </div>
+    )
+  }
+  <hr class="my-8" />
+  {
+    ede && (
+      <div>
+        <div class="flex items-center gap-4 mb-8">
+          <Image src={YEdeLogo} alt={"Y_EDE Logo"} class="w-auto h-12" />
+          <h3 class="text-xl font-medium flex items-center justify-center rounded-full bg-brand-yellow/25 border border-brand-yellow px-4 py-2">
+            <ArrowRightIcon class="w-4 h-4 mr-2" />
+            {ede.title}
+          </h3>
+        </div>
+        <div class="text-sm text-muted-foreground mb-4 font-mono flex items-start gap-2">
+          <ArrowRightIcon class="w-4 h-4" />
+          {ede.subtitle || '--'}
+        </div>
+        <div class="flex items-start gap-14 mt-8">
+         {
+          ede.description && (
+            <div class="text-sm text-gray-600 mb-4 font-mono y-feature-details" set:html={decodeHtmlEntities(documentToHtmlString(ede.description))} />
+          )
+         }
+         {
+          ede.image?.url && ede.image.width && ede.image.height && (
+            <Image src={ede.image.url} alt={ede.image.alt || ede.title || ''} width={ede.image.width} height={ede.image.height} class="w-auto h-96" />
+          )
+         }
+        </div>
+      </div>
+    )
+  }
 </Section>
 
+<style is:global>
+  .y-feature-details ul {
+    list-style-type: disc;
+  }
+  .y-feature-details h3 {
+    font-family: sans-serif;
+    font-size: 1.2rem;
+    font-weight: normal;
+    margin-bottom: 0.5rem;
+  }
+  .y-feature-details p {
+    font-family: monospace;
+    margin-bottom: 1.5rem;
+    color: var(--color-muted-foreground);
+  }
+</style>

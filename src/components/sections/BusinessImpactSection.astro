@@ -1,20 +1,24 @@
 ---
-import type { ProcessedSection } from '@/types/contentful-v2';
+import type { ProcessedComponent, ProcessedSection } from '@/types/contentful-v2';
 import { ArrowRightIcon } from '@lucide/astro';
 import Section from '@/components/Section.astro';
 import AnimatedProgressBar from '@/components/AnimatedProgressBar';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';;
 import { decodeHtmlEntities } from '@/lib/utils';
+import Home3xMetricImage from '@/assets/home-3x-metric.svg';
+import { Image } from 'astro:assets';
+
 
 interface Props {
   section: ProcessedSection;
 }
 
 const { section } = Astro.props;
+
 ---
 
 <Section title={section.title || ''}>
-  <div class="flex justify-between items-center gap-8 mb-8">
+  <div class="md:flex justify-between items-center gap-8 mb-8 ">
     {section.headline && (
       <h2 class="text-3xl md:text-4xl font-medium mb-6 max-w-sm">
         {section.headline}
@@ -35,26 +39,51 @@ const { section } = Astro.props;
     )}
   </div>
 
-  <div class="grid md:grid-cols-3 gap-8">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
     {section.items?.map((item) => (
-      <div class="text-center">
+      <div class="text-center border border-gray-900 rounded-lg bg-background p-6">
         {item.value && (
-          <div class="text-5xl font-bold mb-4 text-brand-purple">
+          <div class="text-5xl font-medium mb-4">
             {item.value}
           </div>
         )}
-        {item.title && (
-          <h3 class="text-xl font-medium mb-2">{item.title}</h3>
+
+        {
+          item.value === '3x' && (
+            <Image src={Home3xMetricImage} alt="Home 3x Metric" class="w-full mx-auto animate-fade animate-once animate-duration-[250ms] animate-delay-100" />
+          )
+        }
+
+        {
+          item.value === '50-60%' && (
+            <div class="w-full flex justify-center tracking-[4px] text-green-600 my-4">
+              <AnimatedProgressBar value={55} max={100} width={15} client:only="react" showPercentage={false} />
+            </div>
+          )
+        }
+
+        {
+          item.value === '80%' && (
+            <div class="w-full flex justify-center tracking-[4px] text-green-600 my-4">
+              <AnimatedProgressBar value={80} max={100} width={15} client:only="react" showPercentage={false} />
+            </div>
+          )
+        }
+
+{
+          item.value === '30%' && (
+            <div class="w-full flex justify-center tracking-[4px] text-green-600 my-4">
+              <AnimatedProgressBar value={30} max={100} width={15} client:only="react" showPercentage={false} />
+            </div>
+          )
+        }
+
+        {item.title && item.subtitle && (
+          <div class="font-mono text-sm italic mt-4">
+            <span class="font-medium text-foreground italic inline">{item.title}</span>
+            <span class="text-muted-foreground inline">{item.subtitle}</span>
+          </div>
         )}
-        {item.description && (
-          <p 
-            class="text-sm text-gray-600 font-mono"
-            set:html={typeof item.description === 'string' 
-              ? item.description 
-              : decodeHtmlEntities(documentToHtmlString(item.description))}
-          />
-        )}
-        <AnimatedProgressBar client:visible />
       </div>
     ))}
   </div>
