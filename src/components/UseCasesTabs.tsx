@@ -82,7 +82,7 @@ export default function UseCasesTabs({ useCases, color }: UseCasesTabsProps) {
       </div>
 
       {/* Right content area */}
-      <div className="border border-gray-900 bg-background rounded-lg p-12">
+      <div className="md:border border-gray-900 md:bg-background rounded-lg p-0 md:p-12">
         {activeUseCase.subtitle && (
           <p className="text-2xl text-gray-700 mb-4 font-medium">
             {activeUseCase.subtitle}
@@ -101,7 +101,7 @@ export default function UseCasesTabs({ useCases, color }: UseCasesTabsProps) {
             <img
               src={activeUseCase.image.url}
               alt={activeUseCase.image.alt || activeUseCase.title || ""}
-              className="w-auto h-56 animate-fade animate-once animate-duration-[250ms] animate-delay-100"
+              className="w-auto md:h-56 animate-fade animate-once animate-duration-[250ms] animate-delay-100"
             />
           </div>
         )}

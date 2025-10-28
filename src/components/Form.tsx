@@ -105,11 +105,11 @@ export default function ContactForm() {
   }
 
   return (
-    <div id="get-in-touch" className="px-4 md:px-0">
-      <div className="pt-8 border-t mt-8">
+    <div id="get-in-touch" >
+      <div className="md:pt-8 border-t mt-8">
       <Form {...form}>
             <form
-              className="text-gray-900 space-y-6 pt-12 md:pt-0"
+              className="text-gray-900 space-y-6 md:pt-12 pt-6"
               onSubmit={form.handleSubmit(onSubmit)}
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

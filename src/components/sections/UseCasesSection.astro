@@ -15,10 +15,10 @@ const { section, color } = Astro.props;
 ---
 
 <Section title={section.title || ""}>
-  <div class="flex justify-between items-center gap-8 mb-8">
+  <div class="flex flex-col md:flex-row justify-between md:items-center gap-8 mb-8">
     {
       section.headline && (
-        <h2 class="text-3xl md:text-4xl font-medium mb-6 max-w-sm">
+        <h2 class="text-3xl md:text-4xl font-medium md:mb-6 max-w-sm">
           {section.headline}
         </h2>
       )
@@ -26,7 +26,7 @@ const { section, color } = Astro.props;
 
     <div
     class={
-      cn("rounded-full flex items-center justify-center w-8 h-8", {
+      cn("rounded-full flex items-center justify-center w-8 h-8 transform rotate-90 md:rotate-0", {
         "bg-brand-yellow": color === "brand-yellow",
         "bg-brand-blue": color === "brand-blue",
         "bg-brand-orange": color === "brand-orange",

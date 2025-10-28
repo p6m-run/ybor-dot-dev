@@ -6,7 +6,7 @@ import YAiLogo from "@/assets/y-ai-logo.svg";
 import YEdeLogo from "@/assets/y-ede-logo.svg";
 import { Image } from "astro:assets";
 import { getHomepageData } from "@/lib/contentful";
-import { ArrowRightIcon } from "@lucide/astro";
+import { ArrowRightIcon, MenuIcon } from "@lucide/astro";
 
 const products = [
   {
@@ -134,9 +134,9 @@ const products = [
             >
           </nav>
         </div>
-        <div class="flex items-center gap-3">
+        <div class="flex items-center md:gap-3 gap-1">
           <button
-            class="inline-flex items-center justify-center rounded-full text-sm font-medium border border-primary bg-transparent hover:bg-primary/5  hover:text-primary transition-colors h-10 px-6 py-2"
+            class="md:inline-flex hidden items-center justify-center rounded-full text-sm font-medium border border-primary bg-transparent hover:bg-primary/5  hover:text-primary transition-colors h-10 px-6 py-2"
           >
             Get Started
             <ArrowRightIcon class="w-4 h-4 ml-4" />
@@ -145,6 +145,12 @@ const products = [
             class="inline-flex items-center justify-center rounded-full text-sm font-medium hover:bg-primary/5 hover:text-primary transition-colors h-10 px-4 py-2"
           >
             Log In
+          </button>
+
+          <button
+            class="md:hidden inline-flex items-center justify-center rounded-full text-sm font-medium hover:bg-primary/5 hover:text-primary transition-colors h-10 px-4 py-2"
+          >
+            <MenuIcon class="w-4 h-4" />
           </button>
         </div>
       </div>
