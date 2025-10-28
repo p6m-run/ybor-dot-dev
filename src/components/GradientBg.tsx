@@ -52,7 +52,7 @@ export default function GradientBg({ color = "brand-purple" }: { color?: string 
     }, []);
 
     return (
-        <div className={`${gradientBgMap[color as keyof typeof gradientBgMap]} gradient-bg absolute top-0 left-0 w-full h-screen -z-50`}>
+        <div className={`${gradientBgMap[color as keyof typeof gradientBgMap]} gradient-bg absolute top-0 left-0 w-full h-screen overflow-hidden -z-50`}>
             <svg xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <filter id="goo">
