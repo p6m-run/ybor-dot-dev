@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import type { ProcessedComponent } from '@/types/contentful-v2';
-import { decodeHtmlEntities } from '@/lib/utils';
 
 interface UseCasesTabsProps {
   useCases: ProcessedComponent[];
@@ -65,11 +64,9 @@ export default function UseCasesTabs({ useCases }: UseCasesTabsProps) {
             <div
               className="text-sm text-white font-mono mb-6 prose prose-sm max-w-none space-y-4"
               dangerouslySetInnerHTML={{
-                __html: decodeHtmlEntities(
-                  typeof activeUseCase.description === "string"
-                    ? activeUseCase.description
-                    : documentToHtmlString(activeUseCase.description)
-                ),
+                __html: typeof activeUseCase.description === "string"
+                ? activeUseCase.description
+                : documentToHtmlString(activeUseCase.description),
               }}
             />
           </div>

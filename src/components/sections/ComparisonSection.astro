@@ -3,7 +3,6 @@ import type { ProcessedSection } from "@/types/contentful-v2";
 import { ArrowRightIcon } from "@lucide/astro";
 import Section from "@/components/Section.astro";
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
-import { decodeHtmlEntities } from "@/lib/utils";
 import ComparisonTable from "@/components/ComparisonTable";
 import { cn } from "@/lib/utils";
 
@@ -42,9 +41,7 @@ const { section, slug, color } = Astro.props;
       section.description && (
         <div
           class="max-w-lg font-mono text-sm text-foreground"
-          set:html={decodeHtmlEntities(
-            documentToHtmlString(section.description)
-          )}
+          set:html={documentToHtmlString(section.description)}
         />
       )
     }

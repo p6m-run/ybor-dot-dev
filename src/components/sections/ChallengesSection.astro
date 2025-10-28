@@ -3,7 +3,6 @@ import type { ProcessedSection } from '@/types/contentful-v2';
 import { ArrowRightIcon } from 'lucide-react';
 import Section from '@/components/Section.astro';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
-import { decodeHtmlEntities } from '@/lib/utils';
 import { Image } from 'astro:assets';
 import UnlockPaceImage from '@/assets/unlock-pace.svg';
 import P6MResourcesImage from '@/assets/p6m-resources.svg';
@@ -36,7 +35,7 @@ const defaultImages = [UnlockPaceImage, P6MResourcesImage, SuccessFlexiblePlatfo
         class="max-w-lg font-mono"
         set:html={typeof section.description === 'string' 
           ? section.description 
-          : decodeHtmlEntities(documentToHtmlString(section.description))}
+          : documentToHtmlString(section.description)}
       />
     )}
   </div>
@@ -60,7 +59,7 @@ const defaultImages = [UnlockPaceImage, P6MResourcesImage, SuccessFlexiblePlatfo
               class="text-xs text-gray-600 font-mono"
               set:html={typeof item.description === 'string' 
                 ? item.description 
-                : decodeHtmlEntities(documentToHtmlString(item.description))}
+                : documentToHtmlString(item.description)}
             />
           )}
         </div>

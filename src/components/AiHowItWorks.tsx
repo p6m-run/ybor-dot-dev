@@ -12,7 +12,6 @@ import {
   DialogDescription,
   DialogFooter,
 } from "@/components/ui/dialog";
-import { decodeHtmlEntities } from "@/lib/utils";
 import { ArrowRightIcon } from "lucide-react";
 
 interface Props {
@@ -640,9 +639,7 @@ export function AiHowItWorks({ section }: Props) {
               {selectedItem?.description ? (
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: decodeHtmlEntities(
-                      documentToHtmlString(selectedItem.description)
-                    ),
+                    __html: documentToHtmlString(selectedItem.description),
                   }}
                 />
               ) : (

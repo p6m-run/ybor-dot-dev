@@ -1,10 +1,9 @@
 ---
-import type { ProcessedComponent, ProcessedSection } from '@/types/contentful-v2';
+import type { ProcessedSection } from '@/types/contentful-v2';
 import { ArrowRightIcon } from '@lucide/astro';
 import Section from '@/components/Section.astro';
 import AnimatedProgressBar from '@/components/AnimatedProgressBar';
-import { documentToHtmlString } from '@contentful/rich-text-html-renderer';;
-import { decodeHtmlEntities } from '@/lib/utils';
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import Home3xMetricImage from '@/assets/home-3x-metric.svg';
 import { Image } from 'astro:assets';
 
@@ -34,7 +33,7 @@ const { section } = Astro.props;
         class="max-w-lg font-mono" 
         set:html={typeof section.description === 'string' 
           ? section.description 
-          : decodeHtmlEntities(documentToHtmlString(section.description))}
+          : documentToHtmlString(section.description)}
       />
     )}
   </div>

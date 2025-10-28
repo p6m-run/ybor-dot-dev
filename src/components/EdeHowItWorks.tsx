@@ -13,7 +13,6 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { decodeHtmlEntities } from "@/lib/utils";
 import { ArrowRightIcon } from "lucide-react";
 
 interface Props {
@@ -677,9 +676,7 @@ export function EdeHowItWorks({ section }: Props) {
               {selectedItem?.description ? (
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: decodeHtmlEntities(
-                      documentToHtmlString(selectedItem.description)
-                    ),
+                    __html: documentToHtmlString(selectedItem.description),
                   }}
                 />
               ) : (

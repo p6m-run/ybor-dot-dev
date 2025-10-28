@@ -15,6 +15,7 @@
     "@astrojs/react": "^4.3.0",
     "@astrojs/vercel": "^8.2.6",
     "@contentful/rich-text-html-renderer": "^17.1.5",
+    "@contentful/rich-text-react-renderer": "^16.1.5",
     "@hookform/resolvers": "^3.10.0",
     "@lucide/astro": "^0.545.0",
     "@notionhq/client": "^2.2.15",
@@ -31,6 +32,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "contentful": "^11.8.5",
+    "he": "^1.2.0",
     "lucide-react": "^0.475.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -43,6 +45,7 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@types/he": "^1.2.3",
     "contentful-management": "^11.60.4",
     "sharp": "^0.34.3"
   }

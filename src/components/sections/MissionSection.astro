@@ -2,7 +2,6 @@
 import type { ProcessedSection } from '@/types/contentful-v2';
 import { ArrowDownIcon } from 'lucide-react';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
-import { decodeHtmlEntities } from '@/lib/utils';
 import { ArrowRightIcon } from '@lucide/astro';
 
 interface Props {
@@ -15,7 +14,7 @@ const { section } = Astro.props;
 const description = typeof section.description === 'string' 
   ? section.description 
   : section.description 
-    ? decodeHtmlEntities(documentToHtmlString(section.description))
+    ? documentToHtmlString(section.description)
     : '';
 ---
 
@@ -49,9 +48,7 @@ const description = typeof section.description === 'string'
           section.description && (
             <div
               class="max-w-lg font-mono text-sm text-white"
-              set:html={decodeHtmlEntities(
-                documentToHtmlString(section.description)
-              )}
+              set:html={documentToHtmlString(section.description)}
             />
           )
         }

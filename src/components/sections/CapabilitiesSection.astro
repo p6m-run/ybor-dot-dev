@@ -6,7 +6,6 @@ import Section from "@/components/Section.astro";
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import YedeCapabilitiesImage from "@/assets/y-ede-capabilities.svg";
 import YHomeCapabilitiesImage from "@/assets/ybor-home-capabilities.svg";
-import { decodeHtmlEntities } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 import YInfraCapabilitiesImage from "@/assets/y-infra-capabilities.svg";
 import YAppCapabilitiesImage from "@/assets/y-app-capabilities.svg";
@@ -32,15 +31,13 @@ const { section, color, slug } = Astro.props;
     }
 
     <div
-      class={
-        cn("rounded-full flex items-center justify-center w-8 h-8", {
-          "bg-brand-yellow": color === "brand-yellow",
-          "bg-brand-blue": color === "brand-blue",
-          "bg-brand-orange": color === "brand-orange",
-          "bg-brand-purple": color === "brand-purple",
-          "bg-brand-green": color === "brand-green",
-        })
-      }
+      class={cn("rounded-full flex items-center justify-center w-8 h-8", {
+        "bg-brand-yellow": color === "brand-yellow",
+        "bg-brand-blue": color === "brand-blue",
+        "bg-brand-orange": color === "brand-orange",
+        "bg-brand-purple": color === "brand-purple",
+        "bg-brand-green": color === "brand-green",
+      })}
     >
       <ArrowRightIcon class="current-color w-4 h-4 mx-2" />
     </div>
@@ -49,9 +46,7 @@ const { section, color, slug } = Astro.props;
       section.description && (
         <div
           class="max-w-lg font-mono text-sm text-foreground"
-          set:html={decodeHtmlEntities(
-            documentToHtmlString(section.description)
-          )}
+          set:html={documentToHtmlString(section.description)}
         />
       )
     }
@@ -67,34 +62,42 @@ const { section, color, slug } = Astro.props;
         />
       )
     }
-    {slug === "/products/ede" && (
-      <Image
-        src={YedeCapabilitiesImage}
-        alt="Y_EDE Capabilities"
-        class="w-full"
-      />
-    )}
-    {slug === "/products/infra" && (
-      <Image
-        src={YInfraCapabilitiesImage}
-        alt="Y_Infra Capabilities"
-        class="w-full"
-      />
-    )}
-    {slug === "/products/app" && (
-      <Image
-        src={YAppCapabilitiesImage}
-        alt="Y_App Capabilities"
-        class="w-full"
-      />
-    )}
-    {slug === "/products/ai" && (
-      <Image
-        src={YAiCapabilitiesImage}
-        alt="Y_AI Capabilities"
-        class="w-full"
-      />
-    )}
+    {
+      slug === "/products/ede" && (
+        <Image
+          src={YedeCapabilitiesImage}
+          alt="Y_EDE Capabilities"
+          class="w-full"
+        />
+      )
+    }
+    {
+      slug === "/products/infra" && (
+        <Image
+          src={YInfraCapabilitiesImage}
+          alt="Y_Infra Capabilities"
+          class="w-full"
+        />
+      )
+    }
+    {
+      slug === "/products/app" && (
+        <Image
+          src={YAppCapabilitiesImage}
+          alt="Y_App Capabilities"
+          class="w-full"
+        />
+      )
+    }
+    {
+      slug === "/products/ai" && (
+        <Image
+          src={YAiCapabilitiesImage}
+          alt="Y_AI Capabilities"
+          class="w-full"
+        />
+      )
+    }
   </div>
 
   <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -108,9 +111,7 @@ const { section, color, slug } = Astro.props;
           {capability.description && (
             <div
               class="text-sm text-gray-600 font-mono"
-              set:html={decodeHtmlEntities(
-                documentToHtmlString(capability.description)
-              )}
+              set:html={documentToHtmlString(capability.description)}
             />
           )}
         </div>

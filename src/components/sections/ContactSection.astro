@@ -3,9 +3,7 @@ import type { ProcessedSection } from '@/types/contentful-v2';
 import Section from '@/components/Section.astro';
 import Form from '@/components/Form';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
-import { cn, decodeHtmlEntities } from '@/lib/utils';
-import { Image } from 'astro:assets';
-import GetInTouchImage from '@/assets/get-in-touch.svg';
+import { cn } from '@/lib/utils';
 import { ArrowRightIcon } from '@lucide/astro';
 
 interface Props {
@@ -36,7 +34,7 @@ const { section, color } = Astro.props;
       <ArrowRightIcon class="text-foreground w-4 h-4 mx-2" />
     </div>
 
-    <div class="font-mono text-sm" set:html={decodeHtmlEntities(documentToHtmlString(section?.description))}>
+    <div class="font-mono text-sm" set:html={documentToHtmlString(section?.description)}>
       
     </div>
   </div>

@@ -5,7 +5,6 @@ import Section from '@/components/Section.astro';
 import { Image } from 'astro:assets';
 import CertificationsImage from '@/assets/certifications.svg';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
-import { decodeHtmlEntities } from '@/lib/utils';
 
 interface Props {
   section: ProcessedSection;
@@ -31,7 +30,7 @@ const { section } = Astro.props;
         class="max-w-lg font-mono"
         set:html={typeof section.description === 'string' 
           ? section.description 
-          : decodeHtmlEntities(documentToHtmlString(section.description))}
+          : documentToHtmlString(section.description)}
       />
     )}
   </div>
