@@ -6,7 +6,7 @@ import YAiLogo from "@/assets/y-ai-logo.svg";
 import YEdeLogo from "@/assets/y-ede-logo.svg";
 import { Image } from "astro:assets";
 import { getHomepageData } from "@/lib/contentful";
-import { ArrowRightIcon, MenuIcon } from "@lucide/astro";
+import { ArrowRightIcon, MenuIcon, XIcon } from "@lucide/astro";
 
 const products = [
   {
@@ -134,7 +134,7 @@ const products = [
             >
           </nav>
         </div>
-        <div class="flex items-center md:gap-3 gap-1">
+        <div class="flex items-center md:gap-3">
           <button
             class="md:inline-flex hidden items-center justify-center rounded-full text-sm font-medium border border-primary bg-transparent hover:bg-primary/5  hover:text-primary transition-colors h-10 px-6 py-2"
           >
@@ -147,11 +147,189 @@ const products = [
             Log In
           </button>
 
+          <!-- menu button -->
           <button
+            id="mobile-menu-button"
             class="md:hidden inline-flex items-center justify-center rounded-full text-sm font-medium hover:bg-primary/5 hover:text-primary transition-colors h-10 px-4 py-2"
           >
-            <MenuIcon class="w-4 h-4" />
+            <MenuIcon class="w-5 h-5" />
           </button>
         </div>
       </div>
     </header>
+
+    <!-- Mobile Menu -->
+    <div
+      id="mobile-menu"
+      class="fixed inset-0 z-50 md:hidden transform translate-x-full transition-transform duration-300 ease-in-out"
+    >
+      <!-- Backdrop -->
+      <div
+        id="mobile-menu-backdrop"
+        class="absolute inset-0 bg-black/50 backdrop-blur-sm opacity-0 transition-opacity duration-300"
+      ></div>
+      
+      <!-- Menu Content -->
+      <div class="absolute right-0 top-0 h-full w-[80%] max-w-sm bg-white shadow-2xl overflow-y-auto">
+        <!-- Header -->
+        <div class="flex items-center justify-between p-6 border-b border-gray-200">
+          <div class="text-xl font-bold font-mono">
+            <Logo />
+          </div>
+          <button
+            id="mobile-menu-close"
+            class="inline-flex items-center justify-center rounded-full text-sm font-medium hover:bg-primary/5 hover:text-primary transition-colors h-10 w-10"
+          >
+            <XIcon class="w-5 h-5" />
+          </button>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="p-6 space-y-6">
+          <!-- Products Section -->
+          <div>
+            <button
+              id="mobile-products-toggle"
+              class="flex items-center justify-between w-full text-left text-base font-medium text-gray-900 mb-3"
+            >
+              Products
+              <svg
+                id="mobile-products-arrow"
+                class="w-5 h-5 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                ></path>
+              </svg>
+            </button>
+            
+            <!-- Products List -->
+            <div id="mobile-products-list" class="flex flex-col items-start">
+              <a
+                href="/products/infra"
+                class="gap-3 py-3 rounded-lg hover:bg-brand-blue/5 transition-colors"
+              >
+                <Image src={YInfraLogo} alt="Y_Infra" class="h-6 w-auto mb-2" />
+                <p class="text-xs text-gray-600">
+                  {products[0].description}
+                </p>
+              </a>
+              
+              <a
+                href="/products/app"
+                class="gap-3 py-3 rounded-lg hover:bg-brand-green/5 transition-colors"
+              >
+                <Image src={YAppLogo} alt="Y_App" class="h-6 w-auto mb-2" />
+                <p class="text-xs text-gray-600">
+                  {products[1].description}
+                </p>
+              </a>
+              
+              <a
+                href="/products/ai"
+                class="gap-3 py-3 rounded-lg hover:bg-brand-orange/5 transition-colors"
+              >
+                <Image src={YAiLogo} alt="Y_AI" class="h-6 w-auto mb-2" />
+                <p class="text-xs text-gray-600">
+                  {products[2].description}
+                </p>
+              </a>
+              
+              <a
+                href="/products/ede"
+                class="gap-3 py-3 rounded-lg hover:bg-brand-yellow/5 transition-colors"
+              >
+                
+              <Image src={YEdeLogo} alt="Y_EDE" class="h-6 w-auto mb-2" />
+              <p class="text-xs text-gray-600">
+                {products[3].description}
+              </p>
+              </a>
+            </div>
+          </div>
+
+          <!-- Other Navigation Links -->
+          <a
+            href="#"
+            class="block text-base text-gray-700 hover:text-brand-purple transition-colors py-2"
+          >
+            Platform Configurator
+          </a>
+          <a
+            href="#"
+            class="block text-base text-gray-700 hover:text-brand-purple transition-colors py-2"
+          >
+            Careers
+          </a>
+          <a
+            href="#"
+            class="block text-base text-gray-700 hover:text-brand-purple transition-colors py-2"
+          >
+            Contact
+          </a>
+
+          <!-- Action Buttons -->
+          <div class="pt-6 space-y-3 border-t border-gray-200">
+            <button
+              class="w-full inline-flex items-center justify-center rounded-full text-sm font-medium border border-primary bg-transparent hover:bg-primary/5 hover:text-primary transition-colors h-10 px-6 py-2"
+            >
+              Get Started
+              <ArrowRightIcon class="w-4 h-4 ml-2" />
+            </button>
+            <button
+              class="w-full inline-flex items-center justify-center rounded-full text-sm font-medium hover:bg-primary/5 hover:text-primary transition-colors h-10 px-6 py-2"
+            >
+              Log In
+            </button>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    <script>
+      // Mobile menu functionality
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const mobileMenuClose = document.getElementById('mobile-menu-close');
+      const mobileMenuBackdrop = document.getElementById('mobile-menu-backdrop');
+      const mobileProductsToggle = document.getElementById('mobile-products-toggle');
+      const mobileProductsList = document.getElementById('mobile-products-list');
+      const mobileProductsArrow = document.getElementById('mobile-products-arrow');
+
+      // Open mobile menu
+      mobileMenuButton?.addEventListener('click', () => {
+        mobileMenu?.classList.remove('translate-x-full');
+        mobileMenuBackdrop?.classList.remove('opacity-0');
+        document.body.style.overflow = 'hidden';
+      });
+
+      // Close mobile menu
+      const closeMobileMenu = () => {
+        mobileMenu?.classList.add('translate-x-full');
+        mobileMenuBackdrop?.classList.add('opacity-0');
+        document.body.style.overflow = '';
+      };
+
+      mobileMenuClose?.addEventListener('click', closeMobileMenu);
+      mobileMenuBackdrop?.addEventListener('click', closeMobileMenu);
+
+      // Toggle products dropdown
+      mobileProductsToggle?.addEventListener('click', () => {
+        mobileProductsList?.classList.toggle('hidden');
+        mobileProductsArrow?.classList.toggle('rotate-180');
+      });
+
+      // Close menu when navigating to a page
+      const mobileMenuLinks = mobileMenu?.querySelectorAll('a');
+      mobileMenuLinks?.forEach(link => {
+        link.addEventListener('click', () => {
+          closeMobileMenu();
+        });
+      });
+    </script>
