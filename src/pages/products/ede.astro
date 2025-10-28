@@ -1,0 +1,45 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PostHogLayout from '@/layouts/PostHogLayout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import SectionRenderer from '@/components/SectionRenderer.astro';
+import { getPageBySlug } from '@/lib/contentful-v2';
+import GradientBg from '@/components/GradientBg';
+
+// Fetch homepage data using new API
+const slug = '/products/ede';
+const page = await getPageBySlug(slug);
+
+// Log status for debugging
+if (page) {
+  console.log('✅ Contentful v2 data loaded successfully');
+  console.log(`📄 Page: ${page.title}`);
+  console.log(`📦 Sections: ${page.sections.length}`);
+} else {
+  console.log('⚠️ No Contentful v2 data found');
+  console.log('💡 Make sure you have created a Page with slug "/products/ede" in Contentful');
+}
+
+// If no data, show helpful message
+if (!page) {
+  return Astro.redirect('/404');
+}
+---
+
+<PostHogLayout>
+  <Layout 
+    title={page.title}
+    description={page.metaDescription}
+  >
+    <Header />
+
+    {page.sections.map((section) => (
+      <SectionRenderer section={section} slug={slug} color="brand-yellow" />
+    ))}
+
+    <GradientBg client:only="react" color="brand-yellow" />
+    <Footer />
+  </Layout>
+</PostHogLayout>
+

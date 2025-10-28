@@ -1,0 +1,120 @@
+---
+import type { ProcessedSection } from "@/types/contentful-v2";
+import { ArrowDownIcon, ArrowRightIcon } from "@lucide/astro";
+import HomeHeroImage from "@/assets/home-hero.svg";
+import YEdeHeroImage from "@/assets/hero-y-ede.svg";
+import YInfraHeroImage from "@/assets/hero-y-infra.svg";
+import YAppHeroImage from "@/assets/hero-y-app.svg";
+import YAiHeroImage from "@/assets/hero-y-ai.svg";
+import { cn } from "@/lib/utils";
+import YEdeLogo from "@/assets/y-ede-logo.svg";
+import YInfraLogo from "@/assets/y-infra-logo.svg";
+import { Image } from "astro:assets";
+import YAppLogo from "@/assets/y-app-logo.svg";
+import YAiLogo from "@/assets/y-ai-logo.svg";
+import GradientBg from "@/components/GradientBg";
+
+interface Props {
+  section: ProcessedSection;
+  slug: string;
+  color?: string;
+}
+
+const { section, slug, color = "brand-purple" } = Astro.props;
+
+const productPagesHeroMap = {
+  "/products/ede": YEdeHeroImage,
+  "/products/infra": YInfraHeroImage,
+  "/products/app": YAppHeroImage,
+  "/products/ai": YAiHeroImage,
+};
+
+const productLogosMap = {
+  "/products/ede": YEdeLogo,
+  "/products/infra": YInfraLogo,
+  "/products/app": YAppLogo,
+  "/products/ai": YAiLogo,
+};
+
+const bgImage =
+  slug === "/"
+    ? HomeHeroImage
+    : productPagesHeroMap[slug as keyof typeof productPagesHeroMap] ||
+      HomeHeroImage;
+
+const productLogo =
+  productLogosMap[slug as keyof typeof productLogosMap] || YEdeLogo;
+---
+
+<div>
+  <section class="container mx-auto px-6 md:py-8 pb-16 z-10">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+      <div>
+        {
+          slug && slug !== "/" && (
+            <Image
+              src={productLogo}
+              alt={section.title || ""}
+              class="w-auto md:h-11 h-8 mb-6"
+            />
+          )
+        }
+        <h1
+          class="text-3xl md:text-5xl lg:text-6xl font-medium leading-normal text-balance max-w-3xl"
+        >
+          {section.headline}
+        </h1>
+
+        {
+          section.subtitle && (
+            <div class="font-mono text-sm space-y-1 py-6 relative max-w-3xl flex items-center gap-4">
+              <div class="flex items-start gap-2 text-foreground">
+                {section.subtitle}
+              </div>
+            </div>
+          )
+        }
+
+        <div class="flex gap-4">
+          {
+            section.primaryButton && (
+              <a
+                href={section.primaryButton.url}
+                class="inline-flex items-center justify-center rounded-full text-sm font-medium bg-gray-900 text-white hover:bg-gray-800 h-10 px-6 py-2"
+              >
+                {section.primaryButton.text}
+                <ArrowRightIcon
+                  class={cn({
+                    "w-4 h-4 ml-4 text-brand-purple": color === "brand-purple",
+                    "w-4 h-4 ml-4 text-brand-blue": color === "brand-blue",
+                    "w-4 h-4 ml-4 text-brand-orange": color === "brand-orange",
+                    "w-4 h-4 ml-4 text-brand-yellow": color === "brand-yellow",
+                    "w-4 h-4 ml-4 text-brand-green": color === "brand-green",
+                  })}
+                />
+              </a>
+            )
+          }
+
+          {
+            section.secondaryButton && (
+              <a
+                href={section.secondaryButton.url}
+                class="inline-flex items-center justify-center rounded-full text-sm font-medium border border-primary hover:bg-primary/5 h-10 px-6 py-2 text-primary transition-colors duration-200"
+              >
+                {section.secondaryButton.text}
+              </a>
+            )
+          }
+        </div>
+      </div>
+      <Image
+        src={bgImage}
+        width={500}
+        height={500}
+        alt={section.title || ""}
+        class="w-auto h-full"
+      />
+    </div>
+  </section>
+</div>

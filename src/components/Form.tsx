@@ -105,142 +105,157 @@ export default function ContactForm() {
   }
 
   return (
-    <div id="get-in-touch" className="gradient-bg py-24 mt-24 px-4 md:px-0">
-      <div className="mx-auto max-w-sm md:max-w-4xl xl:max-w-7xl pt-8">
-        <div className="grid md:grid-cols-2 gap-x-4">
-          <div>
-            <h3 className="text-xs text-white mb-6">Contact us</h3>
-            <h2 className="text-4xl font-semibold mb-6 text-white">
-              Get in Touch
-            </h2>
-            <p className="jetbrains-mono text-white mb-8">
-              Schedule a demo to see how Ybor can accelerate your business
-              today.
-            </p>
-            <img src={GetInTouchImage.src} alt="Get in Touch" />
-          </div>
-
-          <Form {...form}>
+    <div id="get-in-touch" >
+      <div className="md:pt-8 border-t mt-8">
+      <Form {...form}>
             <form
-              className="text-white space-y-8 pt-12 md:pt-0"
+              className="text-gray-900 space-y-6 md:pt-12 pt-6"
               onSubmit={form.handleSubmit(onSubmit)}
             >
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Full Name</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter your full name" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="company"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Company Name</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter your company name" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Work E-mail</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter your work email" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="reason"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Reason for Interest</FormLabel>
-                    <FormControl>
-                      <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                      >
-                        <SelectTrigger className="w-full">
-                          <SelectValue placeholder="Select" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="increasing-developer-speed">
-                            Increasing developer speed
-                          </SelectItem>
-                          <SelectItem value="modernizing-infrastructure">
-                            Modernizing our infrastructure
-                          </SelectItem>
-                          <SelectItem value="building-for-scale">
-                            Building for Scale
-                          </SelectItem>
-                          <SelectItem value="security-and-compliance">
-                            Security and compliance
-                          </SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="message"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Message</FormLabel>
-                    <FormControl>
-                      <Textarea placeholder="Enter your message" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="privacy"
-                render={({ field }) => (
-                  <FormItem className="flex items-center space-x-4">
-                    <FormControl>
-                      <Checkbox
-                        className="m-0 mr-2"
-                        checked={field.value}
-                        onCheckedChange={(checked) => field.onChange(!!checked)}
-                      />
-                    </FormControl>
-                    <FormLabel
-                    >
-                      By selecting this you agree to our <a className="underline hover:text-brand-green" href="#">Privacy Policy</a>.{" "}
-                    </FormLabel>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button
-                className="w-full bg-brand-green text-black font-semibold jetbrains-mono text-sm uppercase px-4 py-2 rounded hover:bg-brand-green-hover transition-colors duration-200"
-                type="submit"
-                disabled={form.formState.isSubmitting}
-              >
-                SEND MESSAGE
-              </Button>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Left Column */}
+                <div className="space-y-6">
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-gray-900">Name</FormLabel>
+                        <FormControl>
+                          <Input 
+                            placeholder="Name" 
+                            className="bg-white border-gray-300 text-gray-900 placeholder-gray-500"
+                            {...field} 
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="company"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-gray-900">Company</FormLabel>
+                        <FormControl>
+                          <Input 
+                            placeholder="Name" 
+                            className="bg-white border-gray-300 text-gray-900 placeholder-gray-500"
+                            {...field} 
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-gray-900">Email</FormLabel>
+                        <FormControl>
+                          <Input 
+                            placeholder="Email" 
+                            className="bg-white border-gray-300 text-gray-900 placeholder-gray-500"
+                            {...field} 
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                {/* Right Column */}
+                <div className="space-y-6">
+                  <FormField
+                    control={form.control}
+                    name="reason"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-gray-900">Reason for Interest</FormLabel>
+                        <FormControl>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                          >
+                            <SelectTrigger className="w-full bg-white border-gray-300 text-gray-900">
+                              <SelectValue placeholder="Select" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="increasing-developer-speed">
+                                Increasing developer speed
+                              </SelectItem>
+                              <SelectItem value="modernizing-infrastructure">
+                                Modernizing our infrastructure
+                              </SelectItem>
+                              <SelectItem value="building-for-scale">
+                                Building for Scale
+                              </SelectItem>
+                              <SelectItem value="security-and-compliance">
+                                Security and compliance
+                              </SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="message"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-gray-900">Message</FormLabel>
+                        <FormControl>
+                          <Textarea 
+                            placeholder="Type your message" 
+                            className="bg-white border-gray-300 text-gray-900 placeholder-gray-500 min-h-[120px]"
+                            {...field} 
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  {/* Bottom Section */}
+              <div className="space-y-4">
+                <FormField
+                  control={form.control}
+                  name="privacy"
+                  render={({ field }) => (
+                    <FormItem className="flex items-center gap-x-2">
+                      <FormControl>
+                        <Checkbox
+                          className="m-0"
+                          checked={field.value}
+                          onCheckedChange={(checked) => field.onChange(!!checked)}
+                        />
+                      </FormControl>
+                      <FormLabel className="text-gray-900 text-sm">
+                        By selecting this you agree to our <a className="underline hover:text-blue-600" href="/privacy-policy">Privacy Policy</a>.
+                      </FormLabel>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button
+                  className="w-full bg-gray-900 text-white font-semibold text-sm px-4 py-3 rounded-full hover:bg-gray-800 transition-colors duration-200"
+                  type="submit"
+                  disabled={form.formState.isSubmitting}
+                >
+                  Send Message
+                </Button>
+              </div>
+                </div>
+              </div>
+
             </form>
           </Form>
-        </div>
       </div>
     </div>
   );

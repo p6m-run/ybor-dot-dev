@@ -1,88 +1,100 @@
 ---
-import Logo from "./Brand";
-import LinuxImage from "../assets/linux-foundation.jpg";
-import CloudImage from "../assets/cloud-native.jpg";
+import LinuxImage from "../assets/linux-foundation.svg";
+import CloudImage from "../assets/cncf-member-silver.svg";
 import { Image } from "astro:assets";
+import BrandIcon from "./BrandIcon.astro";
 ---
 
-<footer class="py-4 px-8 text-sm">
-  <div
-    class="flex flex-col gap-4 items-center md:flex-row md:justify-between w-full py-8"
-  >
-    <Logo />
-
-    <div class="flex items-center gap-8">
-      <a href="https://www.linuxfoundation.org/about/members" target="_blank"
-        ><Image
-          class="h-14 w-auto"
-          src={LinuxImage}
-          alt="Linux Foundation"
-        /></a
-      >
-      <a href="https://www.cncf.io/about/members/" target="_blank"
-        ><Image
-          class="h-14 w-auto"
-          src={CloudImage}
-          alt="Cloud Native Computing Foundation"
-        /></a
-      >
+<footer class="py-8 px-8 text-sm bg-dark-gradient text-white">
+  <!-- Top Section: Logo and Social/Partner Logos -->
+  <div class="flex flex-col md:flex-row md:justify-between items-center py-8">
+    <div class="mb-6 md:mb-0">
+      <BrandIcon />
     </div>
-
-    <div class="flex items-center gap-4">
+    
+    <div class="flex items-center gap-6">
+      <!-- LinkedIn Logo -->
       <a
         href="https://www.linkedin.com/company/ybor-technology-llc"
         target="_blank"
         rel="noopener noreferrer"
+        class="p-2 rounded"
       >
         <svg
-          width="32"
-          height="32"
+          width="24"
+          height="24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
           <g clip-path="url(#clip0_0_1)">
             <path
               d="M22.2234 0H1.77187C0.792187 0 0 0.773438 0 1.72969V22.2656C0 23.2219 0.792187 24 1.77187 24H22.2234C23.2031 24 24 23.2219 24 22.2703V1.72969C24 0.773438 23.2031 0 22.2234 0ZM7.12031 20.4516H3.55781V8.99531H7.12031V20.4516ZM5.33906 7.43438C4.19531 7.43438 3.27188 6.51094 3.27188 5.37187C3.27188 4.23281 4.19531 3.30937 5.33906 3.30937C6.47813 3.30937 7.40156 4.23281 7.40156 5.37187C7.40156 6.50625 6.47813 7.43438 5.33906 7.43438ZM20.4516 20.4516H16.8937V14.8828C16.8937 13.5563 16.8703 11.8453 15.0422 11.8453C13.1906 11.8453 12.9094 13.2938 12.9094 14.7891V20.4516H9.35625V8.99531H12.7687V10.5609H12.8156C13.2891 9.66094 14.4516 8.70938 16.1813 8.70938C19.7859 8.70938 20.4516 11.0813 20.4516 14.1656V20.4516V20.4516Z"
-              fill="#18181B"></path>
-          </g>
-          <g clip-path="url(#clip1_0_1)">
-            <path
-              d="M381.734 2520.6H358.799C357.7 2520.6 356.812 2521.47 356.812 2522.54V2545.57C356.812 2546.64 357.7 2547.51 358.799 2547.51H381.734C382.832 2547.51 383.726 2546.64 383.726 2545.58V2522.54C383.726 2521.47 382.832 2520.6 381.734 2520.6ZM364.797 2543.54H360.801V2530.69H364.797V2543.54ZM362.799 2528.94C361.516 2528.94 360.481 2527.9 360.481 2526.62C360.481 2525.35 361.516 2524.31 362.799 2524.31C364.076 2524.31 365.112 2525.35 365.112 2526.62C365.112 2527.9 364.076 2528.94 362.799 2528.94ZM379.747 2543.54H375.757V2537.29C375.757 2535.8 375.731 2533.88 373.68 2533.88C371.604 2533.88 371.289 2535.51 371.289 2537.19V2543.54H367.304V2530.69H371.131V2532.44H371.184C371.714 2531.43 373.018 2530.37 374.958 2530.37C379 2530.37 379.747 2533.03 379.747 2536.49V2543.54V2543.54Z"
-              fill="#18181B"></path>
+              fill="currentColor"></path>
           </g>
           <defs>
             <clipPath id="clip0_0_1">
               <rect width="24" height="24" fill="white"></rect>
             </clipPath>
-            <clipPath id="clip1_0_1">
-              <rect
-                width="26.9144"
-                height="26.9144"
-                fill="white"
-                transform="translate(356.812 2520.6)"></rect>
-            </clipPath>
           </defs>
         </svg>
+      </a>
+      
+      <!-- Linux Foundation Logo -->
+      <a href="https://www.linuxfoundation.org/about/members" target="_blank">
+        <Image
+          class="h-6 w-auto"
+          src={LinuxImage}
+          alt="Linux Foundation"
+        />
+      </a>
+      
+      <!-- Cloud Native Computing Foundation Logo -->
+      <a href="https://www.cncf.io/about/members/" target="_blank">
+        <Image
+          class="h-6 w-auto"
+          src={CloudImage}
+          alt="Cloud Native Computing Foundation"
+        />
       </a>
     </div>
   </div>
 
-  <hr class="border-gray-200 w-full" />
-
-  <div
-    class="mb-2 md:mb-0 md:flex md:flex-row-reverse md:justify-between items-center text-gray-500 py-8"
-  >
-    <nav class="flex gap-4 flex-col md:flex-row items-center mb-4 md:mb-0">
-      <a href="/privacy-policy"> Privacy Policy </a>
-      <a href="/terms-of-service"> Terms of Service </a>
-      <!-- <a href="#">Cookies Settings</a> -->
+  <!-- Middle Section: Navigation -->
+  <div class="py-6">
+    <nav class="flex flex-col md:flex-row md:items-start gap-6">
+      <!-- Products Section -->
+      <div>
+        <h3 class="text-white font-medium mb-3">Products</h3>
+        <ul class="space-y-2">
+          <li><a href="#y-infra" class="hover:opacity-100 text-white transition-opacity opacity-75">Y_Infra</a></li>
+          <li><a href="#y-app" class="hover:opacity-100 text-white transition-opacity opacity-75">Y_App</a></li>
+          <li><a href="#y-ai" class="hover:opacity-100 text-white transition-opacity opacity-75">Y_AI</a></li>
+          <li><a href="#y-ede" class="hover:opacity-100 text-white transition-opacity opacity-75">Y_EDE</a></li>
+        </ul>
+      </div>
+      
+      <!-- Contact and Careers -->
+      <div class="flex flex-col md:flex-row gap-6">
+        <a href="#contact" class="text-white hover:opacity-100 transition-opacity opacity-75">Contact</a>
+        <a href="#careers" class="text-white hover:opacity-100 transition-opacity opacity-75">Careers</a>
+      </div>
     </nav>
+  </div>
 
-    <div class="text-center md:text-left">
-      Copyright {new Date().getFullYear()} &copy;
-      <a class="hover:underline" href="https://ybor.ai"
-        >Ybor Technology, LLC.</a
-      >
+  <!-- Separator Line -->
+  <hr class="border-white opacity-10 w-full" />
+
+  <!-- Bottom Section: Copyright and Legal Links -->
+  <div class="flex flex-col md:flex-row md:justify-between items-center py-6 text-gray-300">
+    <div class="mb-4 md:mb-0">
+      Copyright 2025 &copy; Ybor Technology LLC.
     </div>
+    
+    <nav class="flex gap-6">
+      <a href="/privacy-policy" class="hover:opacity-100 text-white transition-opacity opacity-75">Privacy Policy</a>
+      <a href="/terms-of-service" class="hover:opacity-100 text-white transition-opacity opacity-75">Terms of Service</a>
+      <a href="#cookies" class="hover:opacity-100 text-white transition-opacity opacity-75">Cookies Settings</a>
+    </nav>
   </div>
 </footer>
+

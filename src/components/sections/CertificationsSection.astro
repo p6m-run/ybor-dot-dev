@@ -1,0 +1,46 @@
+---
+import type { ProcessedSection } from '@/types/contentful-v2';
+import { ArrowRightIcon } from 'lucide-react';
+import Section from '@/components/Section.astro';
+import { Image } from 'astro:assets';
+import CertificationsImage from '@/assets/certifications.svg';
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+
+interface Props {
+  section: ProcessedSection;
+}
+
+const { section } = Astro.props;
+---
+
+<Section title={section.title || ''}>
+  <div class="flex justify-between items-center gap-8 mb-8">
+    {section.headline && (
+      <h2 class="text-3xl md:text-4xl font-medium mb-6 max-w-sm">
+        {section.headline}
+      </h2>
+    )}
+    
+    <div class="rounded-full bg-brand-purple flex items-center justify-center w-8 h-8">
+      <ArrowRightIcon className="current-color w-4 h-4 mx-2" />
+    </div>
+
+    {section.description && (
+      <div 
+        class="max-w-lg font-mono"
+        set:html={typeof section.description === 'string' 
+          ? section.description 
+          : documentToHtmlString(section.description)}
+      />
+    )}
+  </div>
+
+  <div class="flex justify-center">
+    {section.media ? (
+      <img src={section.media.url} alt={section.media.alt} class="max-w-full h-auto" />
+    ) : (
+      <Image src={CertificationsImage} alt="Certifications" class="max-w-full h-auto" />
+    )}
+  </div>
+</Section>
+
