@@ -4,10 +4,15 @@ import { ArrowDownIcon, ArrowRightIcon } from "@lucide/astro";
 import HomeHeroImage from "@/assets/home-hero.svg";
 import YEdeHeroImage from "@/assets/hero-y-ede.svg";
 import YInfraHeroImage from "@/assets/hero-y-infra.svg";
+import YAppHeroImage from "@/assets/hero-y-app.svg";
+import YAiHeroImage from "@/assets/hero-y-ai.svg";
 import { cn } from "@/lib/utils";
 import YEdeLogo from "@/assets/y-ede-logo.svg";
 import YInfraLogo from "@/assets/y-infra-logo.svg";
 import { Image } from "astro:assets";
+import YAppLogo from "@/assets/y-app-logo.svg";
+import YAiLogo from "@/assets/y-ai-logo.svg";
+import GradientBg from "@/components/GradientBg";
 
 interface Props {
   section: ProcessedSection;
@@ -18,68 +23,59 @@ interface Props {
 const { section, slug, color = "brand-purple" } = Astro.props;
 
 const productPagesHeroMap = {
-  "/products/ede": YEdeHeroImage.src,
-  "/products/infra": YInfraHeroImage.src,
+  "/products/ede": YEdeHeroImage,
+  "/products/infra": YInfraHeroImage,
+  "/products/app": YAppHeroImage,
+  "/products/ai": YAiHeroImage,
 };
 
 const productLogosMap = {
   "/products/ede": YEdeLogo,
   "/products/infra": YInfraLogo,
+  "/products/app": YAppLogo,
+  "/products/ai": YAiLogo,
 };
 
 const bgImage =
   slug === "/"
-    ? HomeHeroImage.src
+    ? HomeHeroImage
     : productPagesHeroMap[slug as keyof typeof productPagesHeroMap] ||
-      HomeHeroImage.src;
+      HomeHeroImage;
 
 const productLogo =
   productLogosMap[slug as keyof typeof productLogosMap] || YEdeLogo;
 ---
 
-<div
-  style={{
-    "background-image": section.media
-      ? `url(${section.media.url})`
-      : `url(${bgImage})`,
-    "background-size": "contain",
-    "background-position": "right 26px",
-    "background-repeat": "no-repeat",
-  }}
->
-  <section class="container mx-auto px-6 py-8">
-    <div class="has-circle-end">
-      <div class="border-l border-t border-gray-900 max-full">
-        <ArrowRightIcon class="w-3 h-3 absolute -top-[5.5px] -right-1" />
-        <ArrowDownIcon class="w-3 h-3 absolute -bottom-1 -left-[5.5px]" />
-
+<div>
+  <section class="container mx-auto px-6 py-8 pb-16 z-10">
+    <div class="flex justify-between items-center gap-8">
+      <div>
+        {
+          slug && slug !== "/" && (
+            <Image
+              src={productLogo}
+              alt={section.title || ""}
+              class="w-auto h-11 mb-6"
+            />
+          )
+        }
         <h1
-          class="pl-10 text-5xl md:text-6xl font-medium leading-relaxed text-balance max-w-3xl"
+          class="text-5xl md:text-6xl font-medium leading-normal text-balance max-w-3xl"
         >
           {section.headline}
         </h1>
 
         {
           section.subtitle && (
-            <div class="font-mono text-sm space-y-1 pl-10 py-6 border-gray-900 border-t relative max-w-3xl flex items-center gap-4">
-              <ArrowRightIcon class="w-3 h-3 absolute -top-[6.5px] -right-1" />
-              {slug && slug !== "/" && (
-                <Image
-                  src={productLogo}
-                  alt={section.title || ""}
-                  class="w-auto h-11"
-                />
-              )}
-
+            <div class="font-mono text-sm space-y-1 py-6 relative max-w-3xl flex items-center gap-4">
               <div class="flex items-start gap-2 text-foreground">
-                <ArrowRightIcon class="w-10 h-auto mt-1 mr-2" />{" "}
                 {section.subtitle}
               </div>
             </div>
           )
         }
 
-        <div class="flex gap-4 pl-10">
+        <div class="flex gap-4">
           {
             section.primaryButton && (
               <a
@@ -93,6 +89,7 @@ const productLogo =
                     "w-4 h-4 ml-4 text-brand-blue": color === "brand-blue",
                     "w-4 h-4 ml-4 text-brand-orange": color === "brand-orange",
                     "w-4 h-4 ml-4 text-brand-yellow": color === "brand-yellow",
+                    "w-4 h-4 ml-4 text-brand-green": color === "brand-green",
                   })}
                 />
               </a>
@@ -103,7 +100,7 @@ const productLogo =
             section.secondaryButton && (
               <a
                 href={section.secondaryButton.url}
-                class="inline-flex items-center justify-center rounded-full text-sm font-medium border border-gray-300 bg-white hover:bg-gray-50 h-10 px-6 py-2"
+                class="inline-flex items-center justify-center rounded-full text-sm font-medium border border-primary hover:bg-primary/5 h-10 px-6 py-2 text-primary transition-colors duration-200"
               >
                 {section.secondaryButton.text}
               </a>
@@ -111,6 +108,13 @@ const productLogo =
           }
         </div>
       </div>
+      <Image
+        src={bgImage}
+        width={500}
+        height={500}
+        alt={section.title || ""}
+        class="w-auto h-full"
+      />
     </div>
   </section>
 </div>

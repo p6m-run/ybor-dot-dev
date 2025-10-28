@@ -9,6 +9,8 @@ import YHomeCapabilitiesImage from "@/assets/ybor-home-capabilities.svg";
 import { decodeHtmlEntities } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 import YInfraCapabilitiesImage from "@/assets/y-infra-capabilities.svg";
+import YAppCapabilitiesImage from "@/assets/y-app-capabilities.svg";
+import YAiCapabilitiesImage from "@/assets/y-ai-capabilities.svg";
 
 interface Props {
   section: ProcessedSection;
@@ -76,6 +78,20 @@ const { section, color, slug } = Astro.props;
       <Image
         src={YInfraCapabilitiesImage}
         alt="Y_Infra Capabilities"
+        class="w-full"
+      />
+    )}
+    {slug === "/products/app" && (
+      <Image
+        src={YAppCapabilitiesImage}
+        alt="Y_App Capabilities"
+        class="w-full"
+      />
+    )}
+    {slug === "/products/ai" && (
+      <Image
+        src={YAiCapabilitiesImage}
+        alt="Y_AI Capabilities"
         class="w-full"
       />
     )}

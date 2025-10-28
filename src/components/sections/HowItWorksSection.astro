@@ -7,6 +7,8 @@ import { decodeHtmlEntities } from "@/lib/utils";
 import { EdeHowItWorks } from "../EdeHowItWorks";
 import { InfraHowItWorks } from "../InfraHowItWorks";
 import { cn } from "@/lib/utils";
+import { AppHowItWorks } from "../AppHowItWorks";
+import { AiHowItWorks } from "../AiHowItWorks";
 
 interface Props {
   section: ProcessedSection;
@@ -56,5 +58,7 @@ const { section, color, slug } = Astro.props;
   <div class="my-8">
     {slug === "/products/ede" && <EdeHowItWorks section={section} client:only="react" />}
     {slug === "/products/infra" && <InfraHowItWorks section={section} client:only="react" />}
+    {slug === "/products/app" && <AppHowItWorks section={section} client:only="react" />}
+    {slug === "/products/ai" && <AiHowItWorks section={section} client:only="react" />}
   </div>
 </Section>
