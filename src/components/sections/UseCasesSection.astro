@@ -50,7 +50,7 @@ const { section, color } = Astro.props;
 
   <div class="my-8">
     {section.items && section.items.length > 0 && (
-      <UseCasesTabs useCases={section.items} color={color} client:load />
+      <UseCasesTabs useCases={section.items} color={color} client:only="react" />
     )}
   </div>
 </Section>
