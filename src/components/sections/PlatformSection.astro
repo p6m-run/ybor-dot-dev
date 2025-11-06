@@ -28,31 +28,31 @@ const ai = section.items?.find((item) => item.internalName?.includes("AI"));
   {
     infra && (
       <div>
-        <div class="flex flex-col md:flex-row md:items-center items-start gap-4 md:mb-8 mb-6">
-          <Image src={YInfraLogo} alt={"Y_Infra Logo"} class="w-auto md:h-12 h-8" />
-          <h3 class="md:text-xl font-medium flex items-center justify-center rounded-full bg-brand-blue/25 border border-brand-blue md:px-4 px-3 md:py-2 py-1">
+        <div class="flex flex-col lg:flex-row lg:items-center items-start gap-4 lg:mb-8 mb-6">
+          <Image src={YInfraLogo} alt={"Y_Infra Logo"} class="w-auto lg:h-12 h-8" />
+          <h3 class="lg:text-xl font-medium flex items-center justify-center rounded-full bg-brand-blue/25 border border-brand-blue lg:px-4 px-3 lg:py-2 py-1">
             <ArrowRightIcon class="w-4 h-4 mr-2" />
             {infra.title}
           </h3>
         </div>
         <div class="text-sm text-muted-foreground mb-4 font-mono flex items-start gap-2">
-          <ArrowRightIcon class="w-4 h-4 md:block hidden" />
+          <ArrowRightIcon class="w-4 h-4 lg:block hidden" />
           <div set:html={he.decode(infra.subtitle || "--")} />
         </div>
-        <div class="flex flex-col md:flex-row items-start md:gap-14 gap-4 mt-8">
+        <div class="flex flex-col lg:flex-row items-start lg:gap-14 gap-4 mt-8">
           {infra.image?.url && infra.image.width && infra.image.height && (
             <Image
               src={infra.image.url}
               alt={infra.image.alt || infra.title || ""}
               width={infra.image.width}
               height={infra.image.height}
-              class="w-auto md:h-96 h-64"
+              class="w-auto lg:h-96 h-64"
             />
           )}
           <div>
             {infra.description && (
               <div
-                class="text-sm text-gray-600 mb-4 font-mono y-feature-details hidden md:block"
+                class="text-sm text-gray-600 mb-4 font-mono y-feature-details hidden lg:block"
                 set:html={he.decode(documentToHtmlString(infra.description))}
               />
             )}
@@ -74,22 +74,22 @@ const ai = section.items?.find((item) => item.internalName?.includes("AI"));
   {
     app && (
       <div>
-        <div class="flex flex-col md:flex-row md:items-center items-start gap-4 md:mb-8 mb-6">
-          <Image src={YAppLogo} alt={"Y_App Logo"} class="w-auto md:h-12 h-8" />
-          <h3 class="text-xl font-medium flex items-center justify-center rounded-full bg-brand-green/25 border border-brand-green md:px-4 px-3 md:py-2 py-1">
+        <div class="flex flex-col lg:flex-row lg:items-center items-start gap-4 lg:mb-8 mb-6">
+          <Image src={YAppLogo} alt={"Y_App Logo"} class="w-auto lg:h-12 h-8" />
+          <h3 class="text-xl font-medium flex items-center justify-center rounded-full bg-brand-green/25 border border-brand-green lg:px-4 px-3 lg:py-2 py-1">
             <ArrowRightIcon class="w-4 h-4 mr-2" />
             {app.title}
           </h3>
         </div>
         <div class="text-sm text-muted-foreground mb-4 font-mono flex items-start gap-2">
-          <ArrowRightIcon class="w-4 h-4 md:block hidden" />
+          <ArrowRightIcon class="w-4 h-4 lg:block hidden" />
           <div set:html={he.decode(app.subtitle || "--")} />
         </div>
-        <div class="flex flex-col md:flex-row items-start md:gap-14 gap-4 mt-8">
+        <div class="flex flex-col lg:flex-row items-start lg:gap-14 gap-4 mt-8">
           <div>
             {app.description && (
               <div
-                class="text-sm text-gray-600 mb-4 font-mono y-feature-details hidden md:block"
+                class="text-sm text-gray-600 mb-4 font-mono y-feature-details hidden lg:block"
                 set:html={he.decode(documentToHtmlString(app.description))}
               />
             )}
@@ -110,7 +110,7 @@ const ai = section.items?.find((item) => item.internalName?.includes("AI"));
               alt={app.image.alt || app.title || ""}
               width={app.image.width}
               height={app.image.height}
-              class="w-auto md:h-96 h-64"
+              class="w-auto lg:h-96 h-64"
             />
           )}
           
@@ -122,31 +122,31 @@ const ai = section.items?.find((item) => item.internalName?.includes("AI"));
   {
     ai && (
       <div>
-        <div class="flex flex-col md:flex-row md:items-center items-start gap-4 md:mb-8 mb-6">
-          <Image src={YAiLogo} alt={"Y_AI Logo"} class="w-auto md:h-12 h-8" />
-          <h3 class="text-xl font-medium flex items-center justify-center rounded-full bg-brand-orange/25 border border-brand-orange md:px-4 px-3 md:py-2 py-1">
+        <div class="flex flex-col lg:flex-row lg:items-center items-start gap-4 lg:mb-8 mb-6">
+          <Image src={YAiLogo} alt={"Y_AI Logo"} class="w-auto lg:h-12 h-8" />
+          <h3 class="text-xl font-medium flex items-center justify-center rounded-full bg-brand-orange/25 border border-brand-orange lg:px-4 px-3 lg:py-2 py-1">
             <ArrowRightIcon class="w-4 h-4 mr-2" />
             {ai.title}
           </h3>
         </div>
         <div class="text-sm text-muted-foreground mb-4 font-mono flex items-start gap-2">
-          <ArrowRightIcon class="w-4 h-4 md:block hidden" />
+          <ArrowRightIcon class="w-4 h-4 lg:block hidden" />
           <div set:html={he.decode(ai.subtitle || "--")} />
         </div>
-        <div class="flex flex-col md:flex-row items-start md:gap-14 gap-4 mt-8">
+        <div class="flex flex-col lg:flex-row items-start lg:gap-14 gap-4 mt-8">
           {ai.image?.url && ai.image.width && ai.image.height && (
             <Image
               src={ai.image.url}
               alt={ai.image.alt || ai.title || ""}
               width={ai.image.width}
               height={ai.image.height}
-              class="w-auto md:h-96 h-64"
+              class="w-auto lg:h-96 h-64"
             />
           )}
           <div>
             {ai.description && (
               <div
-                class="text-sm text-gray-600 mb-4 font-mono y-feature-details hidden md:block"
+                class="text-sm text-gray-600 mb-4 font-mono y-feature-details hidden lg:block"
                 set:html={he.decode(documentToHtmlString(ai.description))}
               />
             )}
@@ -168,22 +168,22 @@ const ai = section.items?.find((item) => item.internalName?.includes("AI"));
   {
     ede && (
       <div>
-        <div class="flex flex-col md:flex-row md:items-center items-start gap-4 md:mb-8 mb-6">
-          <Image src={YEdeLogo} alt={"Y_EDE Logo"} class="w-auto md:h-12 h-8" />
-          <h3 class="text-xl font-medium flex items-center justify-center rounded-full bg-brand-yellow/25 border border-brand-yellow md:px-4 px-3 md:py-2 py-1">
+        <div class="flex flex-col lg:flex-row lg:items-center items-start gap-4 lg:mb-8 mb-6">
+          <Image src={YEdeLogo} alt={"Y_EDE Logo"} class="w-auto lg:h-12 h-8" />
+          <h3 class="text-xl font-medium flex items-center justify-center rounded-full bg-brand-yellow/25 border border-brand-yellow lg:px-4 px-3 lg:py-2 py-1">
             <ArrowRightIcon class="w-4 h-4 mr-2" />
             {ede.title}
           </h3>
         </div>
         <div class="text-sm text-muted-foreground mb-4 font-mono flex items-start gap-2">
-          <ArrowRightIcon class="w-4 h-4 md:block hidden" />
+          <ArrowRightIcon class="w-4 h-4 lg:block hidden" />
           <div set:html={he.decode(ede.subtitle || "--")} />
         </div>
-        <div class="flex flex-col md:flex-row items-start md:gap-14 gap-4 mt-8">
+        <div class="flex flex-col lg:flex-row items-start lg:gap-14 gap-4 mt-8">
           <div>
             {ede.description && (
               <div
-                class="text-sm text-gray-600 mb-4 font-mono y-feature-details hidden md:block"
+                class="text-sm text-gray-600 mb-4 font-mono y-feature-details hidden lg:block"
                 set:html={he.decode(documentToHtmlString(ede.description))}
               />
             )}
@@ -203,7 +203,7 @@ const ai = section.items?.find((item) => item.internalName?.includes("AI"));
               alt={ede.image.alt || ede.title || ""}
               width={ede.image.width}
               height={ede.image.height}
-              class="w-auto md:h-96 h-64"
+              class="w-auto lg:h-96 h-64"
             />
           )}
         </div>

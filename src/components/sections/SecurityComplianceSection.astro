@@ -49,7 +49,7 @@ const { section } = Astro.props;
           <hr class="opacity-10 border-white" />
           <div class="my-8">
             {section.items && section.items.length > 0 && (
-              <SecurityFeaturesTabs useCases={section.items} client:load />
+              <SecurityFeaturesTabs useCases={section.items} client:only="react" />
             )}
           </div>
       </div>

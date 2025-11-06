@@ -24,7 +24,7 @@ export default function UseCasesTabs({ useCases, color }: UseCasesTabsProps) {
   const activeUseCase = useCases[activeTab];
 
   return (
-    <div className="grid md:grid-cols-[340px_1fr] gap-8">
+    <div className="grid lg:grid-cols-[340px_1fr] gap-8">
       {/* Left sidebar - Vertical tabs */}
       <div className="space-y-2">
         {useCases.map((useCase, index) => (
@@ -82,7 +82,7 @@ export default function UseCasesTabs({ useCases, color }: UseCasesTabsProps) {
       </div>
 
       {/* Right content area */}
-      <div className="md:border border-gray-900 md:bg-background rounded-lg p-0 md:p-12">
+      <div className="lg:border border-gray-900 lg:bg-background rounded-lg p-0 lg:p-12">
         {activeUseCase.subtitle && (
           <p className="text-2xl text-gray-700 mb-4 font-medium">
             {activeUseCase.subtitle}
@@ -101,7 +101,7 @@ export default function UseCasesTabs({ useCases, color }: UseCasesTabsProps) {
             <img
               src={activeUseCase.image.url}
               alt={activeUseCase.image.alt || activeUseCase.title || ""}
-              className="w-auto md:h-56 animate-fade animate-once animate-duration-[250ms] animate-delay-100"
+              className="w-auto lg:h-56 animate-fade animate-once animate-duration-[250ms] animate-delay-100"
             />
           </div>
         )}
