@@ -4,17 +4,19 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import type { ProcessedComponent } from "@/types/contentful-v2";
 import { cn } from "@/lib/utils";
 import he from 'he';
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 
 interface UseCasesTabsProps {
   useCases: ProcessedComponent[];
   color: string;
+  showCta?: boolean;
 }
 
 const options = {
   renderText: (text: string) => he.decode(text),
 };
 
-export default function UseCasesTabs({ useCases, color }: UseCasesTabsProps) {
+export default function UseCasesTabs({ useCases, color, showCta = true }: UseCasesTabsProps) {
   const [activeTab, setActiveTab] = useState(0);
 
   if (!useCases || useCases.length === 0) {
@@ -57,6 +59,7 @@ export default function UseCasesTabs({ useCases, color }: UseCasesTabsProps) {
         ))}
 
         {/* CTA Section */}
+        {showCta && (
         <div className="mt-8 border border-gray-900 bg-background rounded-lg p-6">
           <p className="text-sm text-gray-600 mb-4 font-mono">
             Have more specific needs?
@@ -79,6 +82,7 @@ export default function UseCasesTabs({ useCases, color }: UseCasesTabsProps) {
             />
           </a>
         </div>
+        )}
       </div>
 
       {/* Right content area */}
@@ -91,9 +95,10 @@ export default function UseCasesTabs({ useCases, color }: UseCasesTabsProps) {
 
         {activeUseCase.description && (
           <div
-            className="text-sm text-gray-600 font-mono mb-6 prose prose-sm max-w-none space-y-4">
-              {documentToReactComponents(activeUseCase.description, options)}
-            </div>
+            className="text-sm text-gray-600 font-mono mb-6 prose prose-sm max-w-none space-y-4"
+        >
+          {documentToReactComponents(activeUseCase.description, options)}
+        </div>
         )}
 
         {activeUseCase.image && (

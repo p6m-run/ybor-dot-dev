@@ -24,6 +24,7 @@ import UseCasesSection from './sections/UseCasesSection.astro';
 import SecurityComplianceSection from './sections/SecurityComplianceSection.astro';
 import ComparisonSection from './sections/ComparisonSection.astro';
 import IntegrationsSection from './sections/IntegrationsSection.astro';
+import CorePrinciplesSection from './sections/CorePrinciples.astro';
 
 interface Props {
   section: ProcessedSection;
@@ -52,6 +53,7 @@ const sectionComponents = {
   'security-compliance': SecurityComplianceSection,
   'comparison': ComparisonSection,
   'integrations': IntegrationsSection,
+  'core-principles': CorePrinciplesSection,
 } as const;
 
 // Get the component for this section type
