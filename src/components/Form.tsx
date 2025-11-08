@@ -63,7 +63,9 @@ const FormSchema = z.object({
   message: z.string().min(2, {
     message: "Message is required.",
   }),
-  privacy: z.boolean(),
+  privacy: z.boolean().refine((val) => val === true, {
+    message: "You must agree to the privacy policy.",
+  }),
 });
 
 export default function ContactForm() {
@@ -75,6 +77,7 @@ export default function ContactForm() {
       email: "",
       reason: undefined,
       message: "",
+      privacy: false,
     },
   });
 
@@ -120,7 +123,7 @@ export default function ContactForm() {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-gray-900">Name</FormLabel>
+                        <FormLabel>Name <span>*</span></FormLabel>
                         <FormControl>
                           <Input 
                             placeholder="Name" 
@@ -137,7 +140,7 @@ export default function ContactForm() {
                     name="company"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-gray-900">Company</FormLabel>
+                        <FormLabel>Company <span>*</span></FormLabel>
                         <FormControl>
                           <Input 
                             placeholder="Name" 
@@ -154,7 +157,7 @@ export default function ContactForm() {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-gray-900">Email</FormLabel>
+                        <FormLabel>Email <span>*</span></FormLabel>
                         <FormControl>
                           <Input 
                             placeholder="Email" 
@@ -175,7 +178,7 @@ export default function ContactForm() {
                     name="reason"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-gray-900">Reason for Interest</FormLabel>
+                        <FormLabel>Reason for Interest <span>*</span></FormLabel>
                         <FormControl>
                           <Select
                             onValueChange={field.onChange}
@@ -209,7 +212,7 @@ export default function ContactForm() {
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-gray-900">Message</FormLabel>
+                        <FormLabel>Message <span>*</span></FormLabel>
                         <FormControl>
                           <Textarea 
                             placeholder="Type your message" 
@@ -228,18 +231,27 @@ export default function ContactForm() {
                   control={form.control}
                   name="privacy"
                   render={({ field }) => (
-                    <FormItem className="flex items-center gap-x-2">
+                    <FormItem className="flex items-start gap-x-2 space-y-0">
                       <FormControl>
                         <Checkbox
-                          className="m-0"
+                          className="mt-1"
                           checked={field.value}
                           onCheckedChange={(checked) => field.onChange(!!checked)}
                         />
                       </FormControl>
-                      <FormLabel className="text-gray-900 text-sm">
-                        By selecting this you agree to our <a className="underline hover:text-blue-600" href="/privacy-policy">Privacy Policy</a>.
-                      </FormLabel>
-                      <FormMessage />
+                      <div className="flex flex-col">
+                        <FormLabel className="text-gray-900 text-sm font-normal">
+                          By selecting this you agree to our{" "}
+                          <a
+                            className="underline hover:text-blue-600"
+                            href="/privacy-policy"
+                          >
+                            Privacy Policy
+                          </a>
+                          .
+                        </FormLabel>
+                        <FormMessage />
+                      </div>
                     </FormItem>
                   )}
                 />

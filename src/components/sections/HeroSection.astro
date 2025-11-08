@@ -12,8 +12,8 @@ import YInfraLogo from "@/assets/y-infra-logo.svg";
 import { Image } from "astro:assets";
 import YAppLogo from "@/assets/y-app-logo.svg";
 import YAiLogo from "@/assets/y-ai-logo.svg";
-
 import CultureAndCareersHeroImage from "@/assets/ybor-culture-hero.svg";
+import ContactHeroImage from "@/assets/ybor-contact-hero.svg";
 
 interface Props {
   section: ProcessedSection;
@@ -29,6 +29,7 @@ const productPagesHeroMap = {
   "/products/app": YAppHeroImage,
   "/products/ai": YAiHeroImage,
   "/culture-and-careers": CultureAndCareersHeroImage,
+  "/contact": ContactHeroImage,
 };
 
 const productLogosMap = {
@@ -53,7 +54,7 @@ const productLogo =
     <div class="flex flex-col md:flex-row justify-between items-center gap-8">
       <div>
         {
-          slug && slug !== "/" && slug !== "/culture-and-careers" && (
+          slug && slug.includes("/products/") && (
             <Image
               src={productLogo}
               alt={section.title || ""}
