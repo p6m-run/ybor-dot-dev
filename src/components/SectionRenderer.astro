@@ -26,6 +26,9 @@ import ComparisonSection from './sections/ComparisonSection.astro';
 import IntegrationsSection from './sections/IntegrationsSection.astro';
 import CorePrinciplesSection from './sections/CorePrinciples.astro';
 import CoreValuesSection from './sections/CoreValuesSection.astro';
+import CareersSection from './sections/CareersSection.astro';
+import FindPlanSection from './sections/FindPlanSection.astro';
+import GetInTouchSection from './sections/GetInTouchSection.astro';
 
 interface Props {
   section: ProcessedSection;
@@ -56,6 +59,9 @@ const sectionComponents = {
   'integrations': IntegrationsSection,
   'core-principles': CorePrinciplesSection,
   'core-values': CoreValuesSection,
+  'careers': CareersSection,
+  'find-plan': FindPlanSection,
+  'get-in-touch': GetInTouchSection,
 } as const;
 
 // Get the component for this section type
