@@ -29,6 +29,7 @@ export const POST: APIRoute = async ({ request }) => {
           !email ||
           !role ||
           !apiCalls ||
+          !companySize ||
           privacy === undefined
         ) {
           return new Response("Missing required fields", { status: 400 });
