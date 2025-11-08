@@ -3,12 +3,15 @@ import type { ProcessedSection } from "@/types/contentful-v2";
 import { ArrowDownIcon, ArrowRightIcon } from "@lucide/astro";
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import SecurityFeaturesTabs from "@/components/SecurityFeaturesTabs";
+import { cn } from "@/lib/utils";
 
 interface Props {
   section: ProcessedSection;
+  color: string;
+  slug: string;
 }
 
-const { section } = Astro.props;
+const { section, color, slug } = Astro.props;
 ---
 
 <section class="container mx-auto px-6 py-8">
@@ -31,11 +34,17 @@ const { section } = Astro.props;
               )
             }
         
-            <div
-                class="rounded-full bg-brand-yellow flex items-center justify-center w-8 h-8 transform rotate-90 md:rotate-0"
-            >
-              <ArrowRightIcon class="text-primary w-4 h-4 mx-2" />
-            </div>
+        <div
+        class={cn("rounded-full flex items-center justify-center w-8 h-8 transform rotate-90 md:rotate-0", {
+          "bg-brand-yellow": color === "brand-yellow",
+          "bg-brand-blue": color === "brand-blue",
+          "bg-brand-orange": color === "brand-orange",
+          "bg-brand-purple": color === "brand-purple",
+          "bg-brand-green": color === "brand-green",
+        })}
+      >
+        <ArrowRightIcon class="text-primary w-4 h-4 mx-2" />
+      </div>
         
             {
               section.description && (
@@ -49,7 +58,7 @@ const { section } = Astro.props;
           <hr class="opacity-10 border-white" />
           <div class="my-8">
             {section.items && section.items.length > 0 && (
-              <SecurityFeaturesTabs useCases={section.items} client:only="react" />
+              <SecurityFeaturesTabs useCases={section.items} color={color} slug={slug} client:only="react" />
             )}
           </div>
       </div>
