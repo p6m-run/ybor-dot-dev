@@ -123,7 +123,7 @@ export default function ContactForm() {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Name</FormLabel>
+                        <FormLabel>Name <span>*</span></FormLabel>
                         <FormControl>
                           <Input 
                             placeholder="Name" 
@@ -140,7 +140,7 @@ export default function ContactForm() {
                     name="company"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Company</FormLabel>
+                        <FormLabel>Company <span>*</span></FormLabel>
                         <FormControl>
                           <Input 
                             placeholder="Name" 
@@ -157,7 +157,7 @@ export default function ContactForm() {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Email</FormLabel>
+                        <FormLabel>Email <span>*</span></FormLabel>
                         <FormControl>
                           <Input 
                             placeholder="Email" 
@@ -178,7 +178,7 @@ export default function ContactForm() {
                     name="reason"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Reason for Interest</FormLabel>
+                        <FormLabel>Reason for Interest <span>*</span></FormLabel>
                         <FormControl>
                           <Select
                             onValueChange={field.onChange}
@@ -212,7 +212,7 @@ export default function ContactForm() {
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Message</FormLabel>
+                        <FormLabel>Message <span>*</span></FormLabel>
                         <FormControl>
                           <Textarea 
                             placeholder="Type your message" 
