@@ -63,7 +63,9 @@ const FormSchema = z.object({
   message: z.string().min(2, {
     message: "Message is required.",
   }),
-  privacy: z.boolean(),
+  privacy: z.boolean().refine((val) => val === true, {
+    message: "You must agree to the privacy policy.",
+  }),
 });
 
 export default function ContactForm() {
@@ -75,6 +77,7 @@ export default function ContactForm() {
       email: "",
       reason: undefined,
       message: "",
+      privacy: false,
     },
   });
 
@@ -228,18 +231,27 @@ export default function ContactForm() {
                   control={form.control}
                   name="privacy"
                   render={({ field }) => (
-                    <FormItem className="flex items-center gap-x-2">
+                    <FormItem className="flex items-start gap-x-2 space-y-0">
                       <FormControl>
                         <Checkbox
-                          className="m-0"
+                          className="mt-1"
                           checked={field.value}
                           onCheckedChange={(checked) => field.onChange(!!checked)}
                         />
                       </FormControl>
-                      <FormLabel className="text-gray-900 text-sm">
-                        By selecting this you agree to our <a className="underline hover:text-blue-600" href="/privacy-policy">Privacy Policy</a>.
-                      </FormLabel>
-                      <FormMessage />
+                      <div className="flex flex-col">
+                        <FormLabel className="text-gray-900 text-sm font-normal">
+                          By selecting this you agree to our{" "}
+                          <a
+                            className="underline hover:text-blue-600"
+                            href="/privacy-policy"
+                          >
+                            Privacy Policy
+                          </a>
+                          .
+                        </FormLabel>
+                        <FormMessage />
+                      </div>
                     </FormItem>
                   )}
                 />
