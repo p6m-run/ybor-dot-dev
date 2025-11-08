@@ -71,7 +71,7 @@ export default function UseCasesTabs({
               <img
                 src={activeUseCase.image.url}
                 alt={activeUseCase.image.alt || activeUseCase.title || ""}
-                className="w-full h-auto rounded-lg"
+                className="w-auto h-23 rounded-lg"
               />
             )}
             <div
