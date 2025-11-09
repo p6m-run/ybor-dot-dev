@@ -42,7 +42,7 @@ export function AiHowItWorks({ section }: Props) {
         viewBox="0 0 356 610"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="lg:block w-full"
+        className="lg:hidden w-full"
       >
         <rect
           x={210.113}
