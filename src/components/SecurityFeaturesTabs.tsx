@@ -58,7 +58,7 @@ export default function UseCasesTabs({
       </div>
 
       {/* Right content area */}
-      <div className="px-8 py-4">
+      <div className="lg:px-8 lg:py-4">
         {activeUseCase.subtitle && (
           <p className="text-xl text-gray-700 mb-4 font-medium">
             {activeUseCase.subtitle}
@@ -66,7 +66,7 @@ export default function UseCasesTabs({
         )}
 
         {activeUseCase.description && (
-          <div className="flex flex-col lg:flex-row gap-8 items-center">
+          <div className="flex flex-col lg:flex-row gap-8 items-start lg:items-center">
             {activeUseCase.image && (
               <img
                 src={activeUseCase.image.url}
