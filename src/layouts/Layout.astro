@@ -1,6 +1,17 @@
 ---
 import { Toaster } from "@/components/ui/toaster";
 import "../styles/global.css";
+///default-og-image.jpg
+import DefaultOgImage from "@/assets/default-og-image.jpg";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const { title, description, image = DefaultOgImage.src } = Astro.props as Props;
+const siteName = "Ybor Technology";
 ---
 
 <!doctype html>
@@ -10,12 +21,16 @@ import "../styles/global.css";
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
-    <title>Ybor</title>
-    <meta
-      name="description"
-      content="The Ybor AI Platform: Enterprise software made easy. Accelerate AI software development with extreme automation."
-    />
-
+    <title>{title ?? siteName}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title ?? siteName} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:url" content={Astro.url.toString()} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Ybor Technology" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="en_US" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
