@@ -33,7 +33,7 @@ const products = [
 
 ---
 <!-- Header -->
-    <header>
+    <header id="main-header" class="fixed top-0 left-0 right-0 w-full z-40 transition-all duration-300">
       <div
         class="mx-auto p-6 flex items-center justify-between"
       >
@@ -156,6 +156,9 @@ const products = [
         </div>
       </div>
     </header>
+
+    <!-- Header Spacer -->
+    <div class="h-[88px]"></div>
 
     <!-- Mobile Menu -->
     <div
@@ -286,6 +289,28 @@ const products = [
     </div>
 
     <script>
+      // Header scroll behavior
+      const header = document.getElementById('main-header');
+      let lastScrollTop = 0;
+
+      function handleScroll() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (scrollTop > 20) {
+          header?.classList.add('bg-white/70', 'backdrop-blur-md', 'border-b', 'border-white/20', 'shadow-lg', 'shadow-black/5');
+        } else {
+          header?.classList.remove('bg-white/70', 'backdrop-blur-md', 'border-b', 'border-white/20', 'shadow-lg', 'shadow-black/5');
+        }
+        
+        lastScrollTop = scrollTop;
+      }
+
+      // Run on load
+      handleScroll();
+      
+      // Run on scroll
+      window.addEventListener('scroll', handleScroll, { passive: true });
+
       // Desktop mega menu functionality (for touch devices)
       const desktopProductsToggle = document.getElementById('desktop-products-toggle');
       const desktopMegaMenu = document.getElementById('desktop-mega-menu');
