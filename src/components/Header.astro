@@ -71,7 +71,7 @@ const products = [
                     <!-- Left Section - Products -->
                     <div>
                       <h3 class="text-2xl font-medium text-gray-900 mb-2">Products</h3>
-                      <p class="text-gray-600 mb-6 text-sm">
+                      <p class="text-gray-600 mb-6 text-sm font-mono">
                         Accelerate your business with our comprehensive platform solutions.
                       </p>
                       
@@ -82,7 +82,7 @@ const products = [
                           <div class="flex items-center justify-start mb-3">
                             <Image src={YInfraLogo} alt={products[0].name || "--"} class="h-8 w-auto" />
                           </div>
-                          <p class="text-xs text-gray-600">
+                          <p class="text-xs text-muted-foreground font-mono">
                             {products[0].description || "--"}
                           </p>
                         </a>
@@ -92,7 +92,7 @@ const products = [
                           <div class="flex items-center justify-start mb-3">
                             <Image src={YAppLogo} alt={products[1].name || "--"} class="h-8 w-auto" />
                           </div>
-                          <p class="text-xs text-gray-600">
+                          <p class="text-xs text-muted-foreground font-mono">
                             {products[1].description || "--"}
                           </p>
                         </a>
@@ -102,7 +102,7 @@ const products = [
                           <div class="flex items-center justify-start mb-3">
                             <Image src={YAiLogo} alt={products[2].name || "--"} class="h-8 w-auto" />
                           </div>
-                          <p class="text-xs text-gray-600">
+                          <p class="text-xs text-muted-foreground font-mono">
                             {products[2].description || "--"}
                           </p>
                         </a>
@@ -112,7 +112,7 @@ const products = [
                           <div class="flex items-center justify-start mb-3">
                             <Image src={YEdeLogo} alt={products[3].name || "--"} class="h-8 w-auto" />
                           </div>
-                          <p class="text-xs text-gray-600">
+                          <p class="text-xs text-muted-foreground font-mono">
                             {products[3].description || "--"}
                           </p>
                         </a>
@@ -217,7 +217,7 @@ const products = [
                 class="gap-3 py-3 rounded-lg hover:bg-brand-blue/5 transition-colors"
               >
                 <Image src={YInfraLogo} alt="Y_Infra" class="h-6 w-auto mb-2" />
-                <p class="text-xs text-gray-600">
+                <p class="text-xs text-muted-foreground font-mono">
                   {products[0].description}
                 </p>
               </a>
@@ -227,7 +227,7 @@ const products = [
                 class="gap-3 py-3 rounded-lg hover:bg-brand-green/5 transition-colors"
               >
                 <Image src={YAppLogo} alt="Y_App" class="h-6 w-auto mb-2" />
-                <p class="text-xs text-gray-600">
+                <p class="text-xs text-muted-foreground font-mono">
                   {products[1].description}
                 </p>
               </a>
@@ -237,7 +237,7 @@ const products = [
                 class="gap-3 py-3 rounded-lg hover:bg-brand-orange/5 transition-colors"
               >
                 <Image src={YAiLogo} alt="Y_AI" class="h-6 w-auto mb-2" />
-                <p class="text-xs text-gray-600">
+                <p class="text-xs text-muted-foreground font-mono">
                   {products[2].description}
                 </p>
               </a>
@@ -248,7 +248,7 @@ const products = [
               >
                 
               <Image src={YEdeLogo} alt="Y_EDE" class="h-6 w-auto mb-2" />
-              <p class="text-xs text-gray-600">
+              <p class="text-xs text-muted-foreground font-mono">
                 {products[3].description}
               </p>
               </a>
