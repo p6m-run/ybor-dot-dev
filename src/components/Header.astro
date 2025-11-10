@@ -5,28 +5,27 @@ import YAppLogo from "@/assets/y-app-logo.svg";
 import YAiLogo from "@/assets/y-ai-logo.svg";
 import YEdeLogo from "@/assets/y-ede-logo.svg";
 import { Image } from "astro:assets";
-import { getHomepageData } from "@/lib/contentful";
 import { ArrowRightIcon, MenuIcon, XIcon } from "@lucide/astro";
 
 const products = [
   {
     name: "Y_Infra",
-    description: "Y_Infra is a platform for building and deploying infrastructure.",
+    description: "Infrastructure Studio",
     url: "/products/y-infra"
   },
   {
     name: "Y_App",
-    description: "Y_App is a platform for building and deploying applications.",
+    description: "Rapid Application Studio",
     url: "/products/y-app"
   },
   {
     name: "Y_AI",
-    description: "Y_AI is a platform for building and deploying AI applications.",
+    description: "AI Studio",
     url: "/products/y-ai"
   },
   {
     name: "Y_EDE",
-    description: "Y_EDE is a platform for building and deploying EDE applications.",
+    description: "Enterprise Development Environments",
     url: "/products/ede"
   }
 ]
