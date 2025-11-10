@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowRightCircleIcon } from "lucide-react";
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import type { ProcessedComponent } from "@/types/contentful-v2";
 import { cn } from "@/lib/utils";
@@ -14,6 +14,40 @@ interface UseCasesTabsProps {
 
 const options = {
   renderText: (text: string) => he.decode(text),
+};
+
+const Cta = ({ color, className }: { color: string, className?: string }) => {
+  return (
+    <div className={cn("mt-8 border border-gray-900 bg-background rounded-lg p-6", className)}>
+          <p className="text-sm text-gray-600 mb-4 font-mono">
+            Have more specific needs?
+            <br />
+            Talk to our team today
+          </p>
+          <a
+            href="/contact"
+            className={cn("inline-flex items-center group justify-center rounded-full text-sm font-medium bg-gray-900 text-white hover:bg-gray-800 h-10 px-6 py-2 transition-colors duration-300 ease-in-out", {
+              "hover:bg-brand-purple": color === "brand-purple",
+              "hover:bg-brand-blue": color === "brand-blue",
+              "hover:bg-brand-orange hover:text-black": color === "brand-orange",
+              "hover:bg-brand-yellow hover:text-black": color === "brand-yellow",
+              "hover:bg-brand-green hover:text-black": color === "brand-green",
+            })
+            }
+          >
+            Get In Touch
+            <ArrowRightCircleIcon
+                  className={cn("", {
+                    "w-5 h-5 ml-4 text-brand-purple group-hover:text-white": color === "brand-purple",
+                    "w-5 h-5 ml-4 text-brand-blue group-hover:text-white": color === "brand-blue",
+                    "w-5 h-5 ml-4 text-brand-orange group-hover:text-black": color === "brand-orange",
+                    "w-5 h-5 ml-4 text-brand-yellow group-hover:text-black": color === "brand-yellow",
+                    "w-5 h-5 ml-4 text-brand-green group-hover:text-black": color === "brand-green",
+                  })}
+                />
+          </a>
+        </div>
+  );
 };
 
 export default function UseCasesTabs({ useCases, color, showCta = true }: UseCasesTabsProps) {
@@ -43,34 +77,12 @@ export default function UseCasesTabs({ useCases, color, showCta = true }: UseCas
             })}
           >
             <span>{useCase.title}</span>
-            {/* {activeTab === index && <ArrowRight className="w-4 h-4" />} */}
           </button>
         ))}
 
         {/* CTA Section */}
         {showCta && (
-        <div className="mt-8 border border-gray-900 bg-background rounded-lg p-6">
-          <p className="text-sm text-gray-600 mb-4 font-mono">
-            Have more specific needs?
-            <br />
-            Talk to our team today
-          </p>
-          <a
-            href="/contact"
-            className="inline-flex items-center justify-center rounded-full text-sm font-medium bg-gray-900 text-white hover:bg-gray-800 h-10 px-6 py-2"
-          >
-            Get In Touch
-            <ArrowRight
-              className={cn("w-4 h-4 ml-2", {
-                "text-brand-yellow": color === "brand-yellow",
-                "text-brand-blue": color === "brand-blue",
-                "text-brand-orange": color === "brand-orange",
-                "text-brand-purple": color === "brand-purple",
-                "text-brand-green": color === "brand-green",
-              })}
-            />
-          </a>
-        </div>
+        <Cta color={color} className="hidden lg:block" />
         )}
       </div>
 
@@ -100,6 +112,11 @@ export default function UseCasesTabs({ useCases, color, showCta = true }: UseCas
           </div>
         )}
       </div>
+
+      {/* CTA Section */}
+      {showCta && (
+        <Cta color={color} className="block lg:hidden" />
+        )}
     </div>
   );
 }

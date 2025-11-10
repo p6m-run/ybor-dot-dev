@@ -31,28 +31,16 @@ export default function UseCasesTabs({
           <button
             key={useCase.id}
             onClick={() => setActiveTab(index)}
-            className={`
-              w-full text-left px-5 py-3 rounded-lg font-medium transition-all
-              flex items-center justify-between group
-              ${
-                activeTab === index
-                  ? "bg-black border border-brand-stroke text-white"
-                  : "bg-transparent text-white opacity-50 hover:bg-black"
-              }
-            `}
+            className={cn("w-full text-left px-5 py-3 rounded-lg font-medium transition-all flex items-center justify-between group", {
+              "bg-transparent text-white/50 hover:bg-black/20": activeTab !== index,
+              "bg-brand-yellow/25": activeTab === index && color === "brand-yellow",
+              "bg-brand-blue/25": activeTab === index && color === "brand-blue",
+              "bg-brand-orange/25": activeTab === index && color === "brand-orange",
+              "bg-brand-purple/25": activeTab === index && color === "brand-purple",
+              "bg-brand-green/25": activeTab === index && color === "brand-green",
+            })}
           >
             <span>{useCase.title}</span>
-            {activeTab === index && (
-              <ArrowRight
-                className={cn("w-4 h-4", {
-                  "text-brand-yellow": color === "brand-yellow",
-                  "text-brand-blue": color === "brand-blue",
-                  "text-brand-orange": color === "brand-orange",
-                  "text-brand-purple": color === "brand-purple",
-                  "text-brand-green": color === "brand-green",
-                })}
-              />
-            )}
           </button>
         ))}
       </div>

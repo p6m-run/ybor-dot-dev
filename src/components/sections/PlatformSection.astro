@@ -9,12 +9,15 @@ import YAppLogo from "@/assets/y-app-logo.svg";
 import YAiLogo from "@/assets/y-ai-logo.svg";
 import YEdeLogo from "@/assets/y-ede-logo.svg";
 import { Image } from "astro:assets";
+import { ArrowRightCircleIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface Props {
   section: ProcessedSection;
+  color: string;
 }
 
-const { section } = Astro.props;
+const { section, color } = Astro.props;
 
 const infra = section.items?.find((item) =>
   item.internalName?.includes("INFRA")
@@ -59,10 +62,10 @@ const ai = section.items?.find((item) => item.internalName?.includes("AI"));
             {infra.url && (
               <a
                 href={infra.url}
-                class="mt-6 inline-flex items-center justify-center rounded-full text-sm font-medium bg-gray-900 text-white hover:bg-gray-800 h-10 px-6 py-2"
+                class="mt-6 inline-flex items-center group justify-center rounded-full text-sm font-medium bg-gray-900 text-white h-10 px-6 py-2 transition-colors duration-300 ease-in-out hover:bg-brand-blue"
               >
                 Learn More
-                <ArrowRightIcon class="w-4 h-4 ml-4 text-brand-blue" />
+                <ArrowRightCircleIcon className="w-5 h-5 ml-4 text-brand-blue group-hover:text-white" />
               </a>
             )}
           </div>
@@ -96,10 +99,10 @@ const ai = section.items?.find((item) => item.internalName?.includes("AI"));
             {app.url && (
               <a
                 href={app.url}
-                class="mt-6 inline-flex items-center justify-center rounded-full text-sm font-medium bg-gray-900 text-white hover:bg-gray-800 h-10 px-6 py-2"
+                class="mt-6 inline-flex items-center group justify-center rounded-full text-sm font-medium bg-gray-900 text-white h-10 px-6 py-2 transition-colors duration-300 ease-in-out hover:bg-brand-green hover:text-black"
               >
                 Learn More
-                <ArrowRightIcon class="w-4 h-4 ml-4 text-brand-green" />
+                <ArrowRightCircleIcon className="w-5 h-5 ml-4 text-brand-green group-hover:text-black" />
               </a>
             )}
           </div>
@@ -153,10 +156,10 @@ const ai = section.items?.find((item) => item.internalName?.includes("AI"));
             {ai.url && (
               <a
                 href={ai.url}
-                class="mt-6 inline-flex items-center justify-center rounded-full text-sm font-medium bg-gray-900 text-white hover:bg-gray-800 h-10 px-6 py-2"
+                class="mt-6 inline-flex items-center group justify-center rounded-full text-sm font-medium bg-gray-900 text-white h-10 px-6 py-2 transition-colors duration-300 ease-in-out hover:bg-brand-orange hover:text-black"
               >
                 Learn More
-                <ArrowRightIcon class="w-4 h-4 ml-4 text-brand-orange" />
+                <ArrowRightCircleIcon className="w-5 h-5 ml-4 text-brand-orange group-hover:text-black" />
               </a>
             )}
           </div>
@@ -190,10 +193,10 @@ const ai = section.items?.find((item) => item.internalName?.includes("AI"));
             {ede.url && (
               <a
                 href={ede.url}
-                class="mt-6 inline-flex items-center justify-center rounded-full text-sm font-medium bg-gray-900 text-white hover:bg-gray-800 h-10 px-6 py-2"
+                class="mt-6 inline-flex items-center group justify-center rounded-full text-sm font-medium bg-gray-900 text-white h-10 px-6 py-2 transition-colors duration-300 ease-in-out hover:bg-brand-yellow hover:text-black"
               >
                 Learn More
-                <ArrowRightIcon class="w-4 h-4 ml-4 text-brand-yellow" />
+                <ArrowRightCircleIcon className="w-5 h-5 ml-4 text-brand-yellow group-hover:text-black" />
               </a>
             )}
           </div>

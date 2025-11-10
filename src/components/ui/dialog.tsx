@@ -14,7 +14,7 @@ export function Dialog({ open, onOpenChange, children }: DialogProps) {
         className="fixed inset-0 bg-black/50"
         onClick={() => onOpenChange?.(false)}
       />
-      <div className="relative">{children}</div>
+      <div className="relative p-4">{children}</div>
     </div>
   ) : null;
 }
@@ -75,7 +75,7 @@ export function DialogTitle({
   return (
     <h2
       className={cn(
-        "text-lg font-semibold leading-none tracking-tight",
+        "text-lg font-semibold leading-none tracking-tight text-left",
         className
       )}
       {...props}

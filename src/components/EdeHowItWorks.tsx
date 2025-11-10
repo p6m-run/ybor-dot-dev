@@ -1313,7 +1313,7 @@ export function EdeHowItWorks({ section }: Props) {
           </DialogHeader>
           <DialogDescription className="font-mono">
             <div className="flex gap-4 items-start text-muted-foreground">
-              <ArrowRightIcon className="w-8 h-auto text-foreground" />
+            <ArrowRightIcon className="w-16 lg:w-8 lg:h-auto text-foreground" />
               {selectedItem?.description ? (
                 <div
                   dangerouslySetInnerHTML={{

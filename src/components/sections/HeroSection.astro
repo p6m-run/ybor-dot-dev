@@ -14,6 +14,7 @@ import YAppLogo from "@/assets/y-app-logo.svg";
 import YAiLogo from "@/assets/y-ai-logo.svg";
 import CultureAndCareersHeroImage from "@/assets/ybor-culture-hero.svg";
 import ContactHeroImage from "@/assets/ybor-contact-hero.svg";
+import { ArrowRightCircleIcon } from "lucide-react";
 
 interface Props {
   section: ProcessedSection;
@@ -63,7 +64,7 @@ const productLogo =
           )
         }
         <h1
-          class="text-xl md:text-3xl lg:text-6xl leading-normal text-balance max-w-3xl"
+          class="text-4xl lg:text-6xl leading-normal text-balance max-w-3xl"
         >
           {section.headline}
         </h1>
@@ -83,16 +84,24 @@ const productLogo =
             section.primaryButton && (
               <a
                 href={section.primaryButton.url}
-                class="inline-flex items-center justify-center rounded-full text-sm font-medium bg-gray-900 text-white hover:bg-gray-800 h-10 px-6 py-2"
+                class={
+                  cn("inline-flex items-center group justify-center rounded-full text-sm font-medium bg-gray-900 text-white hover:bg-gray-800 h-10 px-6 py-2 transition-colors duration-300 ease-in-out", {
+                    "hover:bg-brand-purple": color === "brand-purple",
+                    "hover:bg-brand-blue": color === "brand-blue",
+                    "hover:bg-brand-orange hover:text-black": color === "brand-orange",
+                    "hover:bg-brand-yellow hover:text-black": color === "brand-yellow",
+                    "hover:bg-brand-green hover:text-black": color === "brand-green",
+                  })
+                }
               >
                 {section.primaryButton.text}
-                <ArrowRightIcon
-                  class={cn({
-                    "w-4 h-4 ml-4 text-brand-purple": color === "brand-purple",
-                    "w-4 h-4 ml-4 text-brand-blue": color === "brand-blue",
-                    "w-4 h-4 ml-4 text-brand-orange": color === "brand-orange",
-                    "w-4 h-4 ml-4 text-brand-yellow": color === "brand-yellow",
-                    "w-4 h-4 ml-4 text-brand-green": color === "brand-green",
+                <ArrowRightCircleIcon
+                  className={cn("", {
+                    "w-5 h-5 ml-4 text-brand-purple group-hover:text-white": color === "brand-purple",
+                    "w-5 h-5 ml-4 text-brand-blue group-hover:text-white": color === "brand-blue",
+                    "w-5 h-5 ml-4 text-brand-orange group-hover:text-black": color === "brand-orange",
+                    "w-5 h-5 ml-4 text-brand-yellow group-hover:text-black": color === "brand-yellow",
+                    "w-5 h-5 ml-4 text-brand-green group-hover:text-black": color === "brand-green",
                   })}
                 />
               </a>
