@@ -21,7 +21,7 @@ const { section, color, slug } = Astro.props;
 ---
 
 <Section title={section.title || ""}>
-  <div class="flex flex-col md:flex-row justify-between md:items-center gap-8 mb-8">
+  <div class="flex flex-col md:flex-row md:items-center gap-8 mb-8">
     {
       section.headline && (
         <h2 class="text-3xl md:text-4xl font-medium md:mb-6 max-w-sm">
@@ -45,7 +45,7 @@ const { section, color, slug } = Astro.props;
     {
       section.description && (
         <div
-          class="max-w-lg font-mono text-sm text-foreground"
+          class="font-mono text-sm text-foreground"
           set:html={documentToHtmlString(section.description)}
         />
       )

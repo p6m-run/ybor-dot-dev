@@ -35,11 +35,11 @@ const description =
       class="bg-dark-gradient text-white p-6 md:p-12 rounded-lg rounded-l-none"
     >
       <div
-        class="flex justify-between flex-col md:flex-row md:items-center gap-8"
+        class="flex flex-col md:flex-row md:items-center gap-8"
       >
         {
           section.headline && (
-            <h2 class="text-3xl md:text-4xl">{section.headline}</h2>
+            <h2 class="text-3xl md:text-4xl max-w-sm">{section.headline}</h2>
           )
         }
 
@@ -58,7 +58,7 @@ const description =
         {
           section.description && (
             <div
-              class="text-sm text-white font-mono flex flex-col gap-4 max-w-lg"
+              class="text-sm text-white font-mono flex flex-col gap-4"
               set:html={documentToHtmlString(section.description)}
             />
           )
