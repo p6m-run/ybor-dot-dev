@@ -119,6 +119,16 @@
   * {
     @apply border-border outline-ring/50;
   }
+  
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Prevent layout shift from animations */
+  [data-animate] {
+    will-change: opacity, transform;
+  }
 }
 
 .has-circle-end,
