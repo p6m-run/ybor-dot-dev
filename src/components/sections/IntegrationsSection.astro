@@ -68,7 +68,7 @@ const getLogoPath = (logoName: string) => {
           {Object.entries(section.metadata).map(([category, integrations]) => (
             <div>
               <h3 class="text-lg text-gray-900 mb-4">{category}</h3>
-              <div class="grid grid-cols-2 lg:grid-cols-3 gap-4">
+              <div class="grid grid-cols-2 lg:grid-cols-3 gap-4" data-animate="stagger">
                 {integrations.map((integration: any) => {
                   const logoSrc = getLogoPath(integration.logo);
                   return (

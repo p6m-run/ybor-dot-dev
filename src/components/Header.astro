@@ -32,7 +32,7 @@ const products = [
 
 ---
 <!-- Header -->
-    <header id="main-header" class="fixed top-0 left-0 right-0 w-full z-40 transition-all duration-300">
+    <header id="main-header" class="fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300">
       <div
         class="mx-auto p-6 flex items-center justify-between"
       >
@@ -162,7 +162,7 @@ const products = [
     <!-- Mobile Menu -->
     <div
       id="mobile-menu"
-      class="fixed inset-0 z-50 md:hidden transform translate-x-full transition-transform duration-300 ease-in-out"
+      class="fixed inset-0 z-[100] md:hidden transform translate-x-full transition-transform duration-300 ease-in-out"
     >
       <!-- Backdrop -->
       <div
@@ -288,105 +288,123 @@ const products = [
     </div>
 
     <script>
-      // Header scroll behavior
-      const header = document.getElementById('main-header');
-      let lastScrollTop = 0;
+      function initHeaderScroll() {
+        // Header scroll behavior
+        const header = document.getElementById('main-header');
+        if (!header) return;
+        
+        let lastScrollTop = 0;
 
-      function handleScroll() {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        if (scrollTop > 20) {
-          header?.classList.add('bg-white/70', 'backdrop-blur-md', 'border-b', 'border-white/20', 'shadow-lg', 'shadow-black/5');
-        } else {
-          header?.classList.remove('bg-white/70', 'backdrop-blur-md', 'border-b', 'border-white/20', 'shadow-lg', 'shadow-black/5');
+        function handleScroll() {
+          const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+          
+          if (scrollTop > 20) {
+            header?.classList.add('bg-white/70', 'backdrop-blur-md', 'border-b', 'border-white/20', 'shadow-lg', 'shadow-black/5');
+          } else {
+            header?.classList.remove('bg-white/70', 'backdrop-blur-md', 'border-b', 'border-white/20', 'shadow-lg', 'shadow-black/5');
+          }
+          
+          lastScrollTop = scrollTop;
         }
+
+        // Run on load
+        handleScroll();
         
-        lastScrollTop = scrollTop;
+        // Run on scroll
+        window.addEventListener('scroll', handleScroll, { passive: true });
       }
-
-      // Run on load
-      handleScroll();
       
-      // Run on scroll
-      window.addEventListener('scroll', handleScroll, { passive: true });
+      // Initialize on page load
+      initHeaderScroll();
+      
+      // Re-initialize on view transitions
+      document.addEventListener('astro:page-load', initHeaderScroll);
 
-      // Desktop mega menu functionality (for touch devices)
-      const desktopProductsToggle = document.getElementById('desktop-products-toggle');
-      const desktopMegaMenu = document.getElementById('desktop-mega-menu');
-      const desktopProductsMenu = document.getElementById('desktop-products-menu');
-      const desktopProductsArrow = document.getElementById('desktop-products-arrow');
-      let isMegaMenuOpen = false;
+      function initHeaderMenus() {
+        // Desktop mega menu functionality (for touch devices)
+        const desktopProductsToggle = document.getElementById('desktop-products-toggle');
+        const desktopMegaMenu = document.getElementById('desktop-mega-menu');
+        const desktopProductsMenu = document.getElementById('desktop-products-menu');
+        const desktopProductsArrow = document.getElementById('desktop-products-arrow');
+        let isMegaMenuOpen = false;
 
-      // Toggle mega menu on click/touch
-      desktopProductsToggle?.addEventListener('click', (e) => {
-        e.stopPropagation();
-        isMegaMenuOpen = !isMegaMenuOpen;
-        
-        if (isMegaMenuOpen) {
-          desktopMegaMenu?.classList.remove('opacity-0', 'invisible');
-          desktopMegaMenu?.classList.add('opacity-100', 'visible');
-          desktopProductsArrow?.classList.add('rotate-180');
-        } else {
-          desktopMegaMenu?.classList.add('opacity-0', 'invisible');
-          desktopMegaMenu?.classList.remove('opacity-100', 'visible');
-          desktopProductsArrow?.classList.remove('rotate-180');
-        }
-      });
-
-      // Close mega menu when clicking outside
-      document.addEventListener('click', (e) => {
-        if (desktopProductsMenu && !desktopProductsMenu.contains(e.target as Node)) {
+        // Toggle mega menu on click/touch
+        desktopProductsToggle?.addEventListener('click', (e) => {
+          e.stopPropagation();
+          isMegaMenuOpen = !isMegaMenuOpen;
+          
           if (isMegaMenuOpen) {
-            isMegaMenuOpen = false;
+            desktopMegaMenu?.classList.remove('opacity-0', 'invisible');
+            desktopMegaMenu?.classList.add('opacity-100', 'visible');
+            desktopProductsArrow?.classList.add('rotate-180');
+          } else {
             desktopMegaMenu?.classList.add('opacity-0', 'invisible');
             desktopMegaMenu?.classList.remove('opacity-100', 'visible');
             desktopProductsArrow?.classList.remove('rotate-180');
           }
-        }
-      });
-
-      // Keep mega menu open when clicking inside it
-      desktopMegaMenu?.addEventListener('click', (e) => {
-        e.stopPropagation();
-      });
-
-      // Mobile menu functionality
-      const mobileMenuButton = document.getElementById('mobile-menu-button');
-      const mobileMenu = document.getElementById('mobile-menu');
-      const mobileMenuClose = document.getElementById('mobile-menu-close');
-      const mobileMenuBackdrop = document.getElementById('mobile-menu-backdrop');
-      const mobileProductsToggle = document.getElementById('mobile-products-toggle');
-      const mobileProductsList = document.getElementById('mobile-products-list');
-      const mobileProductsArrow = document.getElementById('mobile-products-arrow');
-
-      // Open mobile menu
-      mobileMenuButton?.addEventListener('click', () => {
-        mobileMenu?.classList.remove('translate-x-full');
-        mobileMenuBackdrop?.classList.remove('opacity-0');
-        document.body.style.overflow = 'hidden';
-      });
-
-      // Close mobile menu
-      const closeMobileMenu = () => {
-        mobileMenu?.classList.add('translate-x-full');
-        mobileMenuBackdrop?.classList.add('opacity-0');
-        document.body.style.overflow = '';
-      };
-
-      mobileMenuClose?.addEventListener('click', closeMobileMenu);
-      mobileMenuBackdrop?.addEventListener('click', closeMobileMenu);
-
-      // Toggle products dropdown
-      mobileProductsToggle?.addEventListener('click', () => {
-        mobileProductsList?.classList.toggle('hidden');
-        mobileProductsArrow?.classList.toggle('rotate-180');
-      });
-
-      // Close menu when navigating to a page
-      const mobileMenuLinks = mobileMenu?.querySelectorAll('a');
-      mobileMenuLinks?.forEach(link => {
-        link.addEventListener('click', () => {
-          closeMobileMenu();
         });
-      });
+
+        // Close mega menu when clicking outside
+        document.addEventListener('click', (e) => {
+          if (desktopProductsMenu && !desktopProductsMenu.contains(e.target as Node)) {
+            if (isMegaMenuOpen) {
+              isMegaMenuOpen = false;
+              desktopMegaMenu?.classList.add('opacity-0', 'invisible');
+              desktopMegaMenu?.classList.remove('opacity-100', 'visible');
+              desktopProductsArrow?.classList.remove('rotate-180');
+            }
+          }
+        });
+
+        // Keep mega menu open when clicking inside it
+        desktopMegaMenu?.addEventListener('click', (e) => {
+          e.stopPropagation();
+        });
+
+        // Mobile menu functionality
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const mobileMenuBackdrop = document.getElementById('mobile-menu-backdrop');
+        const mobileProductsToggle = document.getElementById('mobile-products-toggle');
+        const mobileProductsList = document.getElementById('mobile-products-list');
+        const mobileProductsArrow = document.getElementById('mobile-products-arrow');
+
+        // Open mobile menu
+        mobileMenuButton?.addEventListener('click', () => {
+          mobileMenu?.classList.remove('translate-x-full');
+          mobileMenuBackdrop?.classList.remove('opacity-0');
+          document.body.style.overflow = 'hidden';
+        });
+
+        // Close mobile menu
+        const closeMobileMenu = () => {
+          mobileMenu?.classList.add('translate-x-full');
+          mobileMenuBackdrop?.classList.add('opacity-0');
+          document.body.style.overflow = '';
+        };
+
+        mobileMenuClose?.addEventListener('click', closeMobileMenu);
+        mobileMenuBackdrop?.addEventListener('click', closeMobileMenu);
+
+        // Toggle products dropdown
+        mobileProductsToggle?.addEventListener('click', () => {
+          mobileProductsList?.classList.toggle('hidden');
+          mobileProductsArrow?.classList.toggle('rotate-180');
+        });
+
+        // Close menu when navigating to a page
+        const mobileMenuLinks = mobileMenu?.querySelectorAll('a');
+        mobileMenuLinks?.forEach(link => {
+          link.addEventListener('click', () => {
+            closeMobileMenu();
+          });
+        });
+      }
+      
+      // Initialize on page load
+      initHeaderMenus();
+      
+      // Re-initialize on view transitions
+      document.addEventListener('astro:page-load', initHeaderMenus);
     </script>
