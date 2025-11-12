@@ -22,7 +22,7 @@ export function initScrollAnimations() {
         ease: 'power3.out',
         scrollTrigger: {
           trigger: section,
-          start: 'top 85%',
+          start: 'top 95%',
           end: 'top 60%',
           toggleActions: 'play none none reverse',
         },
