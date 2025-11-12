@@ -1,8 +1,7 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from "astro:transitions";
 import { Toaster } from "@/components/ui/toaster";
 import "../styles/global.css";
-///default-og-image.jpg
 import DefaultOgImage from "@/assets/default-og-image.jpg";
 
 interface Props {
@@ -35,7 +34,7 @@ const siteName = "Ybor Technology";
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
-    <ViewTransitions />
+    <ClientRouter />
   </head>
   <body class="manrope bg-background">
     <slot />

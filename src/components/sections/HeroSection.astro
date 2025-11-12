@@ -51,7 +51,7 @@ const productLogo =
 ---
 
 <div>
-  <section class="container mx-auto px-6 md:py-8 pb-16 z-10">
+  <section class="container mx-auto px-6 md:py-24 pb-16 z-10">
     <div class="flex flex-col md:flex-row justify-between items-center gap-8">
       <div data-animate="slide-left">
         {
@@ -71,7 +71,7 @@ const productLogo =
 
         {
           section.subtitle && (
-            <div class="font-mono fon text-sm space-y-1 py-6 relative max-w-3xl flex items-center gap-4">
+            <div class="font-mono text-sm space-y-1 py-6 relative max-w-3xl flex items-center gap-4 mb-4">
               <div class={
                 cn("flex items-start gap-2 text-foreground", {
                   "text-xl": slug === "/",
@@ -127,8 +127,6 @@ const productLogo =
       <div data-animate="slide-right">
         <Image
           src={bgImage}
-          width={500}
-          height={500}
           alt={section.title || ""}
           class="h-auto"
         />
