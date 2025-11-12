@@ -72,7 +72,11 @@ const productLogo =
         {
           section.subtitle && (
             <div class="font-mono fon text-sm space-y-1 py-6 relative max-w-3xl flex items-center gap-4">
-              <div class="flex items-start gap-2 text-foreground">
+              <div class={
+                cn("flex items-start gap-2 text-foreground", {
+                  "text-xl": slug === "/",
+                })
+              }>
                 {section.subtitle}
               </div>
             </div>
